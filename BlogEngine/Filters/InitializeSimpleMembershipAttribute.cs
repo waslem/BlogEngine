@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using BlogEngine.Models;
+using BlogEngine.Core.Contexts;
 
 namespace BlogEngine.Filters
 {
@@ -25,11 +26,11 @@ namespace BlogEngine.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<BlogContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new BlogContext())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +39,7 @@ namespace BlogEngine.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "User", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
