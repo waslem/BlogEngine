@@ -20,5 +20,9 @@ namespace BlogEngine.Core.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
 
+        public Blog()
+        {
+            Comments = new List<Comment>();
+        }
     }
 }

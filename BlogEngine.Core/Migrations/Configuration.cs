@@ -41,7 +41,6 @@ namespace BlogEngine.Core.Migrations
             {
                 Roles.AddUsersToRoles(new[] { "Admin" }, new[] { "Administrator", "User" });
             }
-
         }
     }
 }

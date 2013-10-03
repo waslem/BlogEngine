@@ -89,6 +89,9 @@ namespace BlogEngine.Web.Controllers
                             CreatedDate = model.CreatedDate
                             }, false);
 
+                    // add user to user role
+                    Roles.AddUserToRole(model.UserName, "User");
+
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

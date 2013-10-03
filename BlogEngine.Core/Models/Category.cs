@@ -14,5 +14,9 @@ namespace BlogEngine.Core.Models
 
         public virtual ICollection<Blog> Blogs { get; set; }
 
+        public Category()
+        {
+            Blogs = new List<Blog>();
+        }
     }
 }
