@@ -11,8 +11,9 @@ namespace BlogEngine.Core.Infrastructure
     public interface ICategoryRepository
     {
         List<Category> GetCategories();
-        bool Create(CategoryViewModel model);
         Category GetCategoryById(int id);
+
+        bool Create(CategoryViewModel model);
 
         void EditCategory(Category model);
         void EditCategory(CategoryViewModel model);

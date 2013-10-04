@@ -14,6 +14,7 @@ namespace BlogEngine.Web.App_Start
     using Ninject.Web.Common;
     using BlogEngine.Core.Infrastructure;
     using BlogEngine.Core.Repositorys;
+    using BlogEngine.Core.Services;
 
     public static class NinjectWebCommon 
     {
@@ -59,6 +60,12 @@ namespace BlogEngine.Web.App_Start
         {
             kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
+
+//#if DEBUG
+//            kernel.Bind<IMailService>().To<MockMailService>().InRequestScope();
+//#else
+            kernel.Bind<IMailService>().To<MailService>().InRequestScope();
+//#endif
         }        
     }
 }

@@ -11,12 +11,20 @@ using WebMatrix.WebData;
 using BlogEngine.Web.Models;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.Contexts;
+using BlogEngine.Core.Infrastructure;
 
 namespace BlogEngine.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private IMailService _mail;
+
+        public AccountController(IMailService mail)
+        {
+            _mail = mail;
+        }
+
         //
         // GET: /Account/Login
 
@@ -24,7 +32,8 @@ namespace BlogEngine.Web.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            LoginModel model = new LoginModel() { IsConfirmed = true };
+            return View(model);
         }
 
         //
@@ -35,13 +44,29 @@ namespace BlogEngine.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
-            }
+            string errorMsg = "The user name or password provided is incorrect.";
 
+            if (model.IsConfirmed)
+            {
+                if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                {
+                    return RedirectToLocal(returnUrl);
+                }
+                else if (WebSecurity.UserExists(model.UserName) && !WebSecurity.IsConfirmed(model.UserName))
+                {
+                    model.IsConfirmed = false;
+                    errorMsg = "You have not completed the registration process.";
+                }
+            }
+            else
+            {
+                // resend confirmation here
+                errorMsg = "The registration email has been resent. ";
+                model.IsConfirmed = true;
+            }
+           
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+            ModelState.AddModelError("", errorMsg);
             return View(model);
         }
 
@@ -81,19 +106,20 @@ namespace BlogEngine.Web.Controllers
                 {
                     model.CreatedDate = DateTime.Now;
 
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, 
+                    string confirmationToken = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, 
                         new { 
                             Email = model.Email, 
                             FirstName = model.FirstName, 
                             LastName = model.LastName,
                             CreatedDate = model.CreatedDate
-                            }, false);
-
+                            }, true);
                     // add user to user role
                     Roles.AddUserToRole(model.UserName, "User");
 
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    _mail.SendRegisterEmail(model.Email, model.UserName,confirmationToken);
+
+                    //WebSecurity.Login(model.UserName, model.Password);
+                    return RedirectToAction("RegisterStepTwo", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -105,6 +131,34 @@ namespace BlogEngine.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult RegisterStepTwo()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterConfirmation(string id)
+        {
+            if (WebSecurity.ConfirmAccount(id))
+            {
+                return RedirectToAction("ConfirmationSuccess");
+            }
+
+            return RedirectToAction("ConfirmationFailure");
+        }
+
+        [AllowAnonymous]
+        public ActionResult ConfirmationSuccess()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ConfirmationFailure()
+        {
+            return View();
+        }
         //
         // POST: /Account/Disassociate
 
