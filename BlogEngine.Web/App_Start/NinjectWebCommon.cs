@@ -58,6 +58,7 @@ namespace BlogEngine.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
         }        
     }
 }

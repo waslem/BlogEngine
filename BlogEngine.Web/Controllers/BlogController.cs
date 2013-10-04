@@ -24,13 +24,5 @@ namespace BlogEngine.Web.Controllers
             var blogs = _blogRepository.GetAll();
             return View(blogs);
         }
-
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create()
-        {
-            var blogViewModel = new BlogViewModel();
-            ViewBag.CategoryId = new SelectList(
-            return View(blogViewModel);
-        }
     }
 }
