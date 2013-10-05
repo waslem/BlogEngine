@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Contexts;
+﻿using System.Data;
+using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using System;
@@ -32,11 +33,11 @@ namespace BlogEngine.Core.Repositorys
 
             return blogs.Select(blog => new BlogListViewModel
                 {
-                    BlogId = blog.BlogId, 
-                    Entry = blog.BlogEntry, 
+                    BlogId = blog.BlogId,
+                    Entry = blog.BlogEntry,
                     Category = blog.Category.Name,
                     CreatedBy = blog.User.UserName,
-                    CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(), 
+                    CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(),
                     CommentCount = blog.Comments.Count()
                 }).ToList();
         }
@@ -44,6 +45,32 @@ namespace BlogEngine.Core.Repositorys
         public void Create(Blog blog)
         {
             _context.Blogs.Add(blog);
+            _context.SaveChanges();
+        }
+
+        public Blog GetBlogById(int id)
+        {
+            var blog = _context.Blogs.Find(id);
+
+            return blog;
+        }
+
+        public void Edit(BlogViewModel model)
+        {
+            var blog = _context.Blogs.Find(model.BlogId);
+
+            blog.CategoryId = Int32.Parse(model.SelectedCategory);
+            blog.BlogEntry = model.BlogEntry;
+
+            _context.Entry(blog).State = EntityState.Modified;
+            _context.SaveChanges();
+
+        }
+
+        public void Delete(int id)
+        {
+            var blog = new Blog {BlogId = id};
+            _context.Entry(blog).State = EntityState.Deleted;
             _context.SaveChanges();
         }
     }

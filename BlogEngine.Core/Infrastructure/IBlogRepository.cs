@@ -1,10 +1,5 @@
-﻿using BlogEngine.Core.Contexts;
-using BlogEngine.Core.Models;
-using System;
+﻿using BlogEngine.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlogEngine.Core.ViewModels;
 
 namespace BlogEngine.Core.Infrastructure
@@ -16,5 +11,8 @@ namespace BlogEngine.Core.Infrastructure
 
         void Create(Blog blog);
 
+        Blog GetBlogById(int id);
+        void Edit(BlogViewModel model);
+        void Delete(int id);
     }
 }

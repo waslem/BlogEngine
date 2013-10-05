@@ -3,10 +3,8 @@ using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
@@ -15,14 +13,13 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
     {
         private readonly IBlogRepository _blogRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IUserRepository _userRepository;
 
-        public BlogController(IBlogRepository blogRepository, ICategoryRepository categoryRepository, IUserRepository userRepository)
+        public BlogController(IBlogRepository blogRepository, ICategoryRepository categoryRepository)
         {
             _blogRepository = blogRepository;
             _categoryRepository = categoryRepository;
-            _userRepository = userRepository;
         }
+
         //
         // GET: /Admin/Blog/
         public ActionResult Index()
@@ -40,7 +37,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
                 {
                    SelectedCategory = _categoryRepository.GetCategoryById(1).ToString(),
                    Categories = _categoryRepository.GetCategoriesForBlogView(), 
-                   UserId = _userRepository.GetUserId(User.Identity.Name)
+                   UserId = WebSecurity.CurrentUserId
                 };
 
             return View(model);
@@ -51,16 +48,55 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(BlogViewModel model)
         {
-           
-            var blog = new Blog
-                {
-                    UserId = model.UserId,
-                    BlogEntry = model.BlogEntry,
-                    DateCreated = DateTime.Now, 
-                    CategoryId = Int32.Parse(model.SelectedCategory)
-                };
+            _blogRepository.Create(ModelBinder.BlogCreate(model));
 
-            _blogRepository.Create(blog);
+            return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Admin/Blog/Edit
+        public ActionResult Edit(int id)
+        {
+            var blog = _blogRepository.GetBlogById(id);
+            var blogViewModel = ModelBinder.Blog(blog);
+
+            blogViewModel.Categories = _categoryRepository.GetCategoriesForBlogView();
+            blogViewModel.UserId = WebSecurity.CurrentUserId;
+
+            return View(blogViewModel);
+        }
+
+        //
+        // POST: /Admin/Blog/Edit
+        [HttpPost]
+        public ActionResult Edit(BlogViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _blogRepository.Edit(model);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        //
+        // GET: /Admin/Blog/Delete
+        public ActionResult Delete(int id)
+        {
+            var model = _blogRepository.GetBlogById(id);
+
+            return View(model);
+        }
+
+        //
+        // POST: /Admin/Blog/Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
+        {
+            _blogRepository.Delete(id);
 
             return RedirectToAction("Index");
         }
