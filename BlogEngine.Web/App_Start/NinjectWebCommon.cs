@@ -1,8 +1,6 @@
 [assembly: WebActivator.PreApplicationStartMethod(typeof(BlogEngine.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(BlogEngine.Web.App_Start.NinjectWebCommon), "Stop")]
 
-
-
 namespace BlogEngine.Web.App_Start
 {
     using System;

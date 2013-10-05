@@ -1,8 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
-using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
-using System;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 

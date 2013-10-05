@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\BlogListViewModel.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

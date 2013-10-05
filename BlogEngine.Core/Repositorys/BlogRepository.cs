@@ -5,8 +5,6 @@ using BlogEngine.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlogEngine.Core.ViewModels;
 
 namespace BlogEngine.Core.Repositorys
@@ -22,8 +20,7 @@ namespace BlogEngine.Core.Repositorys
 
         public ICollection<Blog> GetAll()
         {
-            var blogs = _context.Blogs.ToList();
-
+            var blogs = _context.Blogs.Include("Comments").ToList();
             return blogs;
         }
 
@@ -71,6 +68,21 @@ namespace BlogEngine.Core.Repositorys
         {
             var blog = new Blog {BlogId = id};
             _context.Entry(blog).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+        public void AddComment(CommentViewModel comment)
+        {
+            var newComment = new Comment
+                {
+                    CommentDate = comment.CommentDate,
+                    CommentText = comment.CommentText, 
+                    UserId = comment.UserId
+                };
+
+            var blog = _context.Blogs.Find(comment.BlogId);
+
+            blog.Comments.Add(newComment);
             _context.SaveChanges();
         }
     }

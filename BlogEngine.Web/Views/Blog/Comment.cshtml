@@ -1,0 +1,40 @@
+﻿@model BlogEngine.Core.ViewModels.CommentViewModel
+
+@{
+    ViewBag.Title = "Comment";
+}
+
+<h2>Comment</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CommentViewModel</legend>
+                    @Html.HiddenFor(model => model.UserId)
+                    @Html.HiddenFor(model => model.CommentDate)
+                    @Html.HiddenFor(model => model.BlogId)
+        @Html.HiddenFor(model => model.CommentId)
+   
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CommentText)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CommentText)
+            @Html.ValidationMessageFor(model => model.CommentText)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

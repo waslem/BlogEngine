@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BlogEngine.Core.Models.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogEntry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlogEntry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            <div>
+                @foreach(var comment in item.Comments)
+                {
+                    <div>
+                        @Html.DisplayFor(m => comment.CommentText)
+                        @Html.DisplayFor(m => comment.User.UserName)
+                        @Html.DisplayFor(m => comment.CommentDate)
+                    </div>
+
+                }
+            </div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                 @Html.ActionLink("Comment","Comment", new { id = item.BlogId})
+            }
+        </td>
+    </tr>
+}
+
+</table>

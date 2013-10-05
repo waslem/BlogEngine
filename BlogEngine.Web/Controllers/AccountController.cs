@@ -18,7 +18,7 @@ namespace BlogEngine.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private IMailService _mail;
+        private readonly IMailService _mail;
 
         public AccountController(IMailService mail)
         {
@@ -32,7 +32,7 @@ namespace BlogEngine.Web.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            LoginModel model = new LoginModel() { IsConfirmed = true };
+            var model = new LoginModel() { IsConfirmed = true };
             return View(model);
         }
 
@@ -52,7 +52,7 @@ namespace BlogEngine.Web.Controllers
                 {
                     return RedirectToLocal(returnUrl);
                 }
-                else if (WebSecurity.UserExists(model.UserName) && !WebSecurity.IsConfirmed(model.UserName))
+                if (WebSecurity.UserExists(model.UserName) && !WebSecurity.IsConfirmed(model.UserName))
                 {
                     model.IsConfirmed = false;
                     errorMsg = "You have not completed the registration process.";
@@ -232,10 +232,8 @@ namespace BlogEngine.Web.Controllers
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
+
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
             }
             else
