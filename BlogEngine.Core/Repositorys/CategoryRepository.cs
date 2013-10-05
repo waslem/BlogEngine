@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Contexts;
+﻿using System.Web.Mvc;
+using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
@@ -73,7 +74,6 @@ namespace BlogEngine.Core.Repositorys
             _context.SaveChanges();
         }
 
-
         public bool Delete(int id)
         {
             var category = new Category { CategoryId = id };
@@ -82,6 +82,19 @@ namespace BlogEngine.Core.Repositorys
             _context.SaveChanges();
 
             return true;
+        }
+
+        public IEnumerable<SelectListItem> GetCategoriesForBlogView()
+        {
+            var categories = _context.Categories
+                .AsEnumerable()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId.ToString(),
+                    Text = c.Name
+                });
+
+            return categories;
         }
     }
 }

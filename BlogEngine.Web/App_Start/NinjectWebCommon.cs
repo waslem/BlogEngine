@@ -60,7 +60,7 @@ namespace BlogEngine.Web.App_Start
         {
             kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
-
+            kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
 //#if DEBUG
 //            kernel.Bind<IMailService>().To<MockMailService>().InRequestScope();
 //#else

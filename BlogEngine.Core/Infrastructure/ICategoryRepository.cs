@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Models;
+﻿using System.Web.Mvc;
+using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,7 @@ namespace BlogEngine.Core.Infrastructure
         void EditCategory(CategoryViewModel model);
 
         bool Delete(int id);
+
+        IEnumerable<SelectListItem> GetCategoriesForBlogView();
     }
 }

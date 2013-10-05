@@ -12,7 +12,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     public class CategoryController : AdminController
     {
-        private ICategoryRepository _categoryRepo;
+        private readonly ICategoryRepository _categoryRepo;
 
         public CategoryController(ICategoryRepository categoryRepo)
         {
@@ -52,10 +52,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
                 //TODO: implement error for duplicate category name 
-                else
-                {
-                    return View(model);
-                }
+
+                return View(model);
             }
             return View(model);
         }
