@@ -1,6 +1,7 @@
 ﻿@model BlogEngine.Core.ViewModels.BlogViewModel
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Create";
 }
 
@@ -22,13 +23,19 @@
             @Html.DropDownListFor(model => model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"))
             @Html.ValidationMessageFor(model => model.SelectedCategory)
         </div>
-
         <div class="editor-label">
-            @Html.LabelFor(model => model.BlogEntry)
+            @Html.LabelFor(model => model.BlogTitle)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.BlogEntry)
-            @Html.ValidationMessageFor(model => model.BlogEntry)
+            @Html.TextAreaFor(model => model.BlogTitle)
+            @Html.ValidationMessageFor(model => model.BlogTitle)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BlogEntryText)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.BlogEntryText)
+            @Html.ValidationMessageFor(model => model.BlogEntryText)
         </div>
 
         <p>

@@ -18,6 +18,6 @@ namespace BlogEngine.Core.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogEntry> BlogEntries { get; set; }
     }
 }

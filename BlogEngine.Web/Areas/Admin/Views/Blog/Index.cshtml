@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BlogEngine.Core.ViewModels.BlogListViewModel>
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Index";
 }
 
@@ -21,7 +22,7 @@
             @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Entry)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CommentCount)
@@ -41,14 +42,13 @@
             @Html.DisplayFor(modelItem => item.Category)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Entry)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CommentCount)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.BlogId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BlogId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.BlogId })
         </td>
     </tr>

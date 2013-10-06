@@ -6,12 +6,12 @@ namespace BlogEngine.Core.Infrastructure
 {
     public interface IBlogRepository
     {
-        ICollection<Blog> GetAll();
+        ICollection<BlogEntry> GetAll();
         ICollection<BlogListViewModel> GetAllViewModel();
 
-        void Create(Blog blog);
+        void Create(BlogEntry blogEntry);
 
-        Blog GetBlogById(int id);
+        BlogEntry GetBlogById(int id);
         void Edit(BlogViewModel model);
         void Delete(int id);
 

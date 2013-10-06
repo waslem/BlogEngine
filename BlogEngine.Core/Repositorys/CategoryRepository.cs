@@ -12,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace BlogEngine.Core.Repositorys
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository, IDisposable
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
+        private bool disposed = false;
 
         public CategoryRepository()
         {
@@ -30,6 +31,7 @@ namespace BlogEngine.Core.Repositorys
 
         public bool Create(CategoryViewModel model)
         {
+            bool success = true;
             // if the category name does not exist in the database
             if (!GetCategories().Any(c => c.Name.Contains(model.Name)))
             {
@@ -42,12 +44,13 @@ namespace BlogEngine.Core.Repositorys
 
                 _context.Categories.Add(category);
                 _context.SaveChanges();
-                return true;
             }
             else
             {
-                return false;
+                success = false;
             }
+
+            return success;
         }
 
         public Category GetCategoryById(int id)
@@ -95,6 +98,24 @@ namespace BlogEngine.Core.Repositorys
                 });
 
             return categories;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

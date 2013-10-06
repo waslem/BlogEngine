@@ -55,7 +55,7 @@
     <Compile Include="Infrastructure\IMailService.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\BlogEntry.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryImage.cs" />
     <Compile Include="Models\Comment.cs" />

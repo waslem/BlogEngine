@@ -21,11 +21,11 @@ namespace BlogEngine.Core.Models
         public string LastName { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<BlogEntry> BlogEntries { get; set; }
 
-        public User()
-        {
-            Blogs = new List<Blog>();
-        }
+        //public User()
+        //{
+        //    Blogs = new List<BlogEntry>();
+        //}
     }
 }

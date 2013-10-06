@@ -23,7 +23,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var blogList = _blogRepository.GetAllViewModel();
-
+            
             return View(blogList);
         }
 

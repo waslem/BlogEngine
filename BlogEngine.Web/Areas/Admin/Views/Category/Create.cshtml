@@ -1,6 +1,7 @@
 ﻿@model BlogEngine.Core.ViewModels.CategoryViewModel
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Create";
 }
 
@@ -20,7 +21,6 @@
             @Html.EditorFor(model => model.Name)
             @Html.ValidationMessageFor(model => model.Name)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.Description)
         </div>

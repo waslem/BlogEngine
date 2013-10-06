@@ -1,18 +1,18 @@
-﻿@model IEnumerable<BlogEngine.Core.Models.Blog>
+﻿@model IEnumerable<BlogEngine.Core.Models.BlogEntry>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Blog Entries";
 }
 
-<h2>Index</h2>
+<h2>Blog Entries</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BlogEntry)
+            @Html.DisplayNameFor(model => model.BlogTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogEntryText)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
@@ -29,7 +29,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.BlogEntry)
+            @Html.DisplayFor(modelItem => item.BlogTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlogEntryText)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateCreated)
@@ -54,7 +57,7 @@
             </div>
             @if(User.Identity.IsAuthenticated)
             {
-                 @Html.ActionLink("Comment","Comment", new { id = item.BlogId})
+                @Html.ActionLink("Comment","Comment", new { id = item.BlogEntryId})
             }
         </td>
     </tr>

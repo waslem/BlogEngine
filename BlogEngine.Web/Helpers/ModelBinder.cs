@@ -19,30 +19,32 @@ namespace BlogEngine.Web.Helpers
             return model;
         }
 
-        public static BlogViewModel Blog(Blog blog)
+        public static BlogViewModel Blog(BlogEntry blogEntry)
         {
             var blogViewModel = new BlogViewModel
                 {
-                    SelectedCategory = blog.CategoryId.ToString(),
-                    BlogEntry = blog.BlogEntry,
-                    DateCreated = blog.DateCreated,
-                    BlogId = blog.BlogId
+                    SelectedCategory = blogEntry.CategoryId.ToString(),
+                    BlogEntryText = blogEntry.BlogEntryText,
+                    BlogTitle = blogEntry.BlogTitle,
+                    DateCreated = blogEntry.DateCreated,
+                    BlogId = blogEntry.BlogEntryId
                 };
 
             return blogViewModel;
         }
 
-        public static Blog BlogCreate(BlogViewModel model)
+        public static BlogEntry BlogCreate(BlogViewModel model)
         {
-            var blog = new Blog
+            var blogEntry = new BlogEntry
             {
                 UserId = model.UserId,
-                BlogEntry = model.BlogEntry,
+                BlogEntryText = model.BlogEntryText,
+                BlogTitle = model.BlogTitle,
                 DateCreated = DateTime.Now,
                 CategoryId = Int32.Parse(model.SelectedCategory)
             };
 
-            return blog;
+            return blogEntry;
         }
     }
 }

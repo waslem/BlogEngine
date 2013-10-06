@@ -9,9 +9,10 @@ using BlogEngine.Core.Models;
 
 namespace BlogEngine.Core.Repositorys
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository, IDisposable
     {
         private readonly BlogContext _context;
+        private bool disposed = false;
 
         public UserRepository()
         {
@@ -35,6 +36,24 @@ namespace BlogEngine.Core.Repositorys
             }
 
             return userId;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

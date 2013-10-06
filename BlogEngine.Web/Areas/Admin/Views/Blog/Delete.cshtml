@@ -1,6 +1,7 @@
-﻿@model BlogEngine.Core.Models.Blog
+﻿@model BlogEngine.Core.Models.BlogEntry
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Delete";
 }
 
@@ -11,12 +12,17 @@
     <legend>Blog</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.BlogEntry)
+         @Html.DisplayNameFor(model => model.BlogEntryText)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.BlogEntry)
+        @Html.DisplayFor(model => model.BlogEntryText)
     </div>
-
+        <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogTitle)
+    </div>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.DateCreated)
     </div>

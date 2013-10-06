@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Log in";
+}
+
+@helper LoggedInUser()
+{   
+    if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+    { 
+        @:Hello, @Html.ActionLink(User.Identity.Name ?? "user", "Manage", "Account", new {area = ""}, new{})
+    }
+    else
+    { 
+        @Html.ActionLink("Register", "Register", "Account",new {area = ""}, new{})
+    }
+}
+ 
+@helper ActiveItem(string actionName, string controllerName, string areaName)
+{
+    if (ViewContext.RouteData.Values["action"].ToString() == actionName && ViewContext.RouteData.Values["controller"].ToString() == controllerName)
+    {
+        if (ViewContext.RouteData.DataTokens["area"] == null)
+        {
+            if(areaName == null)
+            {
+                @:active
+            }
+        }
+        else if (ViewContext.RouteData.DataTokens["area"].ToString() == areaName)
+        {
+            @:active
+        }
+    }
+}
+ 
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Blog Engine</a>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="@ActiveItem("Index", "Home", null)">@Html.ActionLink("Home", "Index", "Home", new { area=""}, new{})</li>
+                <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("About", "About", "Home", new { area=""}, new{})</li>
+                <li class="@ActiveItem("Contact", "Home", null)">@Html.ActionLink("Contact", "Contact", "Home", new { area=""}, new{})</li>
+                <li class="@ActiveItem("Index", "Blog", null)">@Html.ActionLink("Blog Entries", "Index", "Blog", new { area=""}, new{})</li>
+                @if(User.IsInRole("Administrator"))
+                {
+                    <li class="@ActiveItem("Index", "Home", "Admin")">@Html.ActionLink("Admin", "Index","Home", new { area = "Admin"}, null)</li>
+                }
+            </ul>
+            @if (Request.IsAuthenticated)
+            {
+            <ul class="nav pull-right">
+                <li><div class="nav navbar-text">@LoggedInUser()</div>
+                    <div class="nav navbar-text" style="margin-top: 13px;font-size: 13px;margin-bottom: 10px;">
+                       @* @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, htmlAttributes: new { id = "logoutForm" })) *@
+                        @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, htmlAttributes: new { id = "logoutForm"}))
+                        {
+                            <button type="submit" class="btn-link">Log Off</button>
+                            @Html.AntiForgeryToken()
+                        }
+                    </div>
+                </li>
+            </ul>
+            }
+            else
+            {
+                <ul class="nav pull-right">
+                    <li>
+                        <div class="nav navbar-text">@Html.ActionLink("Register", "Register", "Account", new { area=""}, null)</div>
+                        <div class="nav navbar-text">@Html.ActionLink("Log in", "Login", "Account", new { area=""}, null)</div>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>

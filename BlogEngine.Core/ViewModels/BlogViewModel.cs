@@ -14,6 +14,7 @@ namespace BlogEngine.Core.ViewModels
         public DateTime DateCreated { get; set; }
         public string SelectedCategory { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
-        public string BlogEntry { get; set; }
+        public string BlogEntryText { get; set; }
+        public string BlogTitle { get; set; }
     }
 }

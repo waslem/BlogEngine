@@ -9,18 +9,19 @@ using BlogEngine.Core.ViewModels;
 
 namespace BlogEngine.Core.Repositorys
 {
-    public class BlogRepository : IBlogRepository
+    public class BlogRepository : IBlogRepository, IDisposable
     {
         private readonly BlogContext _context;
+        private bool disposed = false;
 
         public BlogRepository()
         {
             _context = new BlogContext();
         }
 
-        public ICollection<Blog> GetAll()
+        public ICollection<BlogEntry> GetAll()
         {
-            var blogs = _context.Blogs.Include("Comments").ToList();
+            var blogs = _context.BlogEntries.Include("Comments").ToList();
             return blogs;
         }
 
@@ -30,8 +31,9 @@ namespace BlogEngine.Core.Repositorys
 
             return blogs.Select(blog => new BlogListViewModel
                 {
-                    BlogId = blog.BlogId,
-                    Entry = blog.BlogEntry,
+                    BlogId = blog.BlogEntryId,
+                    Entry = blog.BlogEntryText,
+                    Title = blog.BlogTitle,
                     Category = blog.Category.Name,
                     CreatedBy = blog.User.UserName,
                     CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(),
@@ -39,25 +41,26 @@ namespace BlogEngine.Core.Repositorys
                 }).ToList();
         }
 
-        public void Create(Blog blog)
+        public void Create(BlogEntry blogEntry)
         {
-            _context.Blogs.Add(blog);
+            _context.BlogEntries.Add(blogEntry);
             _context.SaveChanges();
         }
 
-        public Blog GetBlogById(int id)
+        public BlogEntry GetBlogById(int id)
         {
-            var blog = _context.Blogs.Find(id);
+            var blog = _context.BlogEntries.Find(id);
 
             return blog;
         }
 
         public void Edit(BlogViewModel model)
         {
-            var blog = _context.Blogs.Find(model.BlogId);
+            var blog = _context.BlogEntries.Find(model.BlogId);
 
             blog.CategoryId = Int32.Parse(model.SelectedCategory);
-            blog.BlogEntry = model.BlogEntry;
+            blog.BlogEntryText = model.BlogEntryText;
+            blog.BlogTitle = model.BlogTitle;
 
             _context.Entry(blog).State = EntityState.Modified;
             _context.SaveChanges();
@@ -66,7 +69,7 @@ namespace BlogEngine.Core.Repositorys
 
         public void Delete(int id)
         {
-            var blog = new Blog {BlogId = id};
+            var blog = new BlogEntry {BlogEntryId = id};
             _context.Entry(blog).State = EntityState.Deleted;
             _context.SaveChanges();
         }
@@ -80,10 +83,28 @@ namespace BlogEngine.Core.Repositorys
                     UserId = comment.UserId
                 };
 
-            var blog = _context.Blogs.Find(comment.BlogId);
+            var blog = _context.BlogEntries.Find(comment.BlogId);
 
             blog.Comments.Add(newComment);
             _context.SaveChanges();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if(disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

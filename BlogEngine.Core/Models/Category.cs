@@ -16,11 +16,8 @@ namespace BlogEngine.Core.Models
         // TODO: Implement image for category
         //public CategoryImage CategoryImage { get; set; }
 
-        public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<BlogEntry> BlogEntries { get; set; }
 
-        public Category()
-        {
-            Blogs = new List<Blog>();
-        }
+
     }
 }
