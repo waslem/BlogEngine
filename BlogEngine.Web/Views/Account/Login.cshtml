@@ -3,17 +3,12 @@
 @{
     ViewBag.Title = "Log in";
 }
-
-
-
 <div>
     <div class="col-md-3"></div>
     <div class="col-md-6 login">
         <hgroup class="title">
             <h1>@ViewBag.Title</h1>
         </hgroup>
-        <hr />
-
         @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl, role="form" })) {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)

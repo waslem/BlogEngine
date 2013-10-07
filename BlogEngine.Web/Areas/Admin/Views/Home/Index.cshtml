@@ -3,12 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<div class="col-md-3">
+<div class="col-sm-3 col-lg-3 col-md-3">
 
 </div>
-<div class="col-md-6">
+<div class="col-sm-6 col-lg-6 col-md-6">
     <h2>Admin Area's</h2>
     <hr />
-    <p><button type="button" title="Category Admin Area" class="btn btn-default btn-block" onclick="location.href='@Url.Action("Index","Category")'">Category Admin Area</button></p>
-     <p><button type="button" title="Blog Admin Area" class="btn btn-default btn-block" onclick="location.href='@Url.Action("Index","Blog")'">Blog Admin Area</button></p>
+    <p><button type="button" title="Category Admin Area" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index","Category")'">Category Admin Area</button></p>
+    <p><button type="button" title="Blog Admin Area" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index","Blog")'">Blog Admin Area</button></p>
+    <p><button type="button" title="Comment Admin Area" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index","Comment")'">Comment Admin Area</button></p>
+    <p><button type="button" title="User Admin Area" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index","User")'">User Admin Area</button></p>
 </div>

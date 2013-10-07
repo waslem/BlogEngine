@@ -41,7 +41,6 @@ html {
 }
 body {
   margin: 0;
-  margin-top: 50px;
 }
 a:focus {
   outline: thin dotted;
@@ -3478,7 +3477,6 @@ textarea.input-group-sm > .input-group-btn > .btn {
   position: relative;
   z-index: 1000;
   min-height: 50px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 .navbar:before,

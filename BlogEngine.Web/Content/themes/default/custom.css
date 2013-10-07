@@ -44,3 +44,31 @@
     margin-top:50px;
     padding: 5px 20px 20px 20px;
 }
+
+html,body{
+    height: 100%
+}
+
+#footer{
+    background-color: silver;
+    bottom: 0;
+    height: 200px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+#holder{
+    min-height: 100%;
+    position:relative;
+}
+
+#body{
+    padding-bottom: 200px;    /* height of footer */
+}
+
+body {
+padding-top: 50px;
+padding-bottom: 0px;
+}
+

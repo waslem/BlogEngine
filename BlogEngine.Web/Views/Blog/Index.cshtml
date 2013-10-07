@@ -14,11 +14,11 @@
         <div class="entry">
             <h2>@Html.DisplayFor(modelItem => item.BlogTitle)</h2>
             <div class="meta">
-                <i class="icon-calendar"></i> @Html.DisplayFor(modelItem => item.DateCreated) By: 
-                <i class="icon-user"></i>@Html.DisplayFor(modelItem => item.User.UserName)
+                <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)
                 <span class="pull-right">
-                    <i class="icon-comment"></i>
-                    <a href="#">@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
+                    <span class="glyphicon glyphicon-comment"></span> 
+                    <a href="#">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
                 </span>
             </div>
             <p>@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
