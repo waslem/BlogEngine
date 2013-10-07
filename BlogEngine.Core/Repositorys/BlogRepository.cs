@@ -106,5 +106,23 @@ namespace BlogEngine.Core.Repositorys
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
+        public ICollection<BlogEntryView> GetAllView()
+        {
+            var blogs = GetAll();
+
+            return blogs.Select(blog => new BlogEntryView
+            {
+
+                BlogEntryId = blog.BlogEntryId,
+                BlogEntryText = blog.BlogEntryText,
+                BlogTitle = blog.BlogTitle,
+                Category = blog.Category,
+                User = blog.User,
+                DateCreated = blog.DateCreated.ToShortDateString(),
+                Comments = blog.Comments
+            }).ToList();
+        }
     }
 }

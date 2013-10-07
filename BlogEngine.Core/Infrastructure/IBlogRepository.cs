@@ -7,6 +7,8 @@ namespace BlogEngine.Core.Infrastructure
     public interface IBlogRepository
     {
         ICollection<BlogEntry> GetAll();
+        ICollection<BlogEntryView> GetAllView();
+
         ICollection<BlogListViewModel> GetAllViewModel();
 
         void Create(BlogEntry blogEntry);

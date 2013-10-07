@@ -3,38 +3,38 @@
 @{
     ViewBag.Title = "Comment";
 }
+<div class="col-md-10">
+    <h2>Comment</h2>
+    <hr />
+    <div class="col-md-8">
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-<h2>Comment</h2>
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>CommentViewModel</legend>
-                    @Html.HiddenFor(model => model.UserId)
-                    @Html.HiddenFor(model => model.CommentDate)
-                    @Html.HiddenFor(model => model.BlogId)
-        @Html.HiddenFor(model => model.CommentId)
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.CommentDate)
+            @Html.HiddenFor(model => model.BlogId)
+            @Html.HiddenFor(model => model.CommentId)
    
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CommentText)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CommentText)
-            @Html.ValidationMessageFor(model => model.CommentText)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CommentText)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.CommentText, new { @class = "form-control", rows = "7" })
+                @Html.ValidationMessageFor(model => model.CommentText)
+            </div>
+            <p></p>
+            <p>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </p>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
         </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

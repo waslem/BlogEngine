@@ -23,7 +23,8 @@ namespace BlogEngine.Web.Controllers
         // GET: /Blog/
         public ActionResult Index()
         {
-            var blogs = _blogRepository.GetAll();
+            //var blogs = _blogRepository.GetAll();
+            var blogs = _blogRepository.GetAllView();
             
             return View(blogs);
         }

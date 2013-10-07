@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlogEngine.Core.Models.BlogEntry>
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.BlogEntryView>
 
 @{
     ViewBag.Title = "Blog Entries";
@@ -6,61 +6,61 @@
 
 <h2>Blog Entries</h2>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlogEntryText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlogTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlogEntryText)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            <div>
-                @foreach(var comment in item.Comments)
+<div class="col-md-8">
+    @foreach (var item in Model)
+    {
+        @Html.HiddenFor(modelItem => item.UserId)
+        @Html.HiddenFor(modelItem => item.CategoryId)
+        <div class="entry">
+            <h2>@Html.DisplayFor(modelItem => item.BlogTitle)</h2>
+            <div class="meta">
+                <i class="icon-calendar"></i> @Html.DisplayFor(modelItem => item.DateCreated) By: 
+                <i class="icon-user"></i>@Html.DisplayFor(modelItem => item.User.UserName)
+                <span class="pull-right">
+                    <i class="icon-comment"></i>
+                    <a href="#">@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
+                </span>
+            </div>
+            <p>@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
+            <hr />
+            <div class="comment">
+                @if (item.Comments.Count > 0)
                 {
-                    <div>
-                        @Html.DisplayFor(m => comment.CommentText)
-                        @Html.DisplayFor(m => comment.User.UserName)
-                        @Html.DisplayFor(m => comment.CommentDate)
-                    </div>
-
+                    <span><b>Comments</b></span>
+                    <hr />
+                    foreach(var comment in item.Comments)
+                    {
+                        <div>
+                            @Html.DisplayFor(m => comment.User.UserName) - 
+                            @Html.DisplayFor(m => comment.CommentDate)
+                            <p>@Html.DisplayFor(m => comment.CommentText)</p>
+                        </div>
+                    }
+                }
+                else
+	            {
+                    <span><b>No Comments</b></span>
+                    <hr />
+	            }
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <p>@Html.ActionLink("Add a Comment","Comment", new { id = item.BlogEntryId})</p>
                 }
             </div>
-            @if(User.Identity.IsAuthenticated)
-            {
-                @Html.ActionLink("Comment","Comment", new { id = item.BlogEntryId})
-            }
-        </td>
-    </tr>
-}
-
-</table>
+            
+        </div>
+    }
+</div>
+<div class="col-md-4">
+    <div class="sidebar">
+        <div class="widget">
+            <h4>Search</h4>
+        </div>
+        <div class="widget">
+            <h4>About</h4>
+        </div>
+        <div class="widget">
+            <h4>Recent blogs</h4>
+        </div>
+    </div>
+</div>    
