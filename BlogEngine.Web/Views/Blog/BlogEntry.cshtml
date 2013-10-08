@@ -1,0 +1,67 @@
+﻿@model BlogEngine.Core.Models.BlogEntry
+
+@{
+    ViewBag.Title = "BlogEntry";
+}
+
+<h2>Blog entry</h2>
+<div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10 centered">
+    <div class="entry">
+        <h3 class="entryPadding">@Html.DisplayFor(modelItem => Model.BlogTitle)</h3>
+        <div class="meta">
+            <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => Model.DateCreated)&nbsp;
+                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
+            <span class="pull-right">
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@Html.DisplayFor(modelItem => Model.Comments.Count) Comments
+            </span>
+        </div>
+        <div class="entryPadding">@Html.DisplayFor(modelItem => Model.BlogEntryText)
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p></p>
+                <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id=Model.BlogEntryId })" method="get">
+                    <button class="btn btn-default">Add a Comment »</button>
+                </form>
+            }
+        </div>
+        <div class="comment entryPadding">
+            @if (Model.Comments.Count > 0)
+            {
+                foreach (var comment in Model.Comments)
+                {               
+                    <div class="commentIndividual">
+                        <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
+                        @if(User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
+                        {
+                            <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit","Comment",new {id = comment.CommentId})">EDIT</a></span>
+                        }
+                        <span class="commentDate">@DateFormatter.Format(comment.CommentDate)</span>
+                        <div class="commentEntry">
+                            @Html.DisplayFor(m => comment.CommentText)
+                        </div>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = Model.BlogEntryId })" method="get">
+                                <button class="btn btn-default">Reply</button>
+                            </form>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <span><b>No Comments</b></span>
+                <hr />
+            }
+
+        </div>
+        <div>
+            <hr />
+            @Html.ActionLink("Back to Blog Entries", "Index", null, new { @class = "entryPadding" })
+        </div>
+    </div>
+</div>
+<div class="col-md-4 col-lg-4">
+
+</div>

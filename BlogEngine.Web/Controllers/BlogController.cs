@@ -1,6 +1,7 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,25 @@ namespace BlogEngine.Web.Controllers
             }
 
             return View(comment);
+        }
+
+        //
+        // GET: /Blog/BlogEntry/1/{blogtitle}
+
+        public ActionResult BlogEntry(int id, string blogEntryName)
+        {
+            var model = _blogRepository.GetBlogById(id);
+
+            string realTitle = UrlEncoder.ToFriendlyUrl(model.BlogTitle);
+            string urlTitle = (blogEntryName ?? "").Trim().ToLower();
+
+            if (realTitle != urlTitle)
+            {
+                string url = "/BlogEntry/" + model.BlogEntryId + "/" + realTitle;
+                return new RedirectResult(url);
+            }
+
+            return View(model);
         }
     }
 }

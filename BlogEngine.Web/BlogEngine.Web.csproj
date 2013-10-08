@@ -205,7 +205,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AdminController.cs" />
+    <Compile Include="Helpers\DateFormatter.cs" />
     <Compile Include="Helpers\ModelBinder.cs" />
+    <Compile Include="Helpers\UrlEncoder.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -399,6 +401,7 @@
     <Content Include="Views\Blog\Comment.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Blog\BlogEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

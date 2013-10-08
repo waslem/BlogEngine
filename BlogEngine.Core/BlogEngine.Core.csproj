@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\BlogContext.cs" />
+    <Compile Include="Helpers\RepoHelpers.cs" />
     <Compile Include="Infrastructure\IBlogRepository.cs" />
     <Compile Include="Infrastructure\ICategoryRepository.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />

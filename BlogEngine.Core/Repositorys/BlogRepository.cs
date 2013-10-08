@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Helpers;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -116,13 +117,16 @@ namespace BlogEngine.Core.Repositorys
             {
 
                 BlogEntryId = blog.BlogEntryId,
-                BlogEntryText = blog.BlogEntryText,
+                BlogEntryText = RepoHelpers.Truncate(blog.BlogEntryText, 300),
                 BlogTitle = blog.BlogTitle,
                 Category = blog.Category,
                 User = blog.User,
                 DateCreated = blog.DateCreated.ToShortDateString(),
                 Comments = blog.Comments
-            }).ToList();
+            })
+            .OrderByDescending(b => b.DateCreated)
+            .ToList();
         }
+
     }
 }

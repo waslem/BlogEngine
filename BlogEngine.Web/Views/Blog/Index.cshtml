@@ -12,42 +12,19 @@
         @Html.HiddenFor(modelItem => item.UserId)
         @Html.HiddenFor(modelItem => item.CategoryId)
         <div class="entry">
-            <h2>@Html.DisplayFor(modelItem => item.BlogTitle)</h2>
+            <h3 class="entryPadding">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
             <div class="meta">
-                <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
                 <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)
                 <span class="pull-right">
                     <span class="glyphicon glyphicon-comment"></span> 
-                    <a href="#">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
+                    <a href="@Url.Action("BlogEntry", "Blog",  new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
                 </span>
             </div>
-            <p>@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
-            <hr />
-            <div class="comment">
-                @if (item.Comments.Count > 0)
-                {
-                    <span><b>Comments</b></span>
-                    <hr />
-                    foreach(var comment in item.Comments)
-                    {
-                        <div>
-                            @Html.DisplayFor(m => comment.User.UserName) - 
-                            @Html.DisplayFor(m => comment.CommentDate)
-                            <p>@Html.DisplayFor(m => comment.CommentText)</p>
-                        </div>
-                    }
-                }
-                else
-	            {
-                    <span><b>No Comments</b></span>
-                    <hr />
-	            }
-                @if(User.Identity.IsAuthenticated)
-                {
-                    <p>@Html.ActionLink("Add a Comment","Comment", new { id = item.BlogEntryId})</p>
-                }
-            </div>
-            
+            <p class="entryPadding">@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
+            <form class="entryPadding" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
+                <button class="btn btn-default">Read more »</button>
+               </form>
         </div>
     }
 </div>
