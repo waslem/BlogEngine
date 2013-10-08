@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace BlogEngine.Core.Models
 {
-    public class Comment
+    public class Reply
     {
-        public int CommentId { get; set; }
+        public int ReplyId { get; set; }
 
-        public string CommentText { get; set; }
-        public DateTime CommentDate { get; set; }
+        public string ReplyText { get; set; }
+        public DateTime ReplyDate { get; set; }
+
+        public int CommentId { get; set; }
+        public virtual Comment Comment { get; set; }
 
         public int UserId { get; set; }
         public virtual User User { get; set; }
-
-        public virtual ICollection<Reply> Replies { get; set; }
     }
 }
