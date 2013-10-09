@@ -32,13 +32,14 @@ namespace BlogEngine.Web.Controllers
 
         //
         // GET: /Blog/Comment/1
-        public ActionResult Comment(int id, string parent)
+        public ActionResult Comment(int id, int? parent)
         {
             // if parent not null, create new comment with parentid == parent
             var model = new CommentViewModel
                 {
                     UserId = WebSecurity.CurrentUserId,
-                    BlogId = id
+                    BlogId = id, 
+                    ParentId = parent
                 };
 
             return View(model);
@@ -67,6 +68,10 @@ namespace BlogEngine.Web.Controllers
         public ActionResult BlogEntry(int id, string blogEntryName)
         {
             var model = _blogRepository.GetBlogById(id);
+
+            // just get the base comments (where there is no ParentId, and then iterate through them in the view
+            var comments = model.Comments.Where(c => c.ParentId == null).ToList();
+            model.Comments = comments;
 
             string realTitle = UrlEncoder.ToFriendlyUrl(model.BlogTitle);
             string urlTitle = (blogEntryName ?? "").Trim().ToLower();

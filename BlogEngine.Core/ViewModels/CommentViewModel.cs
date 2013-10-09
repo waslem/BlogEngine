@@ -11,5 +11,7 @@ namespace BlogEngine.Core.ViewModels
         public DateTime CommentDate { get; set; }
         public int UserId { get; set; }
         public int BlogId { get; set; }
+
+        public int? ParentId { get; set; }
     }
 }

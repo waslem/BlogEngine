@@ -15,7 +15,8 @@
             @Html.HiddenFor(model => model.CommentDate)
             @Html.HiddenFor(model => model.BlogId)
             @Html.HiddenFor(model => model.CommentId)
-   
+            @Html.HiddenFor(model => model.ParentId)
+
             <div class="editor-label">
                 @Html.LabelFor(model => model.CommentText)
             </div>

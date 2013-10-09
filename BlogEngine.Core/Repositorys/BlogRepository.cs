@@ -81,7 +81,9 @@ namespace BlogEngine.Core.Repositorys
                 {
                     CommentDate = comment.CommentDate,
                     CommentText = comment.CommentText, 
-                    UserId = comment.UserId
+                    UserId = comment.UserId,
+                    ParentId = comment.ParentId, 
+                    Children = new List<Comment>()
                 };
 
             var blog = _context.BlogEntries.Find(comment.BlogId);
@@ -90,11 +92,30 @@ namespace BlogEngine.Core.Repositorys
             _context.SaveChanges();
         }
 
+        public ICollection<BlogEntryView> GetAllView()
+        {
+            var blogs = GetAll();
+
+            return blogs.Select(blog => new BlogEntryView
+            {
+
+                BlogEntryId = blog.BlogEntryId,
+                BlogEntryText = blog.BlogEntryText.Truncate(300),
+                BlogTitle = blog.BlogTitle,
+                Category = blog.Category,
+                User = blog.User,
+                DateCreated = blog.DateCreated.ToShortDateString(),
+                Comments = blog.Comments
+            })
+            .OrderByDescending(b => b.DateCreated)
+            .ToList();
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
-                if(disposing)
+                if (disposing)
                 {
                     _context.Dispose();
                 }
@@ -107,26 +128,5 @@ namespace BlogEngine.Core.Repositorys
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-
-        public ICollection<BlogEntryView> GetAllView()
-        {
-            var blogs = GetAll();
-
-            return blogs.Select(blog => new BlogEntryView
-            {
-
-                BlogEntryId = blog.BlogEntryId,
-                BlogEntryText = RepoHelpers.Truncate(blog.BlogEntryText, 300),
-                BlogTitle = blog.BlogTitle,
-                Category = blog.Category,
-                User = blog.User,
-                DateCreated = blog.DateCreated.ToShortDateString(),
-                Comments = blog.Comments
-            })
-            .OrderByDescending(b => b.DateCreated)
-            .ToList();
-        }
-
     }
 }
