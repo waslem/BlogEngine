@@ -12,7 +12,7 @@
         @Html.HiddenFor(modelItem => item.UserId)
         @Html.HiddenFor(modelItem => item.CategoryId)
         <div class="entry">
-            <h3 class="entryPadding">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
+            <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
             <div class="meta">
                 <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
                 <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)
@@ -21,8 +21,8 @@
                     <a href="@Url.Action("BlogEntry", "Blog",  new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
                 </span>
             </div>
-            <p class="entryPadding">@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
-            <form class="entryPadding" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
+            <p class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
+            <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
                 <button class="btn btn-default">Read more »</button>
                </form>
         </div>

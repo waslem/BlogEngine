@@ -75,23 +75,6 @@ namespace BlogEngine.Core.Repositorys
             _context.SaveChanges();
         }
 
-        public void AddComment(CommentViewModel comment)
-        {
-            var newComment = new Comment
-                {
-                    CommentDate = comment.CommentDate,
-                    CommentText = comment.CommentText, 
-                    UserId = comment.UserId,
-                    ParentId = comment.ParentId, 
-                    Children = new List<Comment>()
-                };
-
-            var blog = _context.BlogEntries.Find(comment.BlogId);
-
-            blog.Comments.Add(newComment);
-            _context.SaveChanges();
-        }
-
         public ICollection<BlogEntryView> GetAllView()
         {
             var blogs = GetAll();

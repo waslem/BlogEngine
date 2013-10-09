@@ -17,6 +17,5 @@ namespace BlogEngine.Core.Infrastructure
         void Edit(BlogViewModel model);
         void Delete(int id);
 
-        void AddComment(CommentViewModel comment);
     }
 }

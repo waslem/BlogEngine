@@ -14,10 +14,12 @@ namespace BlogEngine.Web.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogRepository _blogRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public BlogController(IBlogRepository blogRepository)
+        public BlogController(IBlogRepository blogRepository, ICommentRepository commentRepository)
         {
             _blogRepository = blogRepository;
+            _commentRepository = commentRepository;
         }
 
         //
@@ -45,7 +47,6 @@ namespace BlogEngine.Web.Controllers
             return View(model);
         }
 
-
         //
         // POST: /Blog/Comment/1
         [HttpPost]
@@ -54,7 +55,8 @@ namespace BlogEngine.Web.Controllers
             if (ModelState.IsValid)
             {
                 comment.CommentDate = DateTime.Now;
-                _blogRepository.AddComment(comment);
+                //_blogRepository.AddComment(comment);
+                _commentRepository.Create(comment);
 
                 return RedirectToAction("Index");
             }
@@ -64,7 +66,6 @@ namespace BlogEngine.Web.Controllers
 
         //
         // GET: /Blog/BlogEntry/1/{blogtitle}
-
         public ActionResult BlogEntry(int id, string blogEntryName)
         {
             var model = _blogRepository.GetBlogById(id);
