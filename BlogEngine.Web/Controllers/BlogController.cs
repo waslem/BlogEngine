@@ -32,8 +32,9 @@ namespace BlogEngine.Web.Controllers
 
         //
         // GET: /Blog/Comment/1
-        public ActionResult Comment(int id)
+        public ActionResult Comment(int id, string parent)
         {
+            // if parent not null, create new comment with parentid == parent
             var model = new CommentViewModel
                 {
                     UserId = WebSecurity.CurrentUserId,
@@ -42,6 +43,7 @@ namespace BlogEngine.Web.Controllers
 
             return View(model);
         }
+
 
         //
         // POST: /Blog/Comment/1

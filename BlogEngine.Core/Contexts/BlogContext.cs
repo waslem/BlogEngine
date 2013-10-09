@@ -1,6 +1,7 @@
 ﻿using BlogEngine.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,17 @@ namespace BlogEngine.Core.Contexts
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BlogEntry> BlogEntries { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Comment>().HasKey(x => x.CommentId);
+            modelBuilder.Entity<Comment>().Property(x => x.CommentId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Comment>().HasOptional(x => x.Parent)
+                                            .WithMany(x => x.Children)
+                                            .HasForeignKey(x => x.ParentId)
+                                            .WillCascadeOnDelete(false);
+        }
     }
 }

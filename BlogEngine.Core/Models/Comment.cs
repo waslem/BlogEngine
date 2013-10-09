@@ -17,6 +17,9 @@ namespace BlogEngine.Core.Models
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-        public virtual ICollection<Reply> Replies { get; set; }
+        public int? ParentId { get; set; }
+        public virtual Comment Parent { get; set; }
+
+        public virtual ICollection<Comment> Children { get; set; }
     }
 }

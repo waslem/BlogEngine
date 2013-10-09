@@ -42,7 +42,7 @@
                         </div>
                         @if(User.Identity.IsAuthenticated)
                         {
-                            <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = Model.BlogEntryId })" method="get">
+                            <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = Model.BlogEntryId, parent = Model.User.UserName })" method="get">
                                 <button class="btn btn-default">Reply</button>
                             </form>
                         }
