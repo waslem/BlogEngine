@@ -65,7 +65,7 @@
 <div style="margin-bottom: 20px;">
 
 </div>
-<div class="text-center">
+<div class="text-center hugFooter">
     <span class="paginationText">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
     @Html.PagedListPager( Model, page => Url.Action("Index", new { page }), options)
 </div>
