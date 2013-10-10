@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<BlogEngine.Core.Models.Comment>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+    PagedListRenderOptions options = new PagedListRenderOptions
+          {
+               UlElementClasses = new [] {"pagination pagination-sm"}, 
+               DisplayLinkToFirstPage = PagedListDisplayMode.Always, 
+               DisplayLinkToLastPage = PagedListDisplayMode.Always,
+               DisplayLinkToPreviousPage = PagedListDisplayMode.Always, 
+               DisplayLinkToNextPage = PagedListDisplayMode.Always
+          };
+}
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    {
+        @input
+    }
+    else 
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CommentText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CommentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().User.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Truncate(item.CommentText, 100)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentId })
+        </td>
+    </tr>
+}
+</table>
+<br />
+<div style="margin-bottom: 20px;">
+
+</div>
+<div class="text-center">
+    <span class="paginationText">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+    @Html.PagedListPager( Model, page => Url.Action("Index", new { page }), options)
+</div>

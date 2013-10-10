@@ -136,3 +136,17 @@ padding-bottom: 0px;
 .entryAddComment {
     margin: 10px;
 }
+
+.paginationFix {
+    margin-top: 15px;
+}
+
+.paginationText {
+    color: rgb(66, 139, 202);
+    font-weight:500;
+    font-size:14px;
+}
+
+.pagination-container {
+    margin-top: -15px;
+}

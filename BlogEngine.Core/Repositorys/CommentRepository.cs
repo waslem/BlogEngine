@@ -52,6 +52,16 @@ namespace BlogEngine.Core.Repositorys
             return comment;
         }
 
+        public ICollection<Comment> GetAll()
+        {
+            var comments = _context
+                                .Comments
+                                .OrderByDescending(c => c.CommentDate)
+                                .ToList() as ICollection<Comment>;
+
+            return comments;
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this._disposed)

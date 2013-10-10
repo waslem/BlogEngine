@@ -14,5 +14,7 @@ namespace BlogEngine.Core.Infrastructure
         void Edit(Comment comment);
 
         Comment GetById(int id);
+
+        ICollection<Comment> GetAll();
     }
 }
