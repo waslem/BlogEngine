@@ -82,6 +82,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             _userRepository.RemoveUserFromAdminRole(id);
 
             return RedirectToAction("Success");
+
         }
 
         public ActionResult Success()
