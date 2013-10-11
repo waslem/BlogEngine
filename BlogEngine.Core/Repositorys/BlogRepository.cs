@@ -22,7 +22,11 @@ namespace BlogEngine.Core.Repositorys
 
         public ICollection<BlogEntry> GetAll()
         {
-            var blogs = _context.BlogEntries.Include("Comments").ToList();
+            var blogs = _context
+                            .BlogEntries
+                            .Include("Comments")
+                            .OrderByDescending(o => o.DateCreated)
+                            .ToList();
             return blogs;
         }
 
@@ -39,7 +43,7 @@ namespace BlogEngine.Core.Repositorys
                     CreatedBy = blog.User.UserName,
                     CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(),
                     CommentCount = blog.Comments.Count()
-                }).ToList();
+                }).OrderByDescending(o => o.CreatedDate).ToList();
         }
 
         public void Create(BlogEntry blogEntry)
@@ -90,7 +94,6 @@ namespace BlogEngine.Core.Repositorys
                 DateCreated = blog.DateCreated.ToShortDateString(),
                 Comments = blog.Comments
             })
-            .OrderByDescending(b => b.DateCreated)
             .ToList();
         }
 

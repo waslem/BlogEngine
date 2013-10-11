@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.ActionLink("Add a user to admins", "AddUserToAdmins") 
+</div>
+<div>
+    @Html.ActionLink("Remove a user from admins", "RemoveUserFromAdmins")
+</div>

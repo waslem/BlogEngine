@@ -1,0 +1,16 @@
+﻿@model BlogEngine.Core.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "RemoveUserFromAdmins";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Remove user to admin role</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.users)
+    @Html.DropDownListFor(model => model.SelectedUser, Model.users)
+    
+    <input type="submit" value="Submit" />
+}

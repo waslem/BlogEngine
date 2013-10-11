@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
+using BlogEngine.Core.ViewModels;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -38,6 +41,35 @@ namespace BlogEngine.Core.Repositorys
             return userId;
         }
 
+        public ICollection<User> GetAllUsers()
+        {
+            var users = _context.Users.ToList() as ICollection<User>;
+
+            return users;
+        }
+
+        public void AddUserToAdminRole(int id)
+        {
+            // get the user by the id
+            var user = _context.Users.Where(u => u.UserId == id).FirstOrDefault();
+
+            // using the websecurity roles api to add the user to the role
+            if (!Roles.IsUserInRole(user.UserName, "Administrator"))
+            {
+                Roles.AddUserToRole(user.UserName, "Administrator");
+            }
+        }
+
+        public void RemoveUserFromAdminRole(int id)
+        {
+            var user = _context.Users.Where(u => u.UserId == id).FirstOrDefault();
+
+            if (!Roles.IsUserInRole(user.UserName, "Administrator"))
+            {
+                Roles.RemoveUserFromRole(user.UserName, "Administrator");
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -55,5 +87,6 @@ namespace BlogEngine.Core.Repositorys
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
     }
 }

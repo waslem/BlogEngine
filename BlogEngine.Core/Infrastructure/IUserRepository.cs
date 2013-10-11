@@ -11,5 +11,9 @@ namespace BlogEngine.Core.Infrastructure
     {
         User GetUser(string username);
         int GetUserId(string username);
+        ICollection<User> GetAllUsers();
+
+        void AddUserToAdminRole(int id);
+        void RemoveUserFromAdminRole(int id);
     }
 }
