@@ -4,7 +4,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Create";
 }
-
 <h2>Create</h2>
 
 @using (Html.BeginForm()) {
@@ -34,10 +33,9 @@
             @Html.LabelFor(model => model.BlogEntryText)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.BlogEntryText)
+            @Html.EditorFor(model => model.BlogEntryText)
             @Html.ValidationMessageFor(model => model.BlogEntryText)
         </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>

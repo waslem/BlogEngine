@@ -49,8 +49,10 @@
                 <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@Html.DisplayFor(modelItem => Model.Comments.Count) Comments
             </span>
         </div>
-        <div class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogEntryText)
-
+        <div class="entryPaddingMain">
+            
+@*            @Html.DisplayFor(modelItem => Model.BlogEntryText)*@
+            @Html.Raw(Model.BlogEntryText)
             @if (User.Identity.IsAuthenticated)
             {
                 <div class="entryAddComment">

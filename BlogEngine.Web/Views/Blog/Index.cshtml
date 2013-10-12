@@ -22,6 +22,7 @@
                 </span>
             </div>
             <p class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogEntryText)</p>
+@*            <p class="entryPaddingMain">@Html.Raw(item.BlogEntryText)</p>*@
             <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
                 <button class="btn btn-default">Read more »</button>
                </form>

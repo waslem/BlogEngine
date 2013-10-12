@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Text.RegularExpressions;
 using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
@@ -87,7 +88,9 @@ namespace BlogEngine.Core.Repositorys
             {
 
                 BlogEntryId = blog.BlogEntryId,
-                BlogEntryText = blog.BlogEntryText.Truncate(300),
+                //BlogEntryText = blog.BlogEntryText.Truncate(300),
+                //do this hack for now for the blog display page to remove markup
+                BlogEntryText = Regex.Replace(blog.BlogEntryText.Truncate(300), @"<(.|\n)*?>", string.Empty),
                 BlogTitle = blog.BlogTitle,
                 Category = blog.Category,
                 User = blog.User,

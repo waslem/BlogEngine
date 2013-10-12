@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BlogEngine.Core.Models
 {
@@ -12,6 +14,7 @@ namespace BlogEngine.Core.Models
         public int CommentId { get; set; }
 
         public string CommentText { get; set; }
+
         public DateTime CommentDate { get; set; }
 
         public int UserId { get; set; }
