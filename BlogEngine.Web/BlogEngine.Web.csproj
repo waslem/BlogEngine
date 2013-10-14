@@ -678,7 +678,6 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Blog\BlogEntry.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
   </ItemGroup>
   <ItemGroup>

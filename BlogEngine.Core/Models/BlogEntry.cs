@@ -13,7 +13,7 @@ namespace BlogEngine.Core.Models
         public int BlogEntryId { get; set; }
 
         public string BlogTitle { get; set; }
-
+        public string BlogShortDescription { get; set; }
         public string BlogEntryText { get; set; }
 
         public DateTime DateCreated { get; set; }

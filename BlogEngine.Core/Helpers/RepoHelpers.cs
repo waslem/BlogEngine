@@ -15,7 +15,7 @@ namespace BlogEngine.Core.Helpers
                 return value.Substring(0, maxLength) + "...";
             }
 
-            return value + "...";
+            return value;
         }
     }
 }

@@ -24,6 +24,7 @@ namespace BlogEngine.Web.Helpers
             var blogViewModel = new BlogViewModel
                 {
                     SelectedCategory = blogEntry.CategoryId.ToString(),
+                    BlogShortDescription = blogEntry.BlogShortDescription,
                     BlogEntryText = blogEntry.BlogEntryText,
                     BlogTitle = blogEntry.BlogTitle,
                     DateCreated = blogEntry.DateCreated,
@@ -38,6 +39,7 @@ namespace BlogEngine.Web.Helpers
             var blogEntry = new BlogEntry
             {
                 UserId = model.UserId,
+                BlogShortDescription = model.BlogShortDescription,
                 BlogEntryText = model.BlogEntryText,
                 BlogTitle = model.BlogTitle,
                 DateCreated = DateTime.Now,

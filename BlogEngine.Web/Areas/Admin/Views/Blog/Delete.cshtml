@@ -10,19 +10,25 @@
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>Blog</legend>
-
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogTitle)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogShortDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogShortDescription)
+    </div>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.BlogEntryText)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.BlogEntryText)
     </div>
-        <div class="display-label">
-         @Html.DisplayNameFor(model => model.BlogTitle)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.BlogTitle)
-    </div>
+
     <div class="display-label">
          @Html.DisplayNameFor(model => model.DateCreated)
     </div>

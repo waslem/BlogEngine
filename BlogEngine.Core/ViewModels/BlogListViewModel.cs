@@ -8,7 +8,8 @@ namespace BlogEngine.Core.ViewModels
 {
     public class BlogListViewModel
     {
-        public int BlogId { get; set; } 
+        public int BlogId { get; set; }
+        public string ShortDescription { get; set; }
         public string Entry { get; set; }
         public string Title { get; set; }
         public string Category { get; set; } 

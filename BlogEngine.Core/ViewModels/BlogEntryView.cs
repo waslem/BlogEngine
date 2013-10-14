@@ -13,6 +13,7 @@ namespace BlogEngine.Core.ViewModels
 
         public string BlogTitle { get; set; }
 
+        public string BlogShortDescription { get; set; }
         public string BlogEntryText { get; set; }
         public string DateCreated { get; set; }
 

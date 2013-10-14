@@ -38,6 +38,7 @@ namespace BlogEngine.Core.Repositorys
             return blogs.Select(blog => new BlogListViewModel
                 {
                     BlogId = blog.BlogEntryId,
+                    ShortDescription = blog.BlogShortDescription,
                     Entry = blog.BlogEntryText,
                     Title = blog.BlogTitle,
                     Category = blog.Category.Name,
@@ -65,8 +66,10 @@ namespace BlogEngine.Core.Repositorys
             var blog = _context.BlogEntries.Find(model.BlogId);
 
             blog.CategoryId = Int32.Parse(model.SelectedCategory);
-            blog.BlogEntryText = model.BlogEntryText;
+
             blog.BlogTitle = model.BlogTitle;
+            blog.BlogShortDescription = model.BlogShortDescription;
+            blog.BlogEntryText = model.BlogEntryText;
 
             _context.Entry(blog).State = EntityState.Modified;
             _context.SaveChanges();
@@ -88,9 +91,8 @@ namespace BlogEngine.Core.Repositorys
             {
 
                 BlogEntryId = blog.BlogEntryId,
-                //BlogEntryText = blog.BlogEntryText.Truncate(300),
-                //do this hack for now for the blog display page to remove markup
-                BlogEntryText = Regex.Replace(blog.BlogEntryText.Truncate(300), @"<(.|\n)*?>", string.Empty),
+                BlogShortDescription = blog.BlogShortDescription.Truncate(300),
+                BlogEntryText = blog.BlogEntryText,
                 BlogTitle = blog.BlogTitle,
                 Category = blog.Category,
                 User = blog.User,

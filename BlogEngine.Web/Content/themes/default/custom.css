@@ -150,3 +150,8 @@ padding-bottom: 0px;
 .pagination-container {
     margin-top: -15px;
 }
+
+.editor-field-desc textarea {
+    width: 790px;
+    height: 100px
+}

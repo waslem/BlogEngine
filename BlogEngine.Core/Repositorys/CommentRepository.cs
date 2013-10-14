@@ -42,7 +42,6 @@ namespace BlogEngine.Core.Repositorys
         {
             _context.Entry(comment).State = EntityState.Modified;
             _context.SaveChanges();
-
         }
 
         public Comment GetById(int id)

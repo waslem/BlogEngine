@@ -26,8 +26,15 @@
             @Html.LabelFor(model => model.BlogTitle)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.BlogTitle)
+            @Html.TextBoxFor(model => model.BlogTitle, new { style = "width:790px" })
             @Html.ValidationMessageFor(model => model.BlogTitle)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BlogShortDescription)
+        </div>
+        <div class="editor-field-desc">
+            @Html.TextAreaFor(model => model.BlogShortDescription)
+            @Html.ValidationMessageFor(model => model.BlogShortDescription)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.BlogEntryText)

@@ -16,6 +16,7 @@ namespace BlogEngine.Core.ViewModels
         public string SelectedCategory { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
 
+        public string BlogShortDescription { get; set; }
         [UIHint("tinymce_jquery_full"), AllowHtml]
         public string BlogEntryText { get; set; }
         public string BlogTitle { get; set; }

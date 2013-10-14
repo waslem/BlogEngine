@@ -14,37 +14,16 @@
         <legend>Comment</legend>
 
         @Html.HiddenFor(model => model.CommentId)
+        @Html.HiddenFor(model => model.CommentDate)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.ParentId)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.CommentText)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CommentText)
+            @Html.TextAreaFor(model => model.CommentText, new { style = "width:790px" })
             @Html.ValidationMessageFor(model => model.CommentText)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CommentDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CommentDate)
-            @Html.ValidationMessageFor(model => model.CommentDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserId)
-            @Html.ValidationMessageFor(model => model.UserId)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ParentId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ParentId)
-            @Html.ValidationMessageFor(model => model.ParentId)
         </div>
 
         <p>
