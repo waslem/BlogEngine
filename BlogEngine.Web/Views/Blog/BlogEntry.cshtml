@@ -12,6 +12,13 @@
             <div class="commentIndividual">
                 <div class="commentInfoBanner">
                     <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
+                    <span>VoteCount:@comment.Votes.Count() VoteScore:  @comment.VoteScore</span>
+                    <form action="@Url.Action("UpVote","Vote", new { commentId = comment.CommentId})" method="post">
+                        <button class="btn btn-default btn-sm">UpVote</button>
+                    </form>
+                    <form action="@Url.Action("DownVote","Vote", new { commentId = comment.CommentId})" method="post">
+                        <button class="btn btn-default btn-sm">DownVote</button>
+                    </form>
                     @if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
                     {
                         <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>

@@ -20,6 +20,7 @@ namespace BlogEngine.Core.Contexts
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BlogEntry> BlogEntries { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,6 +31,13 @@ namespace BlogEngine.Core.Contexts
             modelBuilder.Entity<Comment>().HasOptional(x => x.Parent)
                                             .WithMany(x => x.Children)
                                             .HasForeignKey(x => x.ParentId)
+                                            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vote>().HasKey(x => x.VoteId);
+            modelBuilder.Entity<Vote>().Property(x => x.VoteId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Vote>().HasRequired(x => x.Comment)
+                                            .WithMany(x => x.Votes)
+                                            .HasForeignKey(x => x.CommentId)
                                             .WillCascadeOnDelete(false);
         }
     }

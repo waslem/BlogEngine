@@ -17,6 +17,7 @@ namespace BlogEngine.Core.Work
         private CategoryRepository categoryRepository;
         private UserRepository userRepository;
         private CommentRepository commentRepository;
+        private VoteRepository voteRepository;
 
         private bool disposed = false;
 
@@ -65,6 +66,18 @@ namespace BlogEngine.Core.Work
                     this.userRepository = new UserRepository(context);
                 }
                 return userRepository;
+            }
+        }
+
+        public IVoteRepository VoteRepository
+        {
+            get
+            {
+                if (this.voteRepository == null)
+                {
+                    this.voteRepository = new VoteRepository(context);
+                }
+                return voteRepository;
             }
         }
 

@@ -17,7 +17,5 @@ namespace BlogEngine.Core.Models
         //public CategoryImage CategoryImage { get; set; }
 
         public virtual ICollection<BlogEntry> BlogEntries { get; set; }
-
-
     }
 }

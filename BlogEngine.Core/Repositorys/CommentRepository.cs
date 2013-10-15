@@ -8,6 +8,7 @@ using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Models.Enums;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -28,7 +29,9 @@ namespace BlogEngine.Core.Repositorys
                 CommentText = comment.CommentText,
                 UserId = comment.UserId,
                 ParentId = comment.ParentId,
-                Children = new List<Comment>()
+                Children = new List<Comment>(), 
+                Votes = new List<Vote>(), 
+                VoteScore = 0
             };
 
             var blog = _context.BlogEntries.Find(comment.BlogId);

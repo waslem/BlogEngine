@@ -16,5 +16,6 @@ namespace BlogEngine.Core.Work
         IBlogRepository BlogRepository { get; }
         ICommentRepository CommentRepository { get; }
         IUserRepository UserRepository { get; }
+        IVoteRepository VoteRepository { get; }
     }
 }

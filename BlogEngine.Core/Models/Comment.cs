@@ -24,5 +24,8 @@ namespace BlogEngine.Core.Models
         public virtual Comment Parent { get; set; }
 
         public virtual ICollection<Comment> Children { get; set; }
+
+        public int VoteScore { get; set; }
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }
