@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Blog Engine</a>
+        @Html.ActionLink("Blog Engine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="@ActiveItem("Index", "Home", null)">@Html.ActionLink("Home", "Index", "Home", new { area=""}, new{})</li>
