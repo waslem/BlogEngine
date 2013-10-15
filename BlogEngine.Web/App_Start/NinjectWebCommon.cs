@@ -57,7 +57,7 @@ namespace BlogEngine.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<UnitOfWork>().ToSelf().InRequestScope();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
 
             // not needed now as refactored to unitOfWork
             //kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();

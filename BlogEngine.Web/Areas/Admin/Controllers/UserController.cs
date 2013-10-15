@@ -11,9 +11,9 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     public class UserController : Controller
     {
-        private UnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
-        public UserController(UnitOfWork unitOfWork)
+        public UserController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

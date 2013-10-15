@@ -1,4 +1,5 @@
 ﻿using BlogEngine.Core.Contexts;
+using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Repositorys;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BlogEngine.Core.Work
 
         private bool disposed = false;
 
-        public BlogRepository BlogRepository
+        public IBlogRepository BlogRepository
         {
             get
             {
@@ -31,7 +32,7 @@ namespace BlogEngine.Core.Work
             }
         }
 
-        public CategoryRepository CategoryRepository
+        public ICategoryRepository CategoryRepository
         {
             get
             {
@@ -43,7 +44,7 @@ namespace BlogEngine.Core.Work
             }
         }
 
-        public CommentRepository CommentRepository
+        public ICommentRepository CommentRepository
         {
             get
             {
@@ -55,7 +56,7 @@ namespace BlogEngine.Core.Work
             }
         }
 
-        public UserRepository UserRepository
+        public IUserRepository UserRepository
         {
             get
             {

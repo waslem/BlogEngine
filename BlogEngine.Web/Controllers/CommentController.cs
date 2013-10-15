@@ -12,9 +12,9 @@ namespace BlogEngine.Web.Controllers
 {
     public class CommentController : Controller
     {
-        private UnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
-        public CommentController(UnitOfWork unitOfWork)
+        public CommentController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

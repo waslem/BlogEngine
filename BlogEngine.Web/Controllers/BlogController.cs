@@ -15,9 +15,9 @@ namespace BlogEngine.Web.Controllers
 {
     public class BlogController : Controller
     {
-        private UnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
-        public BlogController(UnitOfWork unitOfWork)
+        public BlogController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

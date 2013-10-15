@@ -9,9 +9,9 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     public class CategoryController : AdminController
     {
-        private UnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
 
-        public CategoryController(UnitOfWork unitOfWork)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
