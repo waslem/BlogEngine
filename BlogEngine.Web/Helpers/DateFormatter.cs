@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Globalization;
 
 namespace BlogEngine.Web.Helpers
 {
     public class DateFormatter
     {
-        public static string Format(DateTime Date)
+        public static string Format(DateTime date)
         {
-            string date = Date.ToString("MMM") 
+            string dateFormatted = date.ToString("MMM") 
                             + " " 
-                            + Date.Day.ToString() 
+                            + date.Day.ToString(CultureInfo.InvariantCulture) 
                             + "," 
-                            + Date.ToString("yyyy") 
+                            + date.ToString("yyyy") 
                             + " at " 
-                            + Date.ToShortTimeString();
+                            + date.ToShortTimeString();
 
-            return date;
+            return dateFormatted;
         }
     }
 }

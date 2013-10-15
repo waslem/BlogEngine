@@ -34,10 +34,7 @@
 .widget {
     background: none repeat scroll 0% 0% rgb(255, 255, 255);
     padding: 8px 8px;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin: 8px 8px 16px 8px;
     border-top: 1px solid rgb(12, 130, 182);
     border-right: 1px solid rgb(238, 238, 238);
     border-left: 1px solid rgb(238, 238, 238);
@@ -188,4 +185,13 @@ padding-bottom: 0px;
 .voteBox {
     width: 90px;
     display: inline-block;
+}
+
+.votePositive {
+    color: green;
+    font-weight: bold;
+}
+.voteNegative {
+    color: red;
+    font-weight: bold;
 }

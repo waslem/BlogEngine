@@ -5,7 +5,6 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace BlogEngine.Web.Helpers
 {
     public static class UrlEncoder
@@ -13,7 +12,7 @@ namespace BlogEngine.Web.Helpers
         public static string ToFriendlyUrl(string urlToEncode)
         {
             urlToEncode = (urlToEncode ?? "").Trim().ToLower();
-            StringBuilder url = new StringBuilder();
+            var url = new StringBuilder();
             foreach (char ch in urlToEncode) 
             {
                 switch (ch)

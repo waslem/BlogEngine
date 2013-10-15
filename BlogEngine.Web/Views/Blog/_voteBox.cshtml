@@ -7,11 +7,11 @@
                             new { @class = "arrow-up" })
     @if (Model.VoteScore > 0)
     {
-        <span style="color: green">@Model.VoteScore</span>
+        <span class="votePositive">@Model.VoteScore</span>
     }
     else if (Model.VoteScore < 0)
     {
-        <span style="color: red">@Model.VoteScore</span>
+        <span class="voteNegative">@Model.VoteScore</span>
     }
     else
     {

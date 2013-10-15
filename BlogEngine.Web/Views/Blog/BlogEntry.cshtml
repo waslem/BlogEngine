@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "BlogEntry";
-
 }
 @helper TreeView(ICollection<BlogEngine.Core.Models.Comment> commentTree)
 {
@@ -13,7 +12,6 @@
                 <div class="commentInfoBanner">
                     <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
                     @Html.Partial("_voteBox", comment)
-
                     @if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
                     {
                         <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
@@ -47,7 +45,7 @@
             <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => Model.DateCreated)&nbsp;
                 <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
             <span class="pull-right">
-                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@Html.DisplayFor(modelItem => Model.Comments.Count) Comments
+                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@ViewBag.totalComments Comments
             </span>
         </div>
         <div class="entryPaddingMain">
@@ -67,7 +65,8 @@
         </div>
     </div>
 </div>
-<div class="col-md-4 col-lg-4">
-
-</div>
+<div class="col-md-4 col-lg-4"></div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

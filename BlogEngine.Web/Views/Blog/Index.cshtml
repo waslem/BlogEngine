@@ -5,7 +5,6 @@
 }
 
 <h2>Blog Entries</h2>
-
 <div class="col-md-8">
     @foreach (var item in Model)
     {
@@ -22,10 +21,9 @@
                 </span>
             </div>
             <p class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogShortDescription)</p>
-@*            <p class="entryPaddingMain">@Html.Raw(item.BlogEntryText)</p>*@
             <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
                 <button class="btn btn-default">Read more »</button>
-               </form>
+            </form>
         </div>
     }
 </div>

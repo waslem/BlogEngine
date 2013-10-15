@@ -1,21 +1,16 @@
-﻿using BlogEngine.Core.Infrastructure;
-using BlogEngine.Core.Models;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using BlogEngine.Core.Work;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using WebMatrix.WebData;
-using BlogEngine.Core.Repositorys;
 
 namespace BlogEngine.Web.Controllers
 {
     public class BlogController : Controller
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public BlogController(IUnitOfWork unitOfWork)
         {
@@ -66,6 +61,8 @@ namespace BlogEngine.Web.Controllers
         public ActionResult BlogEntry(int id, string blogEntryName)
         {
             var model = _unitOfWork.BlogRepository.GetBlogById(id);
+
+            ViewBag.totalComments = model.Comments.Count();
 
             // just get the base comments (where there is no ParentId, and then iterate through them in the view
             var comments = model.Comments.Where(c => c.ParentId == null).ToList();

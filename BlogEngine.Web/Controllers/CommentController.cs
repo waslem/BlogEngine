@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using BlogEngine.Core.Infrastructure;
-using BlogEngine.Core.Models;
+﻿using System.Web.Mvc;
 using WebMatrix.WebData;
+using BlogEngine.Core.Models;
 using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Controllers
 {
     public class CommentController : Controller
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CommentController(IUnitOfWork unitOfWork)
         {

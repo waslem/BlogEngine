@@ -10,13 +10,11 @@
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
             @Html.HiddenFor(model => model.UserId)
             @Html.HiddenFor(model => model.CommentDate)
             @Html.HiddenFor(model => model.BlogId)
             @Html.HiddenFor(model => model.CommentId)
             @Html.HiddenFor(model => model.ParentId)
-
             <div class="editor-label">
                 @Html.LabelFor(model => model.CommentText)
             </div>
@@ -32,7 +30,6 @@
         <div>
             @Html.ActionLink("Back to Blog Post", "Index")
         </div>
-
     </div>
 </div>
 @section Scripts {

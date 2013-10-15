@@ -1,11 +1,6 @@
-﻿using BlogEngine.Core.Contexts;
-using BlogEngine.Core.Work;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebMatrix.WebData;
+using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -25,6 +20,7 @@ namespace BlogEngine.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult UpVote(int commentId)
         {
@@ -35,6 +31,7 @@ namespace BlogEngine.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult DownVote(int commentId)
         {
