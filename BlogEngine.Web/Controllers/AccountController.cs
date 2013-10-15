@@ -78,7 +78,6 @@ namespace BlogEngine.Web.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -113,6 +112,7 @@ namespace BlogEngine.Web.Controllers
                             LastName = model.LastName,
                             CreatedDate = model.CreatedDate
                             }, true);
+
                     // add user to user role
                     Roles.AddUserToRole(model.UserName, "User");
 

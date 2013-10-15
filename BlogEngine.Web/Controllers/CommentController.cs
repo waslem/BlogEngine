@@ -6,16 +6,17 @@ using System.Web.Mvc;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using WebMatrix.WebData;
+using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Controllers
 {
     public class CommentController : Controller
     {
-        private readonly ICommentRepository _commentRepo;
+        private UnitOfWork _unitOfWork;
 
-        public CommentController(ICommentRepository commentRepo)
+        public CommentController(UnitOfWork unitOfWork)
         {
-            _commentRepo = commentRepo;
+            _unitOfWork = unitOfWork;
         }
 
         //
@@ -29,8 +30,7 @@ namespace BlogEngine.Web.Controllers
         // GET: /Comment/Edit/1
         public ActionResult Edit(int id)
         {
-            var model = _commentRepo.GetById(id);
-
+            var model = _unitOfWork.CommentRepository.GetById(id);
             return View(model);
         }
 
@@ -43,7 +43,8 @@ namespace BlogEngine.Web.Controllers
             {
                 if(WebSecurity.CurrentUserId == comment.UserId)
                 {
-                    _commentRepo.Edit(comment);
+                    _unitOfWork.CommentRepository.Edit(comment);
+                    _unitOfWork.Save();
                     return RedirectToAction("Index", "Blog");
                 }
                 // error here because you can only edit your own comments

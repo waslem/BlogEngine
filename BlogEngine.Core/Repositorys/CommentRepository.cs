@@ -14,11 +14,12 @@ namespace BlogEngine.Core.Repositorys
     public class CommentRepository : ICommentRepository
     {
         private readonly BlogContext _context;
-        private bool _disposed;
+        //private bool _disposed;
 
-        public CommentRepository()
+        public CommentRepository(BlogContext context)
         {
-            _context = new BlogContext();
+            //_context = new BlogContext();
+            _context = context;
         }
 
         public void Create(CommentViewModel comment)
@@ -35,13 +36,13 @@ namespace BlogEngine.Core.Repositorys
             var blog = _context.BlogEntries.Find(comment.BlogId);
 
             blog.Comments.Add(newComment);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Edit(Comment comment)
         {
             _context.Entry(comment).State = EntityState.Modified;
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public Comment GetById(int id)
@@ -61,22 +62,22 @@ namespace BlogEngine.Core.Repositorys
             return comments;
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this._disposed)
-            {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
-            }
-            this._disposed = true;
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this._disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _context.Dispose();
+        //        }
+        //    }
+        //    this._disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
     }
 }

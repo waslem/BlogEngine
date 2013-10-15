@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
 using System;
 using System.Web.Mvc;
@@ -8,19 +9,18 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     public class CategoryController : AdminController
     {
-        private readonly ICategoryRepository _categoryRepo;
+        private UnitOfWork _unitOfWork;
 
-        public CategoryController(ICategoryRepository categoryRepo)
+        public CategoryController(UnitOfWork unitOfWork)
         {
-            _categoryRepo = categoryRepo;
+            _unitOfWork = unitOfWork;
         }
 
         //
         // GET: /Admin/Category/
         public ActionResult Index()
         {
-            var model = _categoryRepo.GetCategories();
-
+            var model = _unitOfWork.CategoryRepository.GetCategories();
             return View(model);
         }
 
@@ -29,7 +29,6 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var model = new CategoryViewModel();
-
             return View(model);
         }
 
@@ -43,12 +42,14 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // if the category name does not exist in the database, create it
-                if (!_categoryRepo.Create(model))
+                var success = _unitOfWork.CategoryRepository.Create(model);
+                if (success)
                 {
+                    _unitOfWork.Save();
                     return RedirectToAction("Index");
                 }
-                //TODO: implement error for duplicate category name 
 
+                //TODO: implement error for duplicate category name 
                 return View(model);
             }
             return View(model);
@@ -58,7 +59,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/Category/Edit/5
         public ActionResult Edit(int id)
         {
-            var category = _categoryRepo.GetCategoryById(id);
+            var category = _unitOfWork.CategoryRepository.GetCategoryById(id);
 
             // use helper modelbinder class to bind to viewmodel
             CategoryViewModel viewModel = ModelBinder.Category(category);
@@ -73,10 +74,11 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepo.EditCategory(model);
+                _unitOfWork.CategoryRepository.EditCategory(model);
+                _unitOfWork.Save();
+
                 return RedirectToAction("Index");
             }
-
             return View(model);
         }
 
@@ -85,8 +87,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             // not sure if this is the most elegant solution
-            CategoryViewModel viewModel = ModelBinder.Category(_categoryRepo.GetCategoryById(id));
-
+            CategoryViewModel viewModel = ModelBinder.Category(_unitOfWork.CategoryRepository.GetCategoryById(id));
             return View(viewModel);
         }
 
@@ -96,8 +97,9 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [ActionName("Delete")]
         public ActionResult DeleteById(int id)
         {
-            if (_categoryRepo.Delete(id))
+            if (_unitOfWork.CategoryRepository.Delete(id))
             {
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             // TODO:  a better way to handle delete failures

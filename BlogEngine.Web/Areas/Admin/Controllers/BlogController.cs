@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
 using System.Web.Mvc;
 using WebMatrix.WebData;
@@ -9,21 +10,18 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
     // Inherits the AdminController abstract class which manages security for all controllers 
     public class BlogController : AdminController
     {
-        private readonly IBlogRepository _blogRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private UnitOfWork _unitOfWork;
 
-        public BlogController(IBlogRepository blogRepository, ICategoryRepository categoryRepository)
+        public BlogController(UnitOfWork unitOfWork)
         {
-            _blogRepository = blogRepository;
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         //
         // GET: /Admin/Blog/
         public ActionResult Index()
         {
-            var blogList = _blogRepository.GetAllViewModel();
-            
+            var blogList = _unitOfWork.BlogRepository.GetAllViewModel();
             return View(blogList);
         }
 
@@ -32,11 +30,11 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var model = new BlogViewModel
-                {
-                   SelectedCategory = _categoryRepository.GetCategoryById(1).ToString(),
-                   Categories = _categoryRepository.GetCategoriesForBlogView(), 
-                   UserId = WebSecurity.CurrentUserId
-                };
+            {
+                SelectedCategory = _unitOfWork.CategoryRepository.GetCategoryById(1).ToString(),
+                Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView(),
+                UserId = WebSecurity.CurrentUserId
+            };
 
             return View(model);
         }
@@ -46,7 +44,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(BlogViewModel model)
         {
-            _blogRepository.Create(ModelBinder.BlogCreate(model));
+            _unitOfWork.BlogRepository.Create(ModelBinder.BlogCreate(model));
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
@@ -55,10 +54,10 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/Blog/Edit
         public ActionResult Edit(int id)
         {
-            var blog = _blogRepository.GetBlogById(id);
+            var blog = _unitOfWork.BlogRepository.GetBlogById(id);
             var blogViewModel = ModelBinder.Blog(blog);
 
-            blogViewModel.Categories = _categoryRepository.GetCategoriesForBlogView();
+            blogViewModel.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
             blogViewModel.UserId = WebSecurity.CurrentUserId;
 
             return View(blogViewModel);
@@ -71,7 +70,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _blogRepository.Edit(model);
+                _unitOfWork.BlogRepository.Edit(model);
+                _unitOfWork.Save();
 
                 return RedirectToAction("Index");
             }
@@ -83,8 +83,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/Blog/Delete
         public ActionResult Delete(int id)
         {
-            var model = _blogRepository.GetBlogById(id);
-
+            var model = _unitOfWork.BlogRepository.GetBlogById(id);
             return View(model);
         }
 
@@ -94,7 +93,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            _blogRepository.Delete(id);
+            _unitOfWork.BlogRepository.Delete(id);
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }

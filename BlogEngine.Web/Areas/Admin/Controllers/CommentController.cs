@@ -7,24 +7,25 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using BlogEngine.Core.Models;
+using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     // Inherits the AdminController abstract class which manages security for all controllers 
     public class CommentController : AdminController
     {
-        private ICommentRepository _commentRepository;
+        private UnitOfWork _unitOfWork;
 
-        public CommentController(ICommentRepository commentRepository)
+        public CommentController(UnitOfWork unitOfWork)
         {
-            _commentRepository = commentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         //
         // GET: /Admin/Comment/
         public ActionResult Index(int? page)
         {
-            var comments = _commentRepository.GetAll();
+            var comments = _unitOfWork.CommentRepository.GetAll();
 
             // just doing this for now, would like to add feature of user selected page size.
             int pageSize = 5;
@@ -40,8 +41,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/Edit/1
         public ActionResult Edit(int id)
         {
-            var model = _commentRepository.GetById(id);
-
+            var model = _unitOfWork.CommentRepository.GetById(id);
             return View(model);
         }
 
@@ -52,7 +52,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _commentRepository.Edit(comment);
+                _unitOfWork.CommentRepository.Edit(comment);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 

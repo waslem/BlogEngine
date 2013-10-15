@@ -8,17 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Helpers;
+using System.Data.Entity;
 
 namespace BlogEngine.Core.Repositorys
 {
-    public class BlogRepository : IBlogRepository, IDisposable
+    public class BlogRepository : IBlogRepository//, IDisposable
     {
-        private readonly BlogContext _context;
-        private bool disposed = false;
+        private BlogContext _context;
 
-        public BlogRepository()
+        //private bool disposed = false;
+
+        public BlogRepository(BlogContext context)
         {
-            _context = new BlogContext();
+            //_context = new BlogContext();
+            _context = context;
+           // this.dbSet = context.Set<BlogEntry>();
         }
 
         public ICollection<BlogEntry> GetAll()
@@ -51,7 +55,7 @@ namespace BlogEngine.Core.Repositorys
         public void Create(BlogEntry blogEntry)
         {
             _context.BlogEntries.Add(blogEntry);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public BlogEntry GetBlogById(int id)
@@ -72,15 +76,14 @@ namespace BlogEngine.Core.Repositorys
             blog.BlogEntryText = model.BlogEntryText;
 
             _context.Entry(blog).State = EntityState.Modified;
-            _context.SaveChanges();
-
+           // _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
             var blog = new BlogEntry {BlogEntryId = id};
             _context.Entry(blog).State = EntityState.Deleted;
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public ICollection<BlogEntryView> GetAllView()
@@ -102,22 +105,22 @@ namespace BlogEngine.Core.Repositorys
             .ToList();
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (!this.disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _context.Dispose();
+        //        }
+        //    }
+        //    this.disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
     }
 }

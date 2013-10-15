@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
+using BlogEngine.Core.Work;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
 using System;
@@ -8,27 +9,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using BlogEngine.Core.Repositorys;
 
 namespace BlogEngine.Web.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly IBlogRepository _blogRepository;
-        private readonly ICommentRepository _commentRepository;
+        private UnitOfWork _unitOfWork;
 
-        public BlogController(IBlogRepository blogRepository, ICommentRepository commentRepository)
+        public BlogController(UnitOfWork unitOfWork)
         {
-            _blogRepository = blogRepository;
-            _commentRepository = commentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         //
         // GET: /Blog/
         public ActionResult Index()
         {
-            //var blogs = _blogRepository.GetAll();
-            var blogs = _blogRepository.GetAllView();
-            
+            var blogs = _unitOfWork.BlogRepository.GetAllView();
             return View(blogs);
         }
 
@@ -55,12 +53,11 @@ namespace BlogEngine.Web.Controllers
             if (ModelState.IsValid)
             {
                 comment.CommentDate = DateTime.Now;
-                //_blogRepository.AddComment(comment);
-                _commentRepository.Create(comment);
+                _unitOfWork.CommentRepository.Create(comment);
+                _unitOfWork.Save();
 
                 return RedirectToAction("Index");
             }
-
             return View(comment);
         }
 
@@ -68,7 +65,7 @@ namespace BlogEngine.Web.Controllers
         // GET: /Blog/BlogEntry/1/{blogtitle}
         public ActionResult BlogEntry(int id, string blogEntryName)
         {
-            var model = _blogRepository.GetBlogById(id);
+            var model = _unitOfWork.BlogRepository.GetBlogById(id);
 
             // just get the base comments (where there is no ParentId, and then iterate through them in the view
             var comments = model.Comments.Where(c => c.ParentId == null).ToList();

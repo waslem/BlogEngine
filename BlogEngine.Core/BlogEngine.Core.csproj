@@ -69,6 +69,8 @@
     <Compile Include="Repositorys\UserRepository.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\MockMailService.cs" />
+    <Compile Include="Work\IUnitOfWork.cs" />
+    <Compile Include="Work\UnitOfWork.cs" />
     <Compile Include="ViewModels\BlogEntryView.cs" />
     <Compile Include="ViewModels\BlogListViewModel.cs" />
     <Compile Include="ViewModels\BlogViewModel.cs" />

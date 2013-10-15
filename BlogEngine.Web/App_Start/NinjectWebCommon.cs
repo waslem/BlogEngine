@@ -13,6 +13,7 @@ namespace BlogEngine.Web.App_Start
     using BlogEngine.Core.Infrastructure;
     using BlogEngine.Core.Repositorys;
     using BlogEngine.Core.Services;
+    using BlogEngine.Core.Work;
 
     public static class NinjectWebCommon 
     {
@@ -56,10 +57,13 @@ namespace BlogEngine.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();
-            kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
-            kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
-            kernel.Bind<ICommentRepository>().To<CommentRepository>().InRequestScope();
+            kernel.Bind<UnitOfWork>().ToSelf().InRequestScope();
+
+            // not needed now as refactored to unitOfWork
+            //kernel.Bind<IBlogRepository>().To<BlogRepository>().InRequestScope();
+            //kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InRequestScope();
+            //kernel.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            //kernel.Bind<ICommentRepository>().To<CommentRepository>().InRequestScope();
 //#if DEBUG
 //            kernel.Bind<IMailService>().To<MockMailService>().InRequestScope();
 //#else

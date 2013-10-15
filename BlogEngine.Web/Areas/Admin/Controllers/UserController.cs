@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Work;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 {
     public class UserController : Controller
     {
-        private IUserRepository _userRepository;
+        private UnitOfWork _unitOfWork;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(UnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
         //
@@ -28,7 +29,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/User/AddUserToAdmins
         public ActionResult AddUserToAdmins()
         {
-            IEnumerable<SelectListItem> _users = _userRepository.GetAllUsers()
+            IEnumerable<SelectListItem> _users = _unitOfWork.UserRepository.GetAllUsers()
                                                     .Select(u => new SelectListItem 
                                                         { 
                                                             Value = u.UserId.ToString(), 
@@ -49,7 +50,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             int id = Int32.Parse(viewModel.SelectedUser);
 
-            _userRepository.AddUserToAdminRole(id);
+            _unitOfWork.UserRepository.AddUserToAdminRole(id);
+            _unitOfWork.Save();
 
             return RedirectToAction("Success");
         }
@@ -58,7 +60,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         // GET: /Admin/User/RemoveUserFromAdmins
         public ActionResult RemoveUserFromAdmins()
         {
-            IEnumerable<SelectListItem> _users = _userRepository.GetAllUsers()
+            IEnumerable<SelectListItem> _users = _unitOfWork.UserRepository.GetAllUsers()
                                                     .Select(u => new SelectListItem 
                                                         { 
                                                             Value = u.UserId.ToString(), 
@@ -79,10 +81,10 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             int id = Int32.Parse(viewModels.SelectedUser);
 
-            _userRepository.RemoveUserFromAdminRole(id);
+            _unitOfWork.UserRepository.RemoveUserFromAdminRole(id);
+            _unitOfWork.Save();
 
             return RedirectToAction("Success");
-
         }
 
         public ActionResult Success()
