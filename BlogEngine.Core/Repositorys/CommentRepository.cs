@@ -47,7 +47,6 @@ namespace BlogEngine.Core.Repositorys
         public Comment GetById(int id)
         {
             var comment = _context.Comments.Find(id);
-
             return comment;
         }
 

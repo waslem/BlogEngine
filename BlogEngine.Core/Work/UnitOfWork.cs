@@ -11,25 +11,25 @@ namespace BlogEngine.Core.Work
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        private BlogContext context = new BlogContext();
+        private readonly BlogContext _context = new BlogContext();
 
-        private BlogRepository blogRepository;
-        private CategoryRepository categoryRepository;
-        private UserRepository userRepository;
-        private CommentRepository commentRepository;
-        private VoteRepository voteRepository;
+        private BlogRepository _blogRepository;
+        private CategoryRepository _categoryRepository;
+        private UserRepository _userRepository;
+        private CommentRepository _commentRepository;
+        private VoteRepository _voteRepository;
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         public IBlogRepository BlogRepository
         {
             get
             {
-                if (this.blogRepository == null)
+                if (this._blogRepository == null)
                 {
-                    this.blogRepository = new BlogRepository(context);
+                    this._blogRepository = new BlogRepository(_context);
                 }
-                return blogRepository;
+                return _blogRepository;
             }
         }
 
@@ -37,11 +37,11 @@ namespace BlogEngine.Core.Work
         {
             get
             {
-                if (this.categoryRepository == null)
+                if (this._categoryRepository == null)
                 {
-                    this.categoryRepository = new CategoryRepository(context);
+                    this._categoryRepository = new CategoryRepository(_context);
                 }
-                return categoryRepository;
+                return _categoryRepository;
             }
         }
 
@@ -49,11 +49,11 @@ namespace BlogEngine.Core.Work
         {
             get
             {
-                if (this.commentRepository == null)
+                if (this._commentRepository == null)
                 {
-                    this.commentRepository = new CommentRepository(context);
+                    this._commentRepository = new CommentRepository(_context);
                 }
-                return commentRepository;
+                return _commentRepository;
             }
         }
 
@@ -61,11 +61,11 @@ namespace BlogEngine.Core.Work
         {
             get
             {
-                if (this.userRepository == null)
+                if (this._userRepository == null)
                 {
-                    this.userRepository = new UserRepository(context);
+                    this._userRepository = new UserRepository(_context);
                 }
-                return userRepository;
+                return _userRepository;
             }
         }
 
@@ -73,29 +73,29 @@ namespace BlogEngine.Core.Work
         {
             get
             {
-                if (this.voteRepository == null)
+                if (this._voteRepository == null)
                 {
-                    this.voteRepository = new VoteRepository(context);
+                    this._voteRepository = new VoteRepository(_context);
                 }
-                return voteRepository;
+                return _voteRepository;
             }
         }
 
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
 
         public void Dispose()

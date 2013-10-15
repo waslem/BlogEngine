@@ -14,7 +14,7 @@ namespace BlogEngine.Core.Repositorys
 {
     public class BlogRepository : IBlogRepository
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
 
         public BlogRepository(BlogContext context)
         {

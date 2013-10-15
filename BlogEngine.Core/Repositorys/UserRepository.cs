@@ -14,7 +14,7 @@ namespace BlogEngine.Core.Repositorys
 {
     public class UserRepository : IUserRepository
     {
-        private  BlogContext _context;
+        private readonly BlogContext _context;
 
         public UserRepository(BlogContext context)
         {
@@ -49,7 +49,7 @@ namespace BlogEngine.Core.Repositorys
         public void AddUserToAdminRole(int id)
         {
             // get the user by the id
-            var user = _context.Users.Where(u => u.UserId == id).FirstOrDefault();
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
 
             // using the websecurity roles api to add the user to the role
             if (!Roles.IsUserInRole(user.UserName, "Administrator"))
@@ -60,7 +60,7 @@ namespace BlogEngine.Core.Repositorys
 
         public void RemoveUserFromAdminRole(int id)
         {
-            var user = _context.Users.Where(u => u.UserId == id).FirstOrDefault();
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
 
             if (!Roles.IsUserInRole(user.UserName, "Administrator"))
             {

@@ -14,7 +14,7 @@ namespace BlogEngine.Core.Repositorys
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
 
         public CategoryRepository(BlogContext context)
         {
@@ -54,7 +54,6 @@ namespace BlogEngine.Core.Repositorys
         public Category GetCategoryById(int id)
         {
             var category = _context.Categories.Find(id);
-
             return category;
         }
 
@@ -75,7 +74,10 @@ namespace BlogEngine.Core.Repositorys
 
         public bool Delete(int id)
         {
-            var category = new Category { CategoryId = id };
+            var category = new Category
+                {
+                    CategoryId = id
+                };
 
             _context.Entry(category).State = EntityState.Deleted;
 

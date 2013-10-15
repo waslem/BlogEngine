@@ -11,7 +11,7 @@ namespace BlogEngine.Web.Controllers
 {
     public class VoteController : Controller
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public VoteController(IUnitOfWork unitOfWork)
         {
@@ -28,6 +28,7 @@ namespace BlogEngine.Web.Controllers
         [HttpPost]
         public ActionResult UpVote(int commentId)
         {
+            // can implement if user has not already voted ?
             _unitOfWork.VoteRepository.UpVote(commentId, WebSecurity.GetUserId(User.Identity.Name));
             _unitOfWork.Save();
 
