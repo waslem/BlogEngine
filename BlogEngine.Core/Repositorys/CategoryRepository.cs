@@ -3,12 +3,10 @@ using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BlogEngine.Core.Repositorys
 {

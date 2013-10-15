@@ -2,17 +2,12 @@
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogEngine.Core.Repositorys
 {
     public class VoteRepository : IVoteRepository
     {
-        private BlogContext _context;
+        private readonly BlogContext _context;
 
         public VoteRepository(BlogContext context)
         {

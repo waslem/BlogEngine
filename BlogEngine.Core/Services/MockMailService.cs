@@ -1,10 +1,6 @@
 ﻿using BlogEngine.Core.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogEngine.Core.Services
 {
@@ -19,7 +15,6 @@ namespace BlogEngine.Core.Services
             Debug.WriteLine(message);
             return true;
         }
-
 
         public void SendRegisterEmail(string to, string username, string confirmationToken)
         {

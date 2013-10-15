@@ -1,14 +1,12 @@
-﻿using System.Data;
-using System.Text.RegularExpressions;
-using BlogEngine.Core.Contexts;
-using BlogEngine.Core.Infrastructure;
-using BlogEngine.Core.Models;
-using System;
+﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Helpers;
-using System.Data.Entity;
+using BlogEngine.Core.Contexts;
+using BlogEngine.Core.Infrastructure;
+using BlogEngine.Core.Models;
 
 namespace BlogEngine.Core.Repositorys
 {

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
-using BlogEngine.Core.ViewModels;
-using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BlogEngine.Core.Repositorys

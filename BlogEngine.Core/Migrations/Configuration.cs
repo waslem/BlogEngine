@@ -1,10 +1,8 @@
 using System;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using WebMatrix.WebData;
 using System.Web.Security;
-
 
 namespace BlogEngine.Core.Migrations
 {
