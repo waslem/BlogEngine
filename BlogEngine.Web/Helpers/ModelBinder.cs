@@ -43,7 +43,8 @@ namespace BlogEngine.Web.Helpers
                 BlogEntryText = model.BlogEntryText,
                 BlogTitle = model.BlogTitle,
                 DateCreated = DateTime.Now,
-                CategoryId = Int32.Parse(model.SelectedCategory)
+                CategoryId = Int32.Parse(model.SelectedCategory),
+                Image = new BlogImage { ImagePath = "~/Images/" + model.BlogImage.FileName }
             };
 
             return blogEntry;

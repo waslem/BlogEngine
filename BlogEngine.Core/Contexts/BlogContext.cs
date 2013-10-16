@@ -16,6 +16,7 @@ namespace BlogEngine.Core.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<BlogEntry> BlogEntries { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<BlogImage> Images { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -63,10 +63,18 @@ namespace BlogEngine.Core.Repositorys
             var blog = _context.BlogEntries.Find(model.BlogId);
 
             blog.CategoryId = Int32.Parse(model.SelectedCategory);
-
             blog.BlogTitle = model.BlogTitle;
             blog.BlogShortDescription = model.BlogShortDescription;
             blog.BlogEntryText = model.BlogEntryText;
+
+            if (blog.Image == null)
+            {
+                blog.Image = new BlogImage { ImagePath = "~/Images/" + model.BlogImage.FileName };
+            }
+            else
+            {
+                blog.Image.ImagePath = "~/Images/" + model.BlogImage.FileName;
+            }
 
             _context.Entry(blog).State = EntityState.Modified;
         }
@@ -84,7 +92,6 @@ namespace BlogEngine.Core.Repositorys
 
             return blogs.Select(blog => new BlogEntryView
             {
-
                 BlogEntryId = blog.BlogEntryId,
                 BlogShortDescription = blog.BlogShortDescription.Truncate(300),
                 BlogEntryText = blog.BlogEntryText,
@@ -92,7 +99,8 @@ namespace BlogEngine.Core.Repositorys
                 Category = blog.Category,
                 User = blog.User,
                 DateCreated = blog.DateCreated.ToShortDateString(),
-                Comments = blog.Comments
+                Comments = blog.Comments, 
+                Image = blog.Image
             })
             .ToList();
         }

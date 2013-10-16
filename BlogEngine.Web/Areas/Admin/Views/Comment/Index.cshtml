@@ -39,6 +39,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().User.UserName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().VoteScore)
+        </th>
         <th></th>
     </tr>
 
@@ -52,6 +55,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VoteScore)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |

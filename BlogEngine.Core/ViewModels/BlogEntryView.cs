@@ -20,5 +20,8 @@ namespace BlogEngine.Core.ViewModels
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual BlogImage Image { get; set; }
+
     }
 }

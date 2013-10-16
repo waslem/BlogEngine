@@ -2,6 +2,7 @@
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
+using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 
@@ -44,10 +45,19 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(BlogViewModel model)
         {
-            _unitOfWork.BlogRepository.Create(ModelBinder.BlogCreate(model));
-            _unitOfWork.Save();
+            if (ModelState.IsValid)
+            {
+                if (model.BlogImage != null)
+                {
+                    model.BlogImage.SaveAs(HttpContext.Server.MapPath("~/Images/" + model.BlogImage.FileName));
+                }
+                _unitOfWork.BlogRepository.Create(ModelBinder.BlogCreate(model));
+                _unitOfWork.Save();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Blog", "Home");
+            }
+
+            return View(model);
         }
 
         //
@@ -70,6 +80,10 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.BlogImage != null)
+                {
+                    model.BlogImage.SaveAs(HttpContext.Server.MapPath("~/Images/" + model.BlogImage.FileName));
+                }
                 _unitOfWork.BlogRepository.Edit(model);
                 _unitOfWork.Save();
 
@@ -93,10 +107,15 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-            _unitOfWork.BlogRepository.Delete(id);
-            _unitOfWork.Save();
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.BlogRepository.Delete(id);
+                _unitOfWork.Save();
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 

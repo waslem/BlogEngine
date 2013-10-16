@@ -12,6 +12,10 @@
         @Html.HiddenFor(modelItem => item.CategoryId)
         <div class="entry">
             <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
+            @if (item.Image != null)
+            {
+                <img class="img-responsive img-entry" src="@Url.Content(item.Image.ImagePath)" alt="Image" />
+            }
             <div class="meta">
                 <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
                 <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)

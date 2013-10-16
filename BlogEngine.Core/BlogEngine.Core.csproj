@@ -59,8 +59,8 @@
     <Compile Include="Infrastructure\IVoteRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogEntry.cs" />
+    <Compile Include="Models\BlogImage.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryImage.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Enums\VoteType.cs" />
     <Compile Include="Models\User.cs" />

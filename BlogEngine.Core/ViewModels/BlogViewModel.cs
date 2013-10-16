@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using BlogEngine.Core.Models;
+using System.Web;
 
 namespace BlogEngine.Core.ViewModels
 {
@@ -17,5 +19,8 @@ namespace BlogEngine.Core.ViewModels
         [UIHint("tinymce_jquery_full"), AllowHtml]
         public string BlogEntryText { get; set; }
         public string BlogTitle { get; set; }
+
+        public HttpPostedFileBase BlogImage { get; set; }
+
     }
 }

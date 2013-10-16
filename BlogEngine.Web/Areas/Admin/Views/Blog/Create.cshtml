@@ -6,7 +6,8 @@
 }
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -21,6 +22,13 @@
         <div class="editor-field">
             @Html.DropDownListFor(model => model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"))
             @Html.ValidationMessageFor(model => model.SelectedCategory)
+        </div>
+        <div class="editor-label">
+            @Html.DisplayFor(model => model.BlogImage)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BlogImage, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.BlogImage)
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.BlogTitle)
@@ -53,6 +61,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

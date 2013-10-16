@@ -21,5 +21,7 @@ namespace BlogEngine.Core.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
 
+        public int? BlogImageId { get; set; }
+        public virtual BlogImage Image { get; set; }
     }
 }
