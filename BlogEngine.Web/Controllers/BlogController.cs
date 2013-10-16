@@ -5,6 +5,7 @@ using BlogEngine.Core.Work;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
 using WebMatrix.WebData;
+using PagedList;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -19,10 +20,14 @@ namespace BlogEngine.Web.Controllers
 
         //
         // GET: /Blog/
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var blogs = _unitOfWork.BlogRepository.GetAllView();
-            return View(blogs);
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(blogs.ToPagedList(pageNumber, pageSize));
         }
 
         //

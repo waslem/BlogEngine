@@ -1,7 +1,16 @@
-﻿@model IEnumerable<BlogEngine.Core.ViewModels.BlogEntryView>
-
+﻿@*@model IEnumerable<BlogEngine.Core.ViewModels.BlogEntryView>*@
+@model PagedList.IPagedList<BlogEngine.Core.ViewModels.BlogEntryView>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Blog Entries";
+    PagedListRenderOptions options = new PagedListRenderOptions
+    {
+        UlElementClasses = new[] { "pagination pagination-sm" },
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+    };
 }
 
 <h2>Blog Entries</h2>
@@ -30,6 +39,10 @@
             </form>
         </div>
     }
+    <div class="text-center hugFooter">
+        <span class="paginationText">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
+        @Html.PagedListPager( Model, page => Url.Action("Index", new { page }), options)
+    </div>
 </div>
 <div class="col-md-4">
     <div class="sidebar">

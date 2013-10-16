@@ -43,7 +43,7 @@ namespace BlogEngine.Core.Repositorys
                     CreatedBy = blog.User.UserName,
                     CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(),
                     CommentCount = blog.Comments.Count()
-                }).OrderByDescending(o => o.CreatedDate).ToList();
+                }).ToList();
         }
 
         public void Create(BlogEntry blogEntry)
