@@ -215,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AdminController.cs" />
+    <Compile Include="Helpers\CustomHelpers.cs" />
     <Compile Include="Helpers\DateFormatter.cs" />
     <Compile Include="Helpers\ModelBinder.cs" />
     <Compile Include="Helpers\UrlEncoder.cs" />

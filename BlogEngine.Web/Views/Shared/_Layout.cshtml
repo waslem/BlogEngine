@@ -18,21 +18,21 @@
         <link rel="apple-touch-icon-precomposed" href="~/Content/ico/apple-touch-icon-57-precomposed.png">
         <link href="~/Content/ico/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     </head>
-        <body>
-            <div id="holder">
-                @Html.Partial("_NavBar")
-                @RenderSection("featured", required: false)
-                <div id="body">
-                    <div class="container">
-                        @RenderBody()
-                    </div>
-                </div>
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("scripts", required: false)
-                <div id="footer">
-                    Footer here
+    <body>
+        <div id="holder">
+            @Html.Partial("_NavBar")
+            @RenderSection("featured", required: false)
+            <div id="body">
+                <div class="container">
+                    @RenderBody()
                 </div>
             </div>
-        </body>
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+            <div id="footer">
+                Footer here
+            </div>
+        </div>
+    </body>
 </html>
 

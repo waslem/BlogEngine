@@ -107,6 +107,7 @@ padding-bottom: 0px;
     font-weight: bold;
     padding-top: 4px;
     padding-left: 15px;
+    padding-right: 5px;
 }
 
 .commentIndividual {
@@ -183,8 +184,8 @@ padding-bottom: 0px;
 }
 
 .voteBox {
-    width: 90px;
     display: inline-block;
+
 }
 
 .votePositive {

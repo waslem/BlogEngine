@@ -12,17 +12,17 @@
                 <div class="commentInfoBanner">
                     <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
                     @Html.Partial("_voteBox", comment)
-                    @if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
-                    {
-                        <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
-                    }
-                        <span class="commentDate pull-right">@DateFormatter.Format(comment.CommentDate)</span>
+                    <span class="commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
                 </div>
                 <div class="commentEntry">
                     @Html.DisplayFor(m => comment.CommentText)
                 </div>
                 @if (User.Identity.IsAuthenticated)
-                {
+                {   
+                    if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
+                    {
+                        <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
+                    }
                     <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = Model.BlogEntryId, parent = comment.CommentId })" method="get">
                         <button class="btn btn-default btn-sm">Reply</button>
                     </form>
@@ -42,7 +42,7 @@
     <div class="entry">
         <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogTitle)</h3>
         <div class="meta">
-            <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => Model.DateCreated)&nbsp;
+            <span class="glyphicon glyphicon-calendar"></span>&nbsp;@DateFormatter.FormatShort(Model.DateCreated)
                 <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
             <span class="pull-right">
                 <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@ViewBag.totalComments Comments
