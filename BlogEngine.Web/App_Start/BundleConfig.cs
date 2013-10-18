@@ -12,7 +12,11 @@ namespace BlogEngine.Web
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include("~/Scripts/jquery-ui-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*","~/Scripts/jquery.unobtrusive*"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryvalun").Include("~/Scripts/jquery.unobtrusive*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapVal").Include("~/Scripts/bootstrapMvcValidation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap*"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

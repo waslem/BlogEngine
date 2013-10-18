@@ -22,6 +22,7 @@ namespace BlogEngine.Core.Services
             smtp.Credentials = new NetworkCredential("waslem123@gmail.com", "B4111ff$");
 
             smtp.Send(message);
+
             return true;
         }
 

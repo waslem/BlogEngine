@@ -36,16 +36,23 @@ namespace BlogEngine.Web.Helpers
 
         public static BlogEntry BlogCreate(BlogViewModel model)
         {
-            var blogEntry = new BlogEntry
+            var blogEntry = new BlogEntry();
+
+            blogEntry.UserId = model.UserId;
+            blogEntry.BlogShortDescription = model.BlogShortDescription;
+            blogEntry.BlogEntryText = model.BlogEntryText;
+            blogEntry.BlogTitle = model.BlogTitle;
+            blogEntry.DateCreated = DateTime.Now;
+            blogEntry.CategoryId = Int32.Parse(model.SelectedCategory);
+
+            if (model.BlogImage != null)
             {
-                UserId = model.UserId,
-                BlogShortDescription = model.BlogShortDescription,
-                BlogEntryText = model.BlogEntryText,
-                BlogTitle = model.BlogTitle,
-                DateCreated = DateTime.Now,
-                CategoryId = Int32.Parse(model.SelectedCategory),
-                Image = new BlogImage { ImagePath = "~/Images/" + model.BlogImage.FileName }
-            };
+                blogEntry.Image = new BlogImage { ImagePath = "~/Images/" + model.BlogImage.FileName };
+            }
+            else
+            {
+                blogEntry.Image = new BlogImage();
+            }
 
             return blogEntry;
         }

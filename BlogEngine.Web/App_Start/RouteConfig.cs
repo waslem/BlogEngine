@@ -13,7 +13,6 @@ namespace BlogEngine.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
             // new route for blog entries
             routes.MapRoute(
                 name: "BlogEntry",

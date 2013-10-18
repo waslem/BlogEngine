@@ -11,7 +11,28 @@
             <div class="commentIndividual">
                 <div class="commentInfoBanner">
                     <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
-                    @Html.Partial("_voteBox", comment)
+                    <div class="voteBox">
+                        @Ajax.ActionLink(" ", "UpVote", "Vote",
+                            new { Id = comment.CommentId },
+                            new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
+                            new { @class = "arrow-up" })
+                        @if (comment.VoteScore > 0)
+                        {
+                            <span class="votePositive">@comment.VoteScore</span>
+                        }
+                        else if (comment.VoteScore < 0)
+                        {
+                            <span class="voteNegative">@comment.VoteScore</span>
+                        }
+                        else
+                        {
+                            <span>@comment.VoteScore</span>
+                        }
+                        @Ajax.ActionLink(" ", "DownVote", "Vote",
+                            new { Id = comment.CommentId },
+                            new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
+                            new { @class = "arrow-down" })
+                    </div>
                     <span class="commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
                 </div>
                 <div class="commentEntry">
@@ -68,5 +89,6 @@
 <div class="col-md-4 col-lg-4"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalun")
 }
 

@@ -20,6 +20,8 @@ namespace BlogEngine.Web.Controllers
             return View();
         }
 
+        //
+        // POST: /Vote/UpVote
         [Authorize]
         [HttpPost]
         public ActionResult UpVote(int commentId)

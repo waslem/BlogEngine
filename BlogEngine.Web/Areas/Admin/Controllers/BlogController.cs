@@ -54,8 +54,12 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
                 _unitOfWork.BlogRepository.Create(ModelBinder.BlogCreate(model));
                 _unitOfWork.Save();
 
-                return RedirectToAction("Blog", "Home");
+                return RedirectToAction("Index", "Blog");
             }
+
+            model.SelectedCategory = _unitOfWork.CategoryRepository.GetCategoryById(1).ToString();
+            model.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
+            model.UserId = WebSecurity.CurrentUserId;
 
             return View(model);
         }

@@ -5,7 +5,7 @@ using System;
 
 namespace BlogEngine.Core.Work
 {
-    public class UnitOfWork : IDisposable, IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly BlogContext _context = new BlogContext();
 

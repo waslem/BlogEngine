@@ -10,14 +10,13 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", role="form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
+    @Html.ValidationSummary()
     @Html.HiddenFor(model => model.DateCreated)
     @Html.HiddenFor(model => model.UserId)
 
     <div class="form-group">
         @Html.LabelFor(model => model.SelectedCategory)
-        @Html.DropDownListFor(model => model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"),null, new { @class = "dropdown" })
+        @Html.DropDownListFor(model => model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.SelectedCategory)
     </div>
     <div class="form-group">
@@ -28,26 +27,30 @@
     <div class="form-group">
         @Html.LabelFor(model => model.BlogTitle)
         @Html.TextBoxFor(model => model.BlogTitle, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.BlogTitle)
+        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogTitle)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.BlogShortDescription)
         @Html.TextAreaFor(model => model.BlogShortDescription, new { @class = "form-control", @rows = 5 })
-        @Html.ValidationMessageFor(model => model.BlogShortDescription)
+        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogShortDescription)</span>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.BlogEntryText)
         @Html.EditorFor(model => model.BlogEntryText)
-        @*@Html.ValidationMessageFor(model => model.BlogEntryText)*@
+        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogEntryText)</span>
     </div>
     <p>
         <input type="submit" value="Create" class="btn btn-success" />
     </p>
 }
+
 </div>
 <div class="col-md-10 col-lg-8 col-sm-12 col-xs-12">
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalun")
+    @Scripts.Render("~/bundles/bootstrapVal")
 }

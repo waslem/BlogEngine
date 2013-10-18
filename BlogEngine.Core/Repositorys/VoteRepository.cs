@@ -16,14 +16,26 @@ namespace BlogEngine.Core.Repositorys
 
         public void UpVote(int commentId, int userId)
         {
-            _context.Votes.Add(new Vote
+            var comment = _context.Comments.Find(commentId);
+            bool voted = false;
+            foreach (var vote in comment.Votes)
+            {
+                if (vote.UserId == userId)
                 {
-                     UserId = userId, 
-                     CommentId = commentId,
-                     VoteType = VoteType.UpVote
-                });
+                    voted = true;
+                }
+            }
+            if (!voted)
+            {
+                _context.Votes.Add(new Vote
+                    {
+                        UserId = userId,
+                        CommentId = commentId,
+                        VoteType = VoteType.UpVote
+                    });
 
-            CalculateVotesForComment(commentId);
+                CalculateVotesForComment(commentId);
+            }
         }
 
         public void DownVote(int commentId, int userId)

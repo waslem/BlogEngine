@@ -1,5 +1,6 @@
 ﻿using BlogEngine.Core.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogEngine.Core.ViewModels
 {
@@ -7,10 +8,15 @@ namespace BlogEngine.Core.ViewModels
     {
         public int BlogEntryId { get; set; }
 
+        [Required]
         public string BlogTitle { get; set; }
 
+        [Required]
         public string BlogShortDescription { get; set; }
+
+        [Required]
         public string BlogEntryText { get; set; }
+
         public string DateCreated { get; set; }
 
         public int UserId { get; set; }
@@ -22,6 +28,5 @@ namespace BlogEngine.Core.ViewModels
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual BlogImage Image { get; set; }
-
     }
 }

@@ -81,7 +81,6 @@ namespace BlogEngine.Web.Models
         public string LastName { get; set; }
 
         public DateTime CreatedDate { get; set; }
-
     }
 
     public class ExternalLogin
