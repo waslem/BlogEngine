@@ -20,6 +20,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="~/Content/ico/apple-touch-icon-57-precomposed.png">
     <link href="~/Content/ico/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
 </head>
     <body>
         <div id="holder">
@@ -37,4 +38,31 @@
             </div>
         </div>
     </body>
+        <script type="text/javascript">
+            jQuery.validator.setDefaults({
+                highlight: function (element, errorClass, validClass) {
+                    if (element.type === 'radio') {
+                        this.findByName(element.name).addClass(errorClass).removeClass(validClass);
+                    } else {
+                        $(element).addClass(errorClass).removeClass(validClass);
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    }
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    if (element.type === 'radio') {
+                        this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+                    } else {
+                        $(element).removeClass(errorClass).addClass(validClass);
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    }
+                }
+            });
+            $(document).ready()
+            {
+                $("span.field-validation-valid, span.field-validation-error").addClass('help-block');
+                $("div.form-group").has("span.field-validation-error").addClass('has-error');
+                $("div.validation-summary-errors").has("li:visible").addClass("alert alert-block alert-danger");
+
+            };
+    </script>
 </html>

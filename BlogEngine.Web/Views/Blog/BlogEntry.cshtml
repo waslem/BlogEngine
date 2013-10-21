@@ -13,7 +13,7 @@
                     <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
                     <div class="voteBox">
                         @Ajax.ActionLink(" ", "UpVote", "Vote",
-                            new { Id = comment.CommentId },
+                            new { commentId = comment.CommentId },
                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
                             new { @class = "arrow-up" })
                         @if (comment.VoteScore > 0)
@@ -29,7 +29,7 @@
                             <span>@comment.VoteScore</span>
                         }
                         @Ajax.ActionLink(" ", "DownVote", "Vote",
-                            new { Id = comment.CommentId },
+                            new { commentId = comment.CommentId },
                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
                             new { @class = "arrow-down" })
                     </div>

@@ -10,7 +10,7 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", role="form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+    @*@Html.ValidationSummary()*@
     @Html.HiddenFor(model => model.DateCreated)
     @Html.HiddenFor(model => model.UserId)
 
@@ -27,17 +27,17 @@
     <div class="form-group">
         @Html.LabelFor(model => model.BlogTitle)
         @Html.TextBoxFor(model => model.BlogTitle, new { @class = "form-control" })
-        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogTitle)</span>
+        @Html.ValidationMessageFor(model => model.BlogTitle)
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.BlogShortDescription)
         @Html.TextAreaFor(model => model.BlogShortDescription, new { @class = "form-control", @rows = 5 })
-        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogShortDescription)</span>
+        @Html.ValidationMessageFor(model => model.BlogShortDescription)
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.BlogEntryText)
         @Html.EditorFor(model => model.BlogEntryText)
-        <span class="help-inline">@Html.ValidationMessageFor(model => model.BlogEntryText)</span>
+        @Html.ValidationMessageFor(model => model.BlogEntryText)
     </div>
     <p>
         <input type="submit" value="Create" class="btn btn-success" />
@@ -52,5 +52,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryvalun")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrapVal")
 }
