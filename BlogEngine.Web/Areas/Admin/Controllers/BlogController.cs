@@ -69,7 +69,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var blog = _unitOfWork.BlogRepository.GetBlogById(id);
-            var blogViewModel = ModelBinder.Blog(blog);
+            BlogViewModel blogViewModel = ModelBinder.Blog(blog);
 
             blogViewModel.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
             blogViewModel.UserId = WebSecurity.CurrentUserId;

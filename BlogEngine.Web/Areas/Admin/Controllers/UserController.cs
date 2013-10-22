@@ -26,6 +26,15 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         }
 
         //
+        // GET: /admin/User/Users
+        public ActionResult Users()
+        {
+            var users = _unitOfWork.UserRepository.GetAllUsers();
+
+            return View(users);
+        }
+
+        //
         // GET: /Admin/User/AddUserToAdmins
         public ActionResult AddUserToAdmins()
         {

@@ -37,10 +37,15 @@ namespace BlogEngine.Web.Controllers
         [HttpPost]
         public ActionResult DownVote(int commentId)
         {
-            _unitOfWork.VoteRepository.DownVote(commentId, WebSecurity.GetUserId(User.Identity.Name));
-            _unitOfWork.Save();
+            if (User.Identity.IsAuthenticated)
+            {
+                _unitOfWork.VoteRepository.DownVote(commentId, WebSecurity.GetUserId(User.Identity.Name));
+                _unitOfWork.Save();
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Login", "Account");
         }
     }
 }
