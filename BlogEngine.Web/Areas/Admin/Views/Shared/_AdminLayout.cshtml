@@ -21,6 +21,14 @@
     <link rel="apple-touch-icon-precomposed" href="~/Content/ico/apple-touch-icon-57-precomposed.png">
     <link href="~/Content/ico/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    @(Html.Telerik().StyleSheetRegistrar()
+                    .DefaultGroup(group => group
+                        .Add("~/Content/2013.2.611/telerik.common.css")
+                        .Add("~/Content/2013.2.611/telerik.metro.min.css")
+                        .Add("~/Content/2013.2.611/telerik.rtl.css")
+                        .Combined(true)
+                        .Compress(true))
+                    )
 </head>
     <body>
         <div id="holder">
@@ -62,7 +70,6 @@
                 $("span.field-validation-valid, span.field-validation-error").addClass('help-block');
                 $("div.form-group").has("span.field-validation-error").addClass('has-error');
                 $("div.validation-summary-errors").has("li:visible").addClass("alert alert-block alert-danger");
-
             };
     </script>
 </html>

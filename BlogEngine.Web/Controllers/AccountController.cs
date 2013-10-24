@@ -11,6 +11,7 @@ using BlogEngine.Web.Models;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
+using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -18,10 +19,12 @@ namespace BlogEngine.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IMailService _mail;
+        private readonly IUnitOfWork _unit;
 
-        public AccountController(IMailService mail)
+        public AccountController(IMailService mail, IUnitOfWork unit)
         {
             _mail = mail;
+            _unit = unit;
         }
 
         //

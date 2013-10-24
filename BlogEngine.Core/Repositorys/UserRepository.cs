@@ -63,5 +63,10 @@ namespace BlogEngine.Core.Repositorys
                 Roles.RemoveUserFromRole(user.UserName, "Administrator");
             }
         }
+
+        public bool UserExists(string username)
+        {
+            return _context.Users.Any(u => u.UserName == username);
+        }
     }
 }

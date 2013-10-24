@@ -11,5 +11,7 @@ namespace BlogEngine.Core.Infrastructure
 
         void AddUserToAdminRole(int id);
         void RemoveUserFromAdminRole(int id);
+
+        bool UserExists(string username);
     }
 }

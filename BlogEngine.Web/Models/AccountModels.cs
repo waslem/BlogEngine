@@ -57,6 +57,7 @@ namespace BlogEngine.Web.Models
     {
         [Required]
         [Display(Name = "User name")]
+        [System.Web.Mvc.Remote("IsUsernameAvailable", "Validation")]
         public string UserName { get; set; }
 
         [Required]

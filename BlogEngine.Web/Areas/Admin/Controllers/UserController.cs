@@ -1,4 +1,5 @@
 ﻿using BlogEngine.Core.Infrastructure;
+using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Work;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GridMvc.Html;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
@@ -30,7 +32,6 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Users()
         {
             var users = _unitOfWork.UserRepository.GetAllUsers();
-
             return View(users);
         }
 
