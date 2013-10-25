@@ -33,7 +33,7 @@
                             new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
                             new { @class = "arrow-down" })
                     </div>
-                    <span class="commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
+                    <span class="hidden-xs commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
                 </div>
                 <div class="commentEntry">
                     @Html.DisplayFor(m => comment.CommentText)

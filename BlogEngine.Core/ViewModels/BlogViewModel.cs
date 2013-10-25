@@ -21,10 +21,10 @@ namespace BlogEngine.Core.ViewModels
         public string BlogShortDescription { get; set; }
 
         [Required]
-        [UIHint("tinymce_jquery_full"), AllowHtml]
+        //[UIHint("tinymce_jquery_full"), AllowHtml]
         public string BlogEntryText { get; set; }
 
-        [Required(ErrorMessage = "A title is required")]
+        [Required(ErrorMessage="A blog title is required")]
         public string BlogTitle { get; set; }
 
         public HttpPostedFileBase BlogImage { get; set; }

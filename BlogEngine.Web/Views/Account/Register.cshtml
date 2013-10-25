@@ -9,7 +9,7 @@
             <h1>@ViewBag.Title.</h1>
             <h2>Create a new account.</h2>
         </hgroup>  
-        @using (Html.BeginForm("Register","Account",FormMethod.Post,new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Register","Account",FormMethod.Post,new { @class = "form-horizontal", role="form" }))
         {
             @Html.AntiForgeryToken()
             @*@Html.ValidationSummary(true)*@
@@ -52,7 +52,7 @@
                 @Html.LabelFor(m => m.Email, new { @class = "col-lg-3 control-label" })
                  <div class="col-lg-8">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
-                   @Html.ValidationMessageFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
                  </div>
             </div>    
             <div class="form-group">
@@ -66,5 +66,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryvalun")
-    @Scripts.Render("~/bundles/bootstrapMvcValidation")
+    @Scripts.Render("~/bundles/jqueryui")
 }

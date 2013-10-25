@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>wysihtml5</id>
+    <version>0.3.0</version>
+    <title>wysihtml5</title>
+    <authors>shvydky</authors>
+    <owners>shvydky</owners>
+    <projectUrl>https://github.com/xing/wysihtml5</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Open source rich text editor based on HTML5 and the progressive-enhancement approach. Uses a sophisticated security concept and aims to generate fully valid HTML5 markup by preventing unmaintainable tag soups and inline styles.</description>
+    <summary>Rich text editor.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <references />
+  </metadata>
+</package>

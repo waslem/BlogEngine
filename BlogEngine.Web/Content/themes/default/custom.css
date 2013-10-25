@@ -185,7 +185,6 @@ padding-bottom: 0px;
 
 .voteBox {
     display: inline-block;
-
 }
 
 .votePositive {
@@ -204,4 +203,12 @@ padding-bottom: 0px;
 
 .editField {
     font-weight: bold;
+}
+
+.commentNameMobile {
+    font-weight: bold;
+    color: black;
+    font-size:medium;
+    padding-left: 5px;
+    padding-right: 5px;
 }

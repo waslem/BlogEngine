@@ -15,11 +15,10 @@
             @Html.HiddenFor(model => model.BlogId)
             @Html.HiddenFor(model => model.CommentId)
             @Html.HiddenFor(model => model.ParentId)
-            <div class="editor-label">
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.CommentText)
-            </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.CommentText, new { @class = "form-control", rows = "7" })
+                @Html.TextAreaFor(model => model.CommentText, new { @class = "form-control", rows = "7", style="resize: none;" })
                 @Html.ValidationMessageFor(model => model.CommentText)
             </div>
             <p></p>
@@ -34,4 +33,6 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalun")
+    @Scripts.Render("~/bundles/jqueryui")
 }

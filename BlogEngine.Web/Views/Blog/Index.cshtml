@@ -23,7 +23,10 @@
             <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
             @if (item.Image != null)
             {
-                <img class="img-responsive img-entry" src="@Url.Content(item.Image.ImagePath)" alt="Image" />
+                if(item.Image.ImagePath != null)
+                {
+                    <img class="img-responsive img-entry" src="@Url.Content(item.Image.ImagePath)" alt="Image" />
+                }
             }
             <div class="meta">
                 <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
