@@ -1,9 +1,19 @@
 ﻿using System.Web.Mvc;
+using BlogEngine.Core.Infrastructure;
+using BlogEngine.Core.Models;
+using BlogEngine.Core.Work;
 
 namespace BlogEngine.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IMailService _mailService;
+
+        public HomeController(IMailService mailService)
+        {
+            _mailService = mailService;
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -20,9 +30,20 @@ namespace BlogEngine.Web.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return View(new ContactForm());
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Contact(ContactForm contactForm)
+        {
+            if(ModelState.IsValid)
+            {
+                _mailService.Send("jvw@westnet.com.au", contactForm.From, contactForm.Subject, contactForm.Message);
+                TempData["Successful"] = "Successful";
+                return RedirectToAction("Contact");
+            }
+
+            return View(contactForm);
         }
     }
 }

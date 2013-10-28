@@ -1,24 +1,25 @@
 ﻿@model BlogEngine.Core.Models.Comment
 
 <div class="voteBox">
-    @Ajax.ActionLink(" ", "UpVote", "Vote",
-                new { commentId = Model.CommentId },
-                new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
-                new { @class = "arrow-up" })
+    @Ajax.ActionLink(@" ", "UpVote", "Vote",
+                     new { commentId = Model.CommentId },
+                     new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
+                     new { @class = "arrow-up" })
     @if (Model.VoteScore > 0)
     {
         <span class="votePositive">@Model.VoteScore</span>
-            }
+    }
     else if (Model.VoteScore < 0)
     {
         <span class="voteNegative">@Model.VoteScore</span>
-            }
+    }
     else
     {
         <span>@Model.VoteScore</span>
-            }
-    @Ajax.ActionLink(" ", "DownVote", "Vote",
-                new { commentId = Model.CommentId },
-                new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
-                new { @class = "arrow-down" })
+    }
+
+    @Ajax.ActionLink(@" ", "DownVote", "Vote",
+                     new { commentId = Model.CommentId },
+                     new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
+                     new { @class = "arrow-down" })
 </div>

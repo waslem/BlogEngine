@@ -11,7 +11,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
     // Inherits the AdminController abstract class which manages security for all controllers 
     public class BlogController : AdminController
     {
-        private IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public BlogController(IUnitOfWork unitOfWork)
         {

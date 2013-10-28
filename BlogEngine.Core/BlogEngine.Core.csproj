@@ -62,6 +62,7 @@
     <Compile Include="Models\BlogImage.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\Enums\VoteType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />

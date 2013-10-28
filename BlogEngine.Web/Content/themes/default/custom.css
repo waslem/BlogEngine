@@ -222,3 +222,7 @@ padding-bottom: 0px;
         text-decoration: none;
         color: white;
     }
+
+.contactFormSuccess {
+    padding-bottom: -65px;
+}
