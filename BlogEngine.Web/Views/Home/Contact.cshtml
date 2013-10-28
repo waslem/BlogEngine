@@ -4,47 +4,32 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
 </hgroup>
 
-<section class="contact">
-    <header>
-        <h3>Phone</h3>
-    </header>
-    <p>
-        <span class="label">Main:</span>
-        <span>425.555.0100</span>
-    </p>
-    <p>
-        <span class="label">After Hours:</span>
-        <span>425.555.0199</span>
-    </p>
-</section>
-
-<section class="contact">
-    <header>
-        <h3>Email</h3>
-    </header>
-    <p>
-        <span class="label">Support:</span>
-        <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">Marketing:</span>
-        <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-    </p>
-    <p>
-        <span class="label">General:</span>
-        <span><a href="mailto:General@example.com">General@example.com</a></span>
-    </p>
-</section>
-
-<section class="contact">
-    <header>
-        <h3>Address</h3>
-    </header>
-    <p>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399
-    </p>
-</section>
+<form class="well span8">
+    <div class="row">
+        <div class="span3">
+            <label>First Name</label>
+            <input type="text" class="span3" placeholder="Your First Name">
+            <label>Last Name</label>
+            <input type="text" class="span3" placeholder="Your Last Name">
+            <label>Email Address</label>
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="inputIcon" class="span2" style="width: 233px" placeholder="Your email address">
+            </div>
+            <label>Subject
+            <select id="subject" name="subject" class="span3">
+                <option value="na" selected="">Choose One:</option>
+                <option value="service">General Customer Service</option>
+                <option value="suggestions">Suggestions</option>
+                <option value="product">Product Support</option>
+            </select>
+            </label>
+        </div>
+        <div class="span5">
+            <label>Message</label>
+            <textarea name="message" id="message" class="input-xlarge span5" rows="10"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary pull-right">Send</button>
+</form>

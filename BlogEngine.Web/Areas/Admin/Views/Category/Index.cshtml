@@ -23,7 +23,6 @@
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
             <th>
-                Options
             </th>
         </tr>
     @foreach (var item in Model) {
@@ -38,9 +37,12 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
+                <button class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Edit", "Category", new { id=item.CategoryId })'"> 
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete", "Category", new { id=item.CategoryId })'"> 
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
             </td>
         </tr>
     }

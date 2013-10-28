@@ -1,0 +1,65 @@
+﻿@model BlogEngine.Core.Models.BlogEntry
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>BlogEntry</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogShortDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogShortDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogEntryText)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogEntryText)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BlogImageId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BlogImageId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BlogEntryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

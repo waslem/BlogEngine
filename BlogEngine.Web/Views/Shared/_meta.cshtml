@@ -1,0 +1,9 @@
+﻿@model BlogEngine.Core.Models.BlogEntry
+
+<div class="meta">
+    <span class="glyphicon glyphicon-calendar"></span>&nbsp;@DateFormatter.FormatShort(Model.DateCreated)
+        <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
+    <span class="pull-right">
+        <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@ViewBag.totalComments Comments
+    </span>
+</div>

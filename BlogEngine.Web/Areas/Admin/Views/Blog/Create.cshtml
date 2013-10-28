@@ -42,14 +42,11 @@
         @Html.TextAreaFor(model => model.BlogEntryText, new { @class = "form-control", @rows = 10 })
         @Html.ValidationMessageFor(model => model.BlogEntryText)
     </div>
-    <p>
+    <p>     
+        <button class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Blog")'"> Back</button>  
         <input type="submit" value="Create" class="btn btn-success" />
     </p>
 }
-
-</div>
-<div class="col-md-10 col-lg-8 col-sm-12 col-xs-12">
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

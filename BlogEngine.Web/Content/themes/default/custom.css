@@ -212,3 +212,13 @@ padding-bottom: 0px;
     padding-left: 5px;
     padding-right: 5px;
 }
+
+.AdminButton {
+    color: white;
+    text-decoration: none;
+}
+
+    .AdminButton :hover {
+        text-decoration: none;
+        color: white;
+    }

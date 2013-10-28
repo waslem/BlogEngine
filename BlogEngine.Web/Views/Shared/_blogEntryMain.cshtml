@@ -1,0 +1,13 @@
+﻿@model BlogEngine.Core.Models.BlogEntry
+
+<div class="entryPaddingMain">
+    @Html.Raw(Model.BlogEntryText)
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="entryAddComment">
+            <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id=Model.BlogEntryId })" method="get">
+                <button class="btn btn-default">Add a Comment »</button>
+            </form>
+        </div>
+    }
+</div>

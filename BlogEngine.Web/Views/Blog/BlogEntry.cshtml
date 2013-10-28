@@ -3,84 +3,14 @@
 @{
     ViewBag.Title = "BlogEntry";
 }
-@helper TreeView(ICollection<BlogEngine.Core.Models.Comment> commentTree)
-{
-    foreach (var comment in commentTree)
-    {
-        <div class="commentGroup">
-            <div class="commentIndividual">
-                <div class="commentInfoBanner">
-                    <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
-                    <div class="voteBox">
-                        @Ajax.ActionLink(" ", "UpVote", "Vote",
-                            new { commentId = comment.CommentId },
-                            new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
-                            new { @class = "arrow-up" })
-                        @if (comment.VoteScore > 0)
-                        {
-                            <span class="votePositive">@comment.VoteScore</span>
-                        }
-                        else if (comment.VoteScore < 0)
-                        {
-                            <span class="voteNegative">@comment.VoteScore</span>
-                        }
-                        else
-                        {
-                            <span>@comment.VoteScore</span>
-                        }
-                        @Ajax.ActionLink(" ", "DownVote", "Vote",
-                            new { commentId = comment.CommentId },
-                            new AjaxOptions { HttpMethod = "POST", OnSuccess = "window.location.reload()" },
-                            new { @class = "arrow-down" })
-                    </div>
-                    <span class="hidden-xs commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
-                </div>
-                <div class="commentEntry">
-                    @Html.DisplayFor(m => comment.CommentText)
-                </div>
-                @if (User.Identity.IsAuthenticated)
-                {   
-                    if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
-                    {
-                        <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
-                    }
-                    <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = Model.BlogEntryId, parent = comment.CommentId })" method="get">
-                        <button class="btn btn-default btn-sm">Reply</button>
-                    </form>
-                }
-            </div>
-            @if (comment.Children.Count > 0)
-            {
-                <div class="commentChildren">
-                    @TreeView(comment.Children)
-                </div>
-            }
-        </div>
-    }
-}
+
 <h2>Blog entry</h2>
 <div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10 centered">
     <div class="entry">
         <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogTitle)</h3>
-        <div class="meta">
-            <span class="glyphicon glyphicon-calendar"></span>&nbsp;@DateFormatter.FormatShort(Model.DateCreated)
-                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
-            <span class="pull-right">
-                <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;@ViewBag.totalComments Comments
-            </span>
-        </div>
-        <div class="entryPaddingMain">
-            @Html.Raw(Model.BlogEntryText)
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="entryAddComment">
-                    <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id=Model.BlogEntryId })" method="get">
-                        <button class="btn btn-default">Add a Comment »</button>
-                    </form>
-                </div>
-            }
-        </div>
-        @TreeView(Model.Comments)
+        @Html.Partial("_meta",Model)
+        @Html.Partial("_blogEntryMain", Model)
+        @Html.Partial("_treeView", Model.Comments, new ViewDataDictionary { { "blogEntryId", Model.BlogEntryId}})
         <div style="padding-top:50px">
             @Html.ActionLink("Back to Blog Entries", "Index", null, new { @class = "entryPadding" })
         </div>

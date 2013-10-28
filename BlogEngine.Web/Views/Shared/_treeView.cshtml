@@ -1,0 +1,33 @@
+﻿@model ICollection<BlogEngine.Core.Models.Comment>
+
+@foreach (var comment in Model)
+{
+    <div class="commentGroup">
+        <div class="commentIndividual">
+            <div class="commentInfoBanner">
+                <span class="commentName">@Html.DisplayFor(m => comment.User.UserName)</span>
+                @Html.Partial("_voteBox", comment)
+                <span class="hidden-xs commentDate pull-right">@comment.CommentDate.ToRelativeDate()</span>
+            </div>
+            <div class="commentEntry">
+                @Html.DisplayFor(m => comment.CommentText)
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {   
+                if (User.Identity.Name.ToLower() == comment.User.UserName.ToLower())
+                {
+                    <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
+                }
+                <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = ViewData["blogEntryId"], parent = comment.CommentId })" method="get">
+                    <button class="btn btn-default btn-sm">Reply</button>
+                </form>
+            }
+        </div>
+        @if (comment.Children.Count > 0)
+        {
+            <div class="commentChildren">
+                @Html.Partial("_treeView", comment.Children)
+            </div>
+        }
+    </div>
+}

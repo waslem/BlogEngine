@@ -121,6 +121,20 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 
             return View();
         }
-    }
 
+        public ActionResult Details(int id)
+        {
+            var model = _unitOfWork.BlogRepository.GetBlogById(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult GetBlogInfo(int id)
+        {
+            var blog = _unitOfWork.BlogRepository.GetBlogById(id);
+            BlogViewModel blogViewModel = ModelBinder.Blog(blog);
+
+            return PartialView("_modalBlogDetails", blogViewModel);
+        }
+    }
 }

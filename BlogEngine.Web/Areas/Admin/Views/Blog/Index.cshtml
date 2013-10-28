@@ -5,56 +5,43 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3 style="display: inline-block"><span class="glyphicon glyphicon-book"></span> Blogs</h3>
+<h5 style="color: grey; display: inline-block">List of all the blogs</h5>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="table-responsive">
-    <table class="table table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommentCount)
-            </th>
-            <th>
-                Options
-            </th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommentCount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.BlogId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.BlogId })
-            </td>
-        </tr>
-    }
-    </table>
+<div class="well well-sm">
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Blog")'">
+        <span class="glyphicon glyphicon-pencil"></span>Create a new Blog
+    </button>
 </div>
+<div class="col-md-12">
+    <div class="row well well-sm" style="padding-top:5px;padding-bottom:5px;margin-bottom:5px">
+        <div class="col-md-1"><b>By</b></div>
+        <div class="col-md-2"><b>Created</b></div>
+        <div class="col-md-2"><b>@Html.DisplayNameFor(model => model.Category)</b></div>
+        <div class="col-md-2"><b>@Html.DisplayNameFor(model => model.Title)</b></div>
+        <div class="col-md-2"><b>Comment #</b></div>
+        <div class="col-md-4"></div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row" style="padding-bottom:5px;">
+            <div class="col-md-1">@Html.DisplayFor(modelItem => item.CreatedBy)</div>
+            <div class="col-md-2">@Html.DisplayFor(modelItem => item.CreatedDate)</div>
+            <div class="col-md-2">@Html.DisplayFor(modelItem => item.Category)</div>
+            <div class="col-md-2">@Html.DisplayFor(modelItem => item.Title)</div>
+            <div class="col-md-1">@Html.DisplayFor(modelItem => item.CommentCount)</div>
+            <div class="col-md-4">
+                <button  class="btn btn-sm btn-danger pull-right" onclick="location.href='@Url.Action("Delete", "Blog", new { id = item.BlogId })'">
+                    <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+                </button>
+                <button style="margin-right:5px" class="btn btn-sm btn-primary pull-right" onclick="location.href='@Url.Action("Edit", "Blog", new { id = item.BlogId })'">
+                    <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+                </button>
+                <button style="margin-right:5px;color:grey;" class="btn btn-sm btn-default pull-right" onclick="location.href='@Url.Action("details", "blog", new { id = item.BlogId })'">
+                    <span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;details
+                </button>
+            </div>
+        </div>
+    }
+</div>
+

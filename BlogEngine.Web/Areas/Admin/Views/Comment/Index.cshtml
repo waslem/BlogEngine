@@ -62,9 +62,13 @@
             @Html.DisplayFor(modelItem => item.VoteScore)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CommentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CommentId })
+            <button class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Details", "Comment", new { id = item.CommentId })'">
+                <span class="glyphicon glyphicon-align-justify"></span> Details
+            </button>
+            <button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete", "Comment", new { id = item.CommentId })'">
+                <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+
         </td>
     </tr>
 }
