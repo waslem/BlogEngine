@@ -2,6 +2,7 @@
 using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;

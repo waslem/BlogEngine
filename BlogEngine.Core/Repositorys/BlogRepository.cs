@@ -7,6 +7,7 @@ using BlogEngine.Core.Helpers;
 using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
+using System.Web.Mvc;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -103,6 +104,13 @@ namespace BlogEngine.Core.Repositorys
                 Image = blog.Image
             })
             .ToList();
+        }
+
+        public ICollection<BlogEntry> GetTopBlogs(int blogCount)
+        {
+            ICollection<BlogEntry> blogs = _context.BlogEntries.OrderByDescending(b => b.Comments.Count).Take(blogCount).ToList();
+
+            return blogs;
         }
     }
 }

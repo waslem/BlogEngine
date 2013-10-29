@@ -17,5 +17,7 @@ namespace BlogEngine.Core.Infrastructure
         BlogEntry GetBlogById(int id);
         void Edit(BlogViewModel model);
         void Delete(int id);
+
+        ICollection<BlogEntry> GetTopBlogs(int blogCount);
     }
 }

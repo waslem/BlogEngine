@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<BlogEngine.Core.ViewModels.BlogEntryView>*@
-@model PagedList.IPagedList<BlogEngine.Core.ViewModels.BlogEntryView>
+﻿@model PagedList.IPagedList<BlogEngine.Core.ViewModels.BlogEntryView>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Blog Entries";
@@ -56,7 +55,8 @@
             <h4>About</h4>
         </div>
         <div class="widget">
-            <h4>Recent blogs</h4>
+            <h4>Most talked about blogs</h4>
+            @Html.Action("GetTopBlogs","Blog", null)
         </div>
     </div>
-</div>    
+</div> 

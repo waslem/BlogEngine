@@ -1,6 +1,7 @@
 ﻿using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using System;
+using System.Collections.Generic;
 
 namespace BlogEngine.Web.Helpers
 {
@@ -55,6 +56,17 @@ namespace BlogEngine.Web.Helpers
             }
 
             return blogEntry;
+        }
+
+        public static ICollection<BlogSummaryView> BlogSummary(ICollection<BlogEntry> blogs)
+        {
+            List<BlogSummaryView> blogSummary = new List<BlogSummaryView>();
+            foreach (var blog in blogs)
+            {
+                blogSummary.Add(new BlogSummaryView { BlogId = blog.BlogEntryId, BlogTitle = blog.BlogTitle, Comments = blog.Comments.Count });
+            }
+
+            return blogSummary;
         }
     }
 }

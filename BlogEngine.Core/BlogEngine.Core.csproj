@@ -73,6 +73,7 @@
     <Compile Include="Repositorys\VoteRepository.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\MockMailService.cs" />
+    <Compile Include="ViewModels\BlogSummaryView.cs" />
     <Compile Include="Work\IUnitOfWork.cs" />
     <Compile Include="Work\UnitOfWork.cs" />
     <Compile Include="ViewModels\BlogEntryView.cs" />

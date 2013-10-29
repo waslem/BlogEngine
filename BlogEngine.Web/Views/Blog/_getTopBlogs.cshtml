@@ -1,0 +1,11 @@
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.BlogSummaryView>
+
+@foreach (var entry in Model)
+{
+    <div class="row" style="padding-left:25px">
+        <a href="@Url.Action("BlogEntry", "Blog",  new { id=entry.BlogId, blogEntryName = UrlEncoder.ToFriendlyUrl(entry.BlogTitle) })">@Html.DisplayFor(modelItem => entry.BlogTitle)</a>
+        <div class="pull-right" style="padding-right:25px;">
+             @Html.DisplayFor(modelItem => entry.Comments) comments
+        </div>
+    </div>
+}

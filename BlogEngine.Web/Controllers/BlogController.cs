@@ -6,6 +6,7 @@ using BlogEngine.Core.ViewModels;
 using BlogEngine.Web.Helpers;
 using WebMatrix.WebData;
 using PagedList;
+using System.Collections.Generic;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -83,6 +84,15 @@ namespace BlogEngine.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult GetTopBlogs()
+        {
+            var blogs = _unitOfWork.BlogRepository.GetTopBlogs(5);
+            ICollection<BlogSummaryView> blogSummaryList = ModelBinder.BlogSummary(blogs);
+
+            return PartialView("_getTopBlogs", blogSummaryList);
         }
     }
 }
