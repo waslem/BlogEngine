@@ -11,9 +11,9 @@ namespace BlogEngine.Core.Services
         {
             MailMessage message = new MailMessage();
             message.To.Add(to);
-            message.Subject = subject;
+            message.Subject = subject; 
             message.From = new MailAddress(from);
-            message.Body = body;
+            message.Body = String.Format("You have a new enquiry from {0}.{1} the message reads {2}", from, Environment.NewLine, body);
 
             SmtpClient smtp = new SmtpClient("smtp.gmail.com",587);
             smtp.EnableSsl = true;

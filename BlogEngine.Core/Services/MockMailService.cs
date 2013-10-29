@@ -18,7 +18,7 @@ namespace BlogEngine.Core.Services
 
         public void SendRegisterEmail(string to, string username, string confirmationToken)
         {
-
+            
         }
     }
 }

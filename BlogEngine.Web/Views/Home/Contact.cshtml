@@ -1,35 +1,51 @@
-﻿@{
+﻿@model BlogEngine.Core.Models.ContactForm
+
+@{
     ViewBag.Title = "Contact";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<form class="well span8">
+<div id="contacts">
     <div class="row">
-        <div class="span3">
-            <label>First Name</label>
-            <input type="text" class="span3" placeholder="Your First Name">
-            <label>Last Name</label>
-            <input type="text" class="span3" placeholder="Your Last Name">
-            <label>Email Address</label>
-            <div class="input-prepend">
-                <span class="add-on"><i class="icon-envelope"></i></span><input type="text" id="inputIcon" class="span2" style="width: 233px" placeholder="Your email address">
-            </div>
-            <label>Subject
-            <select id="subject" name="subject" class="span3">
-                <option value="na" selected="">Choose One:</option>
-                <option value="service">General Customer Service</option>
-                <option value="suggestions">Suggestions</option>
-                <option value="product">Product Support</option>
-            </select>
-            </label>
-        </div>
-        <div class="span5">
-            <label>Message</label>
-            <textarea name="message" id="message" class="input-xlarge span5" rows="10"></textarea>
+        <!-- Alignment -->
+        <div class="col-sm-offset-3 col-sm-6" style="margin-top: 50px;">
+            @using(Html.BeginForm("contact", "Home", FormMethod.Post, new { id="contactForm", @class = "well form-horizontal", @style ="padding-bottom:65px;"}))
+            {
+                @Html.AntiForgeryToken()
+                <h2>Contact us</h2>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.From, new {@class="col-md-2 col-lg-2 control-label"})
+                    <div class="col-md-10 col-lg-10">
+                        @Html.TextBoxFor(model => model.From, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.From)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Subject, new {@class="col-md-2 col-lg-2 control-label"})
+                    <div class="col-md-10 col-lg-10">
+                        @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Subject)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Message, new {@class="col-md-2 col-lg-2 control-label"})
+                    <div class="col-md-10 col-lg-10">
+                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", @rows = 10, @style="resize:vertical"})
+                        @Html.ValidationMessageFor(model => model.Message)                    
+                    </div>
+                </div>
+                <div class="col-lg-offset-2 col-md-offset-2 col-lg-10 col-md-10">
+                    <input class="btn btn-success pull-right" type="submit" value="Send" /> 
+                </div>                
+                if (Equals(TempData["Successful"], "Successful"))
+                {
+                    <div class="alert alert-success" style="margin-top:65px">Message sent!</div>
+                }
+            }
         </div>
     </div>
-    <button type="submit" class="btn btn-primary pull-right">Send</button>
-</form>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalun")
+    @Scripts.Render("~/bundles/jqueryui")
+}
