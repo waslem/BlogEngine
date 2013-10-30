@@ -17,6 +17,8 @@ namespace BlogEngine.Core.ViewModels
 
         public IEnumerable<SelectListItem> Categories { get; set; }
 
+        public List<TagCheckViewModel> Tags { get; set; }
+
         [Required(ErrorMessage="A short blog description is required")]
         public string BlogShortDescription { get; set; }
 

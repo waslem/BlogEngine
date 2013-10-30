@@ -73,6 +73,17 @@ namespace BlogEngine.Web.Helpers
                 blogEntry.Image = new BlogImage();
             }
 
+            blogEntry.Tags = new List<Tag>();
+            //todo add tags to blog here
+            foreach (var tag in model.Tags)
+            {
+                if (tag.Checked)
+                {
+                    blogEntry.Tags.Add(tag);
+                }
+            }
+
+
             return blogEntry;
         }
 

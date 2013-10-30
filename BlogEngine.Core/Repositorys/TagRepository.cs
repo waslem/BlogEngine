@@ -1,6 +1,7 @@
 ﻿using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
+using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Work;
 using System;
 using System.Collections.Generic;
@@ -19,19 +20,29 @@ namespace BlogEngine.Core.Repositorys
             _context = context;
         }
 
-        public ICollection<Tag> GetTagsForBlog(int blogId)
+        public IEnumerable<Tag> GetTagsForBlog(int blogId)
         {
-            throw new NotImplementedException();
+            var tags = from t in _context.Tags
+                       from b in t.BlogEntries
+                       where b.BlogEntryId == blogId
+                       select t;
+            
+            return tags;
         }
 
         public ICollection<Tag> GetAllTags()
         {
-            throw new NotImplementedException();
+            var tags = _context.Tags;
+
+            return tags.ToList();
         }
 
         public bool Create(Tag tag)
         {
-            throw new NotImplementedException();
+            // if tag is valid
+            _context.Tags.Add(tag);
+
+            return true;
         }
 
         public bool Delete(int tagId)
@@ -46,7 +57,24 @@ namespace BlogEngine.Core.Repositorys
 
         public Tag GetTagById(int id)
         {
-            throw new NotImplementedException();
+            var tag = _context.Tags.Find(id);
+
+            return tag;
+        }
+
+
+        public List<TagCheckViewModel> GetAllTagsForVM()
+        {
+            var tags = _context
+                .Tags
+                .Select(s => new TagCheckViewModel 
+                    { 
+                        Id = s.TagId, 
+                        Checked = false, 
+                        Name = s.Name
+                    });
+
+            return tags.ToList();
         }
     }
 }
