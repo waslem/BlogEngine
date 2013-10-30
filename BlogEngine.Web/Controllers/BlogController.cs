@@ -96,6 +96,8 @@ namespace BlogEngine.Web.Controllers
             return PartialView("_getTopBlogs", blogSummaryList);
         }
 
+        //
+        // GET: /category/{category}
         public ActionResult Category(string category)
         {
             var blogs = _unitOfWork.BlogRepository.GetBlogsByCategory(category).ToList();

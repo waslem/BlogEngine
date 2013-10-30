@@ -1,0 +1,15 @@
+﻿<div class="col-md-4">
+    <div class="sidebar">
+        <div class="widget">
+            @Html.Partial("_Search")
+        </div>
+        <div class="widget">
+            <h4>Categories</h4>
+            @Html.Action("GetCategories","Blog",null)
+        </div>
+        <div class="widget">
+            <h4>Most talked about blogs</h4>
+            @Html.Action("GetTopBlogs","Blog", null)
+        </div>
+    </div>
+</div> 

@@ -950,11 +950,11 @@
     <Content Include="Views\Blog\_getCategories.cshtml" />
     <Content Include="Views\Blog\Category.cshtml" />
     <Content Include="Views\Blog\_Search.cshtml" />
+    <Content Include="Views\Shared\_entryBlogList.cshtml" />
+    <Content Include="Views\Shared\_sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

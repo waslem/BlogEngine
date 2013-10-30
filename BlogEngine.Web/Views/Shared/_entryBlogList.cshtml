@@ -1,0 +1,30 @@
+﻿@model BlogEngine.Core.ViewModels.BlogEntryView
+
+<div class="entry">
+    <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogTitle)</h3>
+    <div class="meta">
+        <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => Model.DateCreated)&nbsp;
+                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => Model.User.UserName)
+        <span class="pull-right">
+            <span class="glyphicon glyphicon-comment"></span>
+            <a href="@Url.Action("BlogEntry", "Blog", new { id = Model.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(Model.BlogTitle) })">&nbsp;@Html.DisplayFor(modelItem => Model.Comments.Count) Comments</a>
+        </span>
+    </div>
+    @if (Model.Image != null)
+    {
+        if (Model.Image.ImagePath != null)
+        {
+            <img class="img-responsive img-entry" src="@Url.Content(Model.Image.ImagePath)" alt="Image" />
+        }
+    }
+    <div class="categoryTagHeader">
+        <span class="categoryHeader glyphicon glyphicon-paperclip"></span>&nbsp;Category: <a href='@Url.Action("Category", "Blog", new { category = Model.Category.Name })'>@Html.DisplayFor(modelItem => Model.Category.Name)</a>
+        <span class="tagHeader">Tags:
+            <button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tag"></span>Example</button>
+        </span>
+    </div>
+    <p class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogShortDescription)</p>
+    <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id = Model.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(Model.BlogTitle) })" method="get">
+        <button class="btn btn-default">Read more »</button>
+    </form>
+</div>
