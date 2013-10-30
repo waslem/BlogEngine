@@ -13,6 +13,14 @@
         @Html.HiddenFor(modelItem => item.CategoryId)
         <div class="entry">
             <h3 class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogTitle)</h3>
+            <div class="meta">
+                <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
+                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)
+                <span class="pull-right">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <a href="@Url.Action("BlogEntry", "Blog", new { id = item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
+                </span>
+            </div>
             @if (item.Image != null)
             {
                 if(item.Image.ImagePath != null)
@@ -20,14 +28,11 @@
                     <img class="img-responsive img-entry" src="@Url.Content(item.Image.ImagePath)" alt="Image" />
                 }
             }
-            <div class="meta">
-                <span class="glyphicon glyphicon-calendar"></span>&nbsp;@Html.DisplayFor(modelItem => item.DateCreated)&nbsp;
-                <span class="glyphicon glyphicon-user"></span>&nbsp;By:&nbsp;@Html.DisplayFor(modelItem => item.User.UserName)
-                <span class="pull-right">
-                    <span class="glyphicon glyphicon-comment"></span> 
-                    <a href="@Url.Action("BlogEntry", "Blog",  new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })">&nbsp;@Html.DisplayFor(modelItem => item.Comments.Count) Comments</a>
-                </span>
+            <div class="categoryTagHeader">
+                <span class="categoryHeader glyphicon glyphicon-paperclip"></span>&nbsp;Category: <a href='@Url.Action("Category", "Blog", new { category = item.Category.Name })'>@Html.DisplayFor(modelItem => item.Category.Name)</a>
+                <span class="tagHeader">Tags:</span>
             </div>
+
             <p class="entryPaddingMain">@Html.DisplayFor(modelItem => item.BlogShortDescription)</p>
             <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id=item.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(item.BlogTitle) })" method="get">
                 <button class="btn btn-default">Read more »</button>

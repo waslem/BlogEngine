@@ -949,6 +949,7 @@
     <Content Include="Views\Blog\_voteBox.cshtml" />
     <Content Include="Views\Blog\_getCategories.cshtml" />
     <Content Include="Views\Blog\Category.cshtml" />
+    <Content Include="Views\Blog\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
