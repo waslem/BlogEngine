@@ -65,6 +65,7 @@ namespace BlogEngine.Web.Controllers
 
         //
         // GET: /Blog/BlogEntry/1/{blogtitle}
+        [HttpGet]
         public ActionResult BlogEntry(int id, string blogEntryName)
         {
             var model = _unitOfWork.BlogRepository.GetBlogById(id);

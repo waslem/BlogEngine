@@ -28,10 +28,7 @@
                 }
             </span>
         }
-
     </div>
     <p class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogShortDescription)</p>
-    <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id = Model.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(Model.BlogTitle) })" method="get">
-        <button class="btn btn-default">Read more »</button>
-    </form>
+    @Html.ActionLink("Read more »","BlogEntry","Blog",new { id = Model.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(Model.BlogTitle) }, new { @class="entryPaddingMain btn btn-default", style="display: inline" })
 </div>

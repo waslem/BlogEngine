@@ -5,9 +5,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="entryAddComment">
-            <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id=Model.BlogEntryId })" method="get">
-                <button class="btn btn-default">Add a Comment »</button>
-            </form>
+            @Html.ActionLink("Add a Comment »","Comment","Blog",new { id = Model.BlogEntryId }, new { @class="entryPadding btn btn-default", style="display: inline" })
         </div>
     }
 </div>

@@ -18,9 +18,7 @@
                 {
                     <span class="editLink commentDate pull-right"><a href="@Url.Action("Edit", "Comment", new { id = comment.CommentId })">EDIT</a></span>
                 }
-                <form class="entryPadding" style="display: inline" action="@Url.Action("Comment", "Blog", new { id = ViewData["blogEntryId"], parent = comment.CommentId })" method="get">
-                    <button class="btn btn-default btn-sm">Reply</button>
-                </form>
+                @Html.ActionLink("Reply »","Comment","Blog",new { id = ViewData["blogEntryId"], parent = comment.CommentId }, new { @class="entryPadding btn btn-default btn-sm", style="display: inline" })
             }
         </div>
         @if (comment.Children.Count > 0)
