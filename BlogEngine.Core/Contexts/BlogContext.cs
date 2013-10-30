@@ -17,6 +17,7 @@ namespace BlogEngine.Core.Contexts
         public DbSet<BlogEntry> BlogEntries { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<BlogImage> Images { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +36,15 @@ namespace BlogEngine.Core.Contexts
                                             .WithMany(x => x.Votes)
                                             .HasForeignKey(x => x.CommentId)
                                             .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tag>().HasMany(x => x.BlogEntries)
+                                        .WithMany(x => x.Tags)
+                                        .Map(m =>
+                                            {
+                                                m.ToTable("BlogEntryTags");
+                                                m.MapLeftKey("TagId");
+                                                m.MapRightKey("BlogEntryId");
+                                            });
         }
     }
 }

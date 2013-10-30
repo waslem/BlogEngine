@@ -23,5 +23,7 @@ namespace BlogEngine.Core.Models
 
         public int? BlogImageId { get; set; }
         public virtual BlogImage Image { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }
