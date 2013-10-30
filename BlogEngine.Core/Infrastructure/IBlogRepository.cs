@@ -19,5 +19,7 @@ namespace BlogEngine.Core.Infrastructure
         void Delete(int id);
 
         ICollection<BlogEntry> GetTopBlogs(int blogCount);
+
+        IEnumerable<BlogEntry> GetBlogsByCategory(string category);
     }
 }

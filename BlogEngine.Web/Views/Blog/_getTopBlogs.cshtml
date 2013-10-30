@@ -4,8 +4,17 @@
 {
     <div class="row" style="padding-left:25px">
         <a href="@Url.Action("BlogEntry", "Blog",  new { id=entry.BlogId, blogEntryName = UrlEncoder.ToFriendlyUrl(entry.BlogTitle) })">@Html.DisplayFor(modelItem => entry.BlogTitle)</a>
-        <div class="pull-right" style="padding-right:25px;">
-             @Html.DisplayFor(modelItem => entry.Comments) comments
-        </div>
+        @if (entry.Comments > 9)
+        {
+            <div class="pull-right" style="padding-right: 25px;">
+                <span style="font-size:11px;color:rgb(100, 100, 100);" class="glyphicon glyphicon-comment"></span>&nbsp;@Html.DisplayFor(modelItem => entry.Comments) comments
+            </div>
+        }
+        else
+        {
+            <div class="pull-right" style="padding-right: 25px;">
+                <span style="font-size:11px;color:rgb(100, 100, 100);" class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(modelItem => entry.Comments) comments
+            </div>
+        }
     </div>
 }

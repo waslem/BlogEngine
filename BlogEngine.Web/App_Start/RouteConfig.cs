@@ -13,6 +13,14 @@ namespace BlogEngine.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // new route for categories
+            routes.MapRoute(
+                name: "Category",
+                url: "Category/{category}",
+                defaults: new { controller = "Blog", action = "Category" },
+                namespaces: new[] { "BlogEngine.Web.Controllers" }
+            );
+
             // new route for blog entries
             routes.MapRoute(
                 name: "BlogEntry",

@@ -7,6 +7,7 @@ using BlogEngine.Web.Helpers;
 using WebMatrix.WebData;
 using PagedList;
 using System.Collections.Generic;
+using System.Web;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -93,6 +94,28 @@ namespace BlogEngine.Web.Controllers
             ICollection<BlogSummaryView> blogSummaryList = ModelBinder.BlogSummary(blogs);
 
             return PartialView("_getTopBlogs", blogSummaryList);
+        }
+
+        public ActionResult Category(string category)
+        {
+            var blogs = _unitOfWork.BlogRepository.GetBlogsByCategory(category).ToList();
+
+            List<BlogEntryView> blogsView = ModelBinder.BlogEntryView(blogs).ToList();
+
+            if (blogsView.Count < 1)
+            {
+                throw new HttpException(404, "Category not found");
+            }
+
+            return View(blogsView);
+        }
+
+        public ActionResult GetCategories()
+        {
+            var categories = _unitOfWork.CategoryRepository.GetCategories();
+            List<CategoryViewModel> categoryViewModel = ModelBinder.Categories(categories);
+
+            return PartialView("_getCategories", categoryViewModel);
         }
     }
 }

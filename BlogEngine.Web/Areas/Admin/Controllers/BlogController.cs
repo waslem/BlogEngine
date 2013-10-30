@@ -137,5 +137,6 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 
             return PartialView("_modalBlogDetails", blogViewModel);
         }
+
     }
 }

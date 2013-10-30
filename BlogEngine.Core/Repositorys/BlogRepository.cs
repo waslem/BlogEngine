@@ -112,5 +112,12 @@ namespace BlogEngine.Core.Repositorys
 
             return blogs;
         }
+
+        public IEnumerable<BlogEntry> GetBlogsByCategory(string category)
+        {
+            var blogs = _context.BlogEntries.OrderByDescending(c => c.DateCreated).Where(c => c.Category.Name == category);
+
+            return blogs;
+        }
     }
 }

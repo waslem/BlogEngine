@@ -1,0 +1,8 @@
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.CategoryViewModel>
+
+@foreach (var category in Model)
+{
+    <div class="row" style="padding-left:25px">
+        <a href='@Url.Action("Category", "Blog",  new { category = category.Name })'><span class="glyphicon glyphicon-paperclip" style="color:#428bca"></span> @Html.DisplayFor(modelItem => category.Name)</a>
+    </div>    
+}

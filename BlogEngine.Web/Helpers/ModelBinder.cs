@@ -20,6 +20,24 @@ namespace BlogEngine.Web.Helpers
             return model;
         }
 
+        public static List<CategoryViewModel> Categories(List<Category> categories)
+        {
+            List<CategoryViewModel> cvm = new List<CategoryViewModel>();
+
+            foreach (var cat in categories)
+            {
+                var model = new CategoryViewModel
+                {
+                    CategoryId = cat.CategoryId,
+                    CreatedDate = cat.CreatedDate,
+                    Description = cat.Description,
+                    Name = cat.Name
+                };
+                cvm.Add(model);
+            }
+            return cvm;
+        }
+
         public static BlogViewModel Blog(BlogEntry blogEntry)
         {
             var blogViewModel = new BlogViewModel
@@ -67,6 +85,31 @@ namespace BlogEngine.Web.Helpers
             }
 
             return blogSummary;
+        }
+
+        public static IEnumerable<BlogEntryView> BlogEntryView(List<BlogEntry> blogs)
+        {
+            List<BlogEntryView> blogEntries = new List<BlogEntryView>();
+
+            foreach (var blog in blogs)
+            {
+                blogEntries.Add(new BlogEntryView
+                {
+                    BlogEntryId = blog.BlogEntryId,
+                    BlogEntryText = blog.BlogEntryText,
+                    BlogShortDescription = blog.BlogShortDescription,
+                    BlogTitle = blog.BlogTitle,
+                    Category = blog.Category,
+                    CategoryId = blog.CategoryId,
+                    Comments = blog.Comments,
+                    DateCreated = blog.DateCreated.ToShortDateString(),
+                    Image = blog.Image,
+                    User = blog.User,
+                    UserId = blog.UserId
+                });
+            }
+
+            return blogEntries;
         }
     }
 }
