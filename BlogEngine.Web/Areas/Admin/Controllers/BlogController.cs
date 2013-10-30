@@ -60,7 +60,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index", "Blog");
             }
-
+            model.Tags = _unitOfWork.TagRepository.GetAllTagsForVM();
             model.SelectedCategory = _unitOfWork.CategoryRepository.GetCategoryById(1).ToString();
             model.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
             model.UserId = WebSecurity.CurrentUserId;
