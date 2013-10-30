@@ -55,6 +55,7 @@
     <Compile Include="Infrastructure\ICategoryRepository.cs" />
     <Compile Include="Infrastructure\ICommentRepository.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />
+    <Compile Include="Infrastructure\ITagRepository.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
     <Compile Include="Infrastructure\IVoteRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repositorys\BlogRepository.cs" />
     <Compile Include="Repositorys\CategoryRepository.cs" />
     <Compile Include="Repositorys\CommentRepository.cs" />
+    <Compile Include="Repositorys\TagRepository.cs" />
     <Compile Include="Repositorys\UserRepository.cs" />
     <Compile Include="Repositorys\VoteRepository.cs" />
     <Compile Include="Services\MailService.cs" />
