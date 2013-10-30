@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using BlogEngine.Core.Models;
+
 namespace BlogEngine.Core.ViewModels
 {
     public class BlogListViewModel
@@ -10,6 +13,7 @@ namespace BlogEngine.Core.ViewModels
         public string Category { get; set; } 
         public string CreatedBy { get; set; } 
         public string CreatedDate { get; set; }
-        public int CommentCount { get; set; } 
+        public int CommentCount { get; set; }
+        public List<Tag> Tags { get; set; }
     }
 }

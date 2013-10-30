@@ -33,8 +33,6 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             var model = new BlogViewModel
             {
-                // todo add checkboxes for each tag to select for the blog
-                // todo fix this
                 Tags = _unitOfWork.TagRepository.GetAllTagsForVM(),
                 SelectedCategory = _unitOfWork.CategoryRepository.GetCategoryById(1).ToString(),
                 Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView(),
@@ -60,7 +58,9 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index", "Blog");
             }
+
             model.Tags = _unitOfWork.TagRepository.GetAllTagsForVM();
+            //todo better way of doing this
             model.SelectedCategory = _unitOfWork.CategoryRepository.GetCategoryById(1).ToString();
             model.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
             model.UserId = WebSecurity.CurrentUserId;

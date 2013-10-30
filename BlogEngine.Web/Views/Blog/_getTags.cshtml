@@ -1,0 +1,8 @@
+﻿@model List<BlogEngine.Core.ViewModels.TagCheckViewModel>
+
+@foreach (var tag in Model)
+{
+    <button style="margin-bottom: 5px;"class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Tag", "Blog", new { tag = tag.Name})'">
+        <span class="glyphicon glyphicon-tag" style="color:white"></span>&nbsp;@Html.DisplayFor(modelItem => tag.Name)
+    </button>  
+}

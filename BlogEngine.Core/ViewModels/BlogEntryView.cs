@@ -28,5 +28,12 @@ namespace BlogEngine.Core.ViewModels
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual BlogImage Image { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
+
+        public BlogEntryView()
+        {
+            Tags = new  List<Tag>();
+        }
     }
 }

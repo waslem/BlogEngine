@@ -13,13 +13,21 @@ namespace BlogEngine.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //new route for tags
+            routes.MapRoute(
+                name: "tag",
+                url: "Tag/{tag}",
+                defaults: new {controller = "Blog", action = "Tag"},
+                namespaces: new[] {"BlogEngine.Web.Controllers"}
+                );
+
             // new route for categories
             routes.MapRoute(
                 name: "Category",
                 url: "Category/{category}",
                 defaults: new { controller = "Blog", action = "Category" },
                 namespaces: new[] { "BlogEngine.Web.Controllers" }
-            );
+                );
 
             // new route for blog entries
             routes.MapRoute(
@@ -27,7 +35,7 @@ namespace BlogEngine.Web
                 url: "blogEntry/{id}/{blogEntryName}",
                 defaults: new { controller = "Blog", action = "BlogEntry", id = "", blogEntryName = "" },
                 namespaces: new[] { "BlogEngine.Web.Controllers" }
-            );
+                );
 
             //new route for comment with optional parent
             routes.MapRoute(
@@ -42,7 +50,7 @@ namespace BlogEngine.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }, 
                 namespaces: new[] { "BlogEngine.Web.Controllers" }
-            );
+                );
 
         }
     }

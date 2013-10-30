@@ -42,13 +42,24 @@ namespace BlogEngine.Core.Repositorys
                     Title = blog.BlogTitle,
                     Category = blog.Category.Name,
                     CreatedBy = blog.User.UserName,
-                    CreatedDate = blog.DateCreated.ToShortDateString() + "-" + blog.DateCreated.ToShortTimeString(),
-                    CommentCount = blog.Comments.Count()
+                    CreatedDate = blog.DateCreated.ToString("dd/MM/yy"),// + "-" + blog.DateCreated.ToShortTimeString(),
+                    CommentCount = blog.Comments.Count(),
+                    Tags = blog.Tags.ToList()
                 }).ToList();
         }
 
         public void Create(BlogEntry blogEntry)
         {
+            var tagList = new List<Tag>();
+
+            // we have to add every tag in the current _context for EF to know not to create new tags
+            foreach (var tag in blogEntry.Tags)
+            {
+                Tag currentTag = _context.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
+                tagList.Add(currentTag);
+            }
+            blogEntry.Tags = tagList;
+
             _context.BlogEntries.Add(blogEntry);
         }
 
@@ -101,7 +112,8 @@ namespace BlogEngine.Core.Repositorys
                 User = blog.User,
                 DateCreated = blog.DateCreated.ToShortDateString(),
                 Comments = blog.Comments, 
-                Image = blog.Image
+                Image = blog.Image, 
+                Tags = blog.Tags
             })
             .ToList();
         }
@@ -115,7 +127,15 @@ namespace BlogEngine.Core.Repositorys
 
         public IEnumerable<BlogEntry> GetBlogsByCategory(string category)
         {
-            var blogs = _context.BlogEntries.OrderByDescending(c => c.DateCreated).Where(c => c.Category.Name == category);
+            var blogs = _context.BlogEntries.OrderByDescending(b => b.DateCreated).Where(c => c.Category.Name == category);
+
+            return blogs;
+        }
+
+
+        public List<BlogEntry> GetBlogsByTag(string tag)
+        {
+            var blogs = _context.Tags.Where(t => t.Name == tag).SelectMany(b => b.BlogEntries).ToList();
 
             return blogs;
         }

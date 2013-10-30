@@ -955,6 +955,8 @@
     <Content Include="Views\Blog\_Search.cshtml" />
     <Content Include="Views\Shared\_entryBlogList.cshtml" />
     <Content Include="Views\Shared\_sidebar.cshtml" />
+    <Content Include="Views\Blog\_getTags.cshtml" />
+    <Content Include="Views\Blog\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

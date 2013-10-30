@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Models;
+﻿using System.Linq;
+using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,14 +56,15 @@ namespace BlogEngine.Web.Helpers
 
         public static BlogEntry BlogCreate(BlogViewModel model)
         {
-            var blogEntry = new BlogEntry();
-
-            blogEntry.UserId = model.UserId;
-            blogEntry.BlogShortDescription = model.BlogShortDescription;
-            blogEntry.BlogEntryText = model.BlogEntryText;
-            blogEntry.BlogTitle = model.BlogTitle;
-            blogEntry.DateCreated = DateTime.Now;
-            blogEntry.CategoryId = Int32.Parse(model.SelectedCategory);
+            var blogEntry = new BlogEntry
+                {
+                    UserId = model.UserId,
+                    BlogShortDescription = model.BlogShortDescription,
+                    BlogEntryText = model.BlogEntryText,
+                    BlogTitle = model.BlogTitle,
+                    DateCreated = DateTime.Now,
+                    CategoryId = Int32.Parse(model.SelectedCategory)
+                };
 
             if (model.BlogImage != null)
             {
@@ -79,10 +81,9 @@ namespace BlogEngine.Web.Helpers
             {
                 if (tag.Checked)
                 {
-                    blogEntry.Tags.Add(tag);
+                    blogEntry.Tags.Add(new Tag() { TagId = tag.Id});
                 }
             }
-
 
             return blogEntry;
         }
@@ -100,27 +101,21 @@ namespace BlogEngine.Web.Helpers
 
         public static IEnumerable<BlogEntryView> BlogEntryView(List<BlogEntry> blogs)
         {
-            List<BlogEntryView> blogEntries = new List<BlogEntryView>();
-
-            foreach (var blog in blogs)
-            {
-                blogEntries.Add(new BlogEntryView
+            return blogs.Select(blog => new BlogEntryView
                 {
-                    BlogEntryId = blog.BlogEntryId,
-                    BlogEntryText = blog.BlogEntryText,
-                    BlogShortDescription = blog.BlogShortDescription,
-                    BlogTitle = blog.BlogTitle,
-                    Category = blog.Category,
-                    CategoryId = blog.CategoryId,
-                    Comments = blog.Comments,
-                    DateCreated = blog.DateCreated.ToShortDateString(),
-                    Image = blog.Image,
-                    User = blog.User,
-                    UserId = blog.UserId
-                });
-            }
-
-            return blogEntries;
+                    BlogEntryId = blog.BlogEntryId, 
+                    BlogEntryText = blog.BlogEntryText, 
+                    BlogShortDescription = blog.BlogShortDescription, 
+                    BlogTitle = blog.BlogTitle, 
+                    Category = blog.Category, 
+                    CategoryId = blog.CategoryId, 
+                    Comments = blog.Comments, 
+                    DateCreated = blog.DateCreated.ToShortDateString(), 
+                    Image = blog.Image, 
+                    User = blog.User, 
+                    UserId = blog.UserId, 
+                    Tags = blog.Tags
+                }).ToList();
         }
     }
 }

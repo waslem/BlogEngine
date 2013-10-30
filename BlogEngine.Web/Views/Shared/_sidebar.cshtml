@@ -4,12 +4,16 @@
             @Html.Partial("_Search")
         </div>
         <div class="widget">
-            <h4>Categories</h4>
-            @Html.Action("GetCategories","Blog",null)
+            <h4>Most talked about blogs</h4>
+            @Html.Action("GetTopBlogs", "Blog", null)
         </div>
         <div class="widget">
-            <h4>Most talked about blogs</h4>
-            @Html.Action("GetTopBlogs","Blog", null)
+            <h4>Categories</h4>
+            @Html.Action("GetCategories", "Blog", null)
+        </div>
+        <div class="widget">
+            <h4>Tags</h4>
+            @Html.Action("GetTags", "Blog", null)
         </div>
     </div>
-</div> 
+</div>

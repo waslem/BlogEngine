@@ -112,12 +112,35 @@ namespace BlogEngine.Web.Controllers
             return View(blogsView);
         }
 
+        //
+        // GET: /Tag/{tag}
+        public ActionResult Tag(string tag)
+        {
+            var blogs = _unitOfWork.BlogRepository.GetBlogsByTag(tag).ToList();
+
+            List<BlogEntryView> blogsView = ModelBinder.BlogEntryView(blogs).ToList();
+
+            if (blogsView.Count < 1)
+            {
+                throw new HttpException(404, "Category not found");
+            }
+
+            return View(blogsView);
+        }
+
         public ActionResult GetCategories()
         {
             var categories = _unitOfWork.CategoryRepository.GetCategories();
             List<CategoryViewModel> categoryViewModel = ModelBinder.Categories(categories);
 
             return PartialView("_getCategories", categoryViewModel);
+        }
+
+        public ActionResult GetTags()
+        {
+            List<TagCheckViewModel> tags = _unitOfWork.TagRepository.GetAllTagsForVM();
+
+            return PartialView("_getTags", tags);
         }
     }
 }

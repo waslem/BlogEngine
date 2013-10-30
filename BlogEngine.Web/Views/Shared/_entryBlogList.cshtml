@@ -19,9 +19,16 @@
     }
     <div class="categoryTagHeader">
         <span class="categoryHeader glyphicon glyphicon-paperclip"></span>&nbsp;Category: <a href='@Url.Action("Category", "Blog", new { category = Model.Category.Name })'>@Html.DisplayFor(modelItem => Model.Category.Name)</a>
-        <span class="tagHeader">Tags:
-            <button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tag"></span>Example</button>
-        </span>
+        @if(Model.Tags.Count > 0)
+        {
+            <span class="tagHeader">Tags:
+                @foreach(var tag in Model.Tags)
+                {
+                    <button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tag"></span>@tag.Name</button>
+                }
+            </span>
+        }
+
     </div>
     <p class="entryPaddingMain">@Html.DisplayFor(modelItem => Model.BlogShortDescription)</p>
     <form class="entryPaddingMain" style="display: inline" action="@Url.Action("BlogEntry", "Blog", new { id = Model.BlogEntryId, blogEntryName = UrlEncoder.ToFriendlyUrl(Model.BlogTitle) })" method="get">

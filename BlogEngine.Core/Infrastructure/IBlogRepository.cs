@@ -21,5 +21,6 @@ namespace BlogEngine.Core.Infrastructure
         ICollection<BlogEntry> GetTopBlogs(int blogCount);
 
         IEnumerable<BlogEntry> GetBlogsByCategory(string category);
+        List<BlogEntry> GetBlogsByTag(string tag);
     }
 }
