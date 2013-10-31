@@ -10,7 +10,7 @@
 
 <div class="well well-sm">
     <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Blog")'">
-        <span class="glyphicon glyphicon-pencil"></span>Create a new Blog
+        <span class="glyphicon glyphicon-pencil"></span>&nbsp;Create a new Blog
     </button>
 </div>
 <div class="col-md-12">
@@ -38,7 +38,6 @@
             <div class="col-md-1">@Html.DisplayFor(modelItem => item.Category)</div>
             <div class="col-md-2">@Html.DisplayFor(modelItem => item.Title)</div>
             <div class="col-md-4">
-
                 <button class="btn btn-sm btn-danger pull-right" id="modalDelete">
                     <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
                 </button>

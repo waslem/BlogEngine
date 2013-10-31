@@ -5,11 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h3 style="display: inline-block"><span class="glyphicon glyphicon-tags"></span> Tags</h3>
+<h5 style="color: grey; display: inline-block">List of all the tags</h5>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="well well-sm">
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Tag")'">
+        <span class="glyphicon glyphicon-pencil"></span>&nbsp;Create a new Tag
+    </button>
+</div>
 <table>
     <tr>
         <th>
@@ -31,7 +34,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TagId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TagId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TagId })
         </td>
     </tr>

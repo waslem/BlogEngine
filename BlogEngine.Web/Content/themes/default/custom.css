@@ -246,3 +246,7 @@ padding-bottom: 0px;
     float: left;
     margin-bottom:5px;
 }
+
+.dropdown-links {
+    color:#ccc;
+}

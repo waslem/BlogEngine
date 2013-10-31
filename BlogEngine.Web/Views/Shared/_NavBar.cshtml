@@ -46,10 +46,23 @@
                             <li class="@ActiveItem("About", "Home", null)">@Html.ActionLink("About", "About", "Home")</li>
                             <li class="@ActiveItem("Contact", "Home", null)">@Html.ActionLink("Contact", "Contact", "Home")</li>
                             <li class="@ActiveItem("Index", "Blog", null)">@Html.ActionLink("Blog", "Index", "Blog")</li>
-                            @if(User.IsInRole("Administrator"))
+                             @if (User.IsInRole("Administrator"))
+                            {
+                                <li class="dropdown @ActiveItem("Index", "Home", "Admin")">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Tag Area", "Index", "Tag", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink("Category Area","Index","Category", new { area = "Admin"}, null)</li>
+                                        <li>@Html.ActionLink("Blog Area","Index","Blog", new { area = "Admin"},  null)</li>
+                                        <li>@Html.ActionLink("Comment Area","Index","Comment", new { area = "Admin"},  null)</li>
+                                        <li>@Html.ActionLink("User Area","Index","User", new { area = "Admin"},  null)</li>
+                                    </ul>
+                                </li>
+                            }
+@*                            @if(User.IsInRole("Administrator"))
                             {
                                 <li class="@ActiveItem("Index", "Home", "Admin")">@Html.ActionLink("Admin", "Index","Home", new { area = "Admin"}, null)</li>
-                            }
+                            }*@
                         </ul>
                         @if (Request.IsAuthenticated)
                         {
