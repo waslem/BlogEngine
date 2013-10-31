@@ -46,5 +46,33 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             }
             return View(tag);
         }
+
+        //
+        // GET: /Admin/Tag/Edit
+        public ActionResult Edit(int id)
+        {
+            var tag = _unitOfWork.TagRepository.GetTagById(id);
+
+            if (tag == null)
+            {
+                throw new HttpException("404"); 
+            }
+
+            return View(tag);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Tag tag)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.TagRepository.Edit(tag);
+                _unitOfWork.Save();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(tag);
+        }
     }
 }

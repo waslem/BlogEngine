@@ -621,6 +621,7 @@
     <Content Include="Views\Blog\_getTopBlogs.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tag\Edit.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
