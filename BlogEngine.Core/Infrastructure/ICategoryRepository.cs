@@ -8,6 +8,8 @@ namespace BlogEngine.Core.Infrastructure
     public interface ICategoryRepository
     {
         List<Category> GetCategories();
+
+
         Category GetCategoryById(int id);
 
         bool Create(CategoryViewModel model);
@@ -18,5 +20,8 @@ namespace BlogEngine.Core.Infrastructure
         bool Delete(int id);
 
         IEnumerable<SelectListItem> GetCategoriesForBlogView();
+
+        IEnumerable<CategoryViewModel> GetCategoriesVM();
+        CategoryViewModel GetCategoryVMById(int id);
     }
 }

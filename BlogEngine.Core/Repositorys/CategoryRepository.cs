@@ -26,6 +26,34 @@ namespace BlogEngine.Core.Repositorys
             return categories;
         }
 
+        public IEnumerable<CategoryViewModel> GetCategoriesVM()
+        {
+            var categories = _context.Categories.Select(s => new CategoryViewModel 
+                    { 
+                        CategoryId = s.CategoryId, 
+                        Name = s.Name, 
+                        CreatedDate = s.CreatedDate, 
+                        Description = s.Description 
+                    });
+
+            return categories;
+        }
+
+        public CategoryViewModel GetCategoryVMById(int id)
+        {
+            var category = _context.Categories
+                                .Where(c => c.CategoryId == id)
+                                .Select(ca => new CategoryViewModel 
+                                        { 
+                                            CategoryId = ca.CategoryId, 
+                                            CreatedDate = ca.CreatedDate, 
+                                            Description = ca.Description, 
+                                            Name = ca.Name
+                                        }).SingleOrDefault();
+
+            return category;
+        }
+
         public bool Create(CategoryViewModel model)
         {
             bool success = true;

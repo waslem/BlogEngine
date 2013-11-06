@@ -1,6 +1,11 @@
-﻿using System;
+﻿using BlogEngine.Core.Work;
+using BlogEngine.Web.App_Start;
+using Ninject;
+using Ninject.Web.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -31,4 +36,5 @@ namespace BlogEngine.Web
             }
         }
     }
+
 }
