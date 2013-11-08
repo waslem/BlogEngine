@@ -619,6 +619,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
     <Content Include="Areas\Admin\Views\User\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Details.cshtml" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\Knockout\Category\CategoryIndex.js" />
     <Content Include="Views\Blog\_getTopBlogs.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Create.cshtml" />

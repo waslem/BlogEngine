@@ -41,8 +41,25 @@ namespace BlogEngine.Web.Api
         }
 
         // POST api/category
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]CategoryViewModel category)
         {
+            if (category != null)
+            {
+                category.CreatedDate = DateTime.Now;
+
+                _unitOfWork.CategoryRepository.Create(category);
+                _unitOfWork.Save();
+                var response = Request.CreateResponse<CategoryViewModel>(HttpStatusCode.Created, category);
+
+                string uri = Url.Link("DefaultApi", new { id = category.CategoryId });
+
+                response.Headers.Location = new Uri(uri);
+
+                return response;
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.NotFound);
+            
         }
 
         // PUT api/category/5
@@ -51,8 +68,18 @@ namespace BlogEngine.Web.Api
         }
 
         // DELETE api/category/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            if (id > 0)
+            {
+                _unitOfWork.CategoryRepository.Delete(id);
+                _unitOfWork.Save();
+
+                return new HttpResponseMessage(HttpStatusCode.OK);
+
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.NotFound);
         }
     }
 }

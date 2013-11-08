@@ -65,15 +65,15 @@
                 <th>Created</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: viewModel.categories">
+        <tbody data-bind="foreach: Categories">
             <tr>
-                <td data-bind="text: $data.CategoryId"></td>
-                <td data-bind="text: $data.Name"></td>
-                <td data-bind="text: $data.Description"></td>
-                <td data-bind="text: $data.CreatedDate"></td>
+                <td data-bind="text: CategoryId"></td>
+                <td data-bind="text: Name"></td>
+                <td data-bind="text: Description"></td>
+                <td data-bind="text: CreatedDate"></td>
                 <td>
                     <button class="btn btn-xs btn-primary">Edit</button>
-                    <button class="btn btn-xs btn-danger">Delete</button>
+                    <button class="btn btn-xs btn-danger" data-bind="click: $root.remove">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -88,16 +88,22 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Create a new category</h4>
             </div>
-            <form id="Category" data-bind="submit: onSubmit">
+            <form id="category" data-bind="submit: save">
                 <div class="modal-body">
-                    @{ Html.RenderPartial("_createCategory", new BlogEngine.Core.ViewModels.CategoryViewModel()); }
+                    <div>
+                        <label >Name:</label>
+                        <input type="text" id="Name" data-bind="value: $root.Name" />
+                    </div>
+                    <div>
+                        <label>Description:</label>
+                        <input type="text" id="Description" data-bind="value: $root.Description" />
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <input type="submit" class="btn btn-primary" value="Save" />
                 </div>
             </form>
-
         </div>
         <!-- /.modal-content -->
     </div>
@@ -107,6 +113,6 @@
 
 @section Scripts {
     <script src="~/Scripts/knockout-2.3.0.js"></script>
-
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
     <script src="~/Scripts/Knockout/Category/CategoryIndex.js" type="text/javascript"></script>
 }
