@@ -78,7 +78,9 @@
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\MockMailService.cs" />
     <Compile Include="ViewModels\BlogSummaryView.cs" />
+    <Compile Include="ViewModels\CommentSummaryVM.cs" />
     <Compile Include="ViewModels\TagCheckViewModel.cs" />
+    <Compile Include="ViewModels\UserCommentSummaryVM.cs" />
     <Compile Include="Work\IUnitOfWork.cs" />
     <Compile Include="Work\UnitOfWork.cs" />
     <Compile Include="ViewModels\BlogEntryView.cs" />

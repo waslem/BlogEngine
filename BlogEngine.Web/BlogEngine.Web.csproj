@@ -611,6 +611,7 @@
     <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\commentCheckbox.js" />
     <Content Include="Scripts\Custom\validationClasses.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js" />
@@ -627,6 +628,7 @@
     <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Category\_createCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Comment\Summary.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

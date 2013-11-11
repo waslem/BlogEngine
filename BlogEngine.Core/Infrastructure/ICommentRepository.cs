@@ -12,5 +12,11 @@ namespace BlogEngine.Core.Infrastructure
         Comment GetById(int id);
 
         ICollection<Comment> GetAll();
+
+        CommentSummaryVM GetCommentSummaryVM();
+
+        bool Delete(int id);
+
+        bool UpdateVisibleComment(int id, bool isChecked);
     }
 }

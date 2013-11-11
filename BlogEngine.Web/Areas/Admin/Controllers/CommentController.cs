@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using PagedList;
 using BlogEngine.Core.Models;
 using BlogEngine.Core.Work;
+using BlogEngine.Core.ViewModels;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
@@ -58,6 +59,37 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             }
 
             return View(comment);
+        }
+
+        //
+        // POST: /Admin/Delete/1
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (_unitOfWork.CommentRepository.Delete(id))
+            {
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Summary()
+        {
+            CommentSummaryVM model = _unitOfWork.CommentRepository.GetCommentSummaryVM();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Save(int id, bool isChecked)
+        {
+            if (_unitOfWork.CommentRepository.UpdateVisibleComment(id, isChecked))
+            {
+                _unitOfWork.Save();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

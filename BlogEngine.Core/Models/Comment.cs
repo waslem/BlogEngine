@@ -11,6 +11,8 @@ namespace BlogEngine.Core.Models
 
         public DateTime CommentDate { get; set; }
 
+        public bool Visible { get; set; }
+
         public int UserId { get; set; }
         public virtual User User { get; set; }
 

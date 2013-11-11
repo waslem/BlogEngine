@@ -1,0 +1,45 @@
+﻿@model BlogEngine.Core.ViewModels.CommentSummaryVM
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Summary";
+}
+
+<h2>Summary</h2>
+
+<fieldset>
+    <legend>Comment Summary</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalComments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalComments)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CommentsLast24hours)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CommentsLast24hours)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserMostComments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserMostComments)
+    </div>
+    <div>
+        <h4>Users</h4>    
+    @foreach (var item in Model.UsersCommentCount)
+    {
+        <div>
+            <span>@Html.DisplayNameFor(model => item.Username)</span>   <span>@Html.DisplayFor(model => item.Username)</span>
+            <span>@Html.DisplayNameFor(model => item.CommentCount)</span>   <span>@Html.DisplayFor(model => item.CommentCount)</span>
+        </div>
+    }
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -28,6 +28,9 @@
 
 <h2>Comments</h2>
 
+<div>
+   @Html.ActionLink("Comment Summary", "Summary", "Comment")
+</div>
 <table class="table table-hover">
     <tr>
         <th>
@@ -43,11 +46,13 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().VoteScore)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Visible)
+        </th>
+        <th>
             Options
         </th>
     </tr>
-
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
             @Truncate(item.CommentText, 80)
@@ -62,6 +67,10 @@
             @Html.DisplayFor(modelItem => item.VoteScore)
         </td>
         <td>
+            @Html.HiddenFor(modelItem => item.CommentId)
+            @Html.CheckBoxFor(modelItem => item.Visible)
+        </td>
+        <td>
             <button class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Details", "Comment", new { id = item.CommentId })'">
                 <span class="glyphicon glyphicon-align-justify"></span> Details
             </button>
@@ -70,13 +79,16 @@
             </button>
         </td>
     </tr>
-}
+    }
 </table>
 <br />
 <div style="margin-bottom: 20px;">
 
 </div>
+
 <div class="text-center hugFooter">
     <span class="paginationText">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</span>
     @Html.PagedListPager( Model, page => Url.Action("Index", new { page }), options)
 </div>
+
+<script src="~/Scripts/Custom/commentCheckbox.js"></script>
