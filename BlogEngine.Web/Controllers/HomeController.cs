@@ -45,5 +45,19 @@ namespace BlogEngine.Web.Controllers
 
             return View(contactForm);
         }
+
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
+        public ActionResult Policy()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView();
+            }
+            return View();
+        }
     }
 }

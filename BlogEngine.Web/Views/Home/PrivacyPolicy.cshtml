@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "PrivacyPolicy";
+}
+
+<h2>PrivacyPolicy</h2>
+
+@Html.ActionLink("Show the privacy policy", "Policy", null, new { id = "privacyLink"})
+
+<div id="privacy"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#privacyLink').click(function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+            $('#privacy').load(url);
+        });
+    });
+</script>
