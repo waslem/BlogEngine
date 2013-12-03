@@ -36,6 +36,13 @@ namespace BlogEngine.Core.Repositorys
             return userId;
         }
 
+        public User GetUserById(int id)
+        {
+            var user = _context.Users.Find(id);
+
+            return user;
+        }
+
         public ICollection<User> GetAllUsers()
         {
             var users = _context.Users.ToList() as ICollection<User>;

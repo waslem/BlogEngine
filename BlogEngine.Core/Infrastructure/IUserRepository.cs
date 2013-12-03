@@ -7,6 +7,7 @@ namespace BlogEngine.Core.Infrastructure
     {
         User GetUser(string username);
         int GetUserId(string username);
+        User GetUserById(int id);
         ICollection<User> GetAllUsers();
 
         void AddUserToAdminRole(int id);

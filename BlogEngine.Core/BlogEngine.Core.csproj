@@ -81,6 +81,8 @@
     <Compile Include="ViewModels\CommentSummaryVM.cs" />
     <Compile Include="ViewModels\TagCheckViewModel.cs" />
     <Compile Include="ViewModels\UserCommentSummaryVM.cs" />
+    <Compile Include="ViewModels\UserEditViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Work\IUnitOfWork.cs" />
     <Compile Include="Work\UnitOfWork.cs" />
     <Compile Include="ViewModels\BlogEntryView.cs" />

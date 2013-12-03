@@ -3,6 +3,8 @@ using BlogEngine.Core.Models;
 using BlogEngine.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using WebMatrix.WebData;
+using System.Web.Security;
 
 namespace BlogEngine.Web.Helpers
 {
@@ -116,6 +118,54 @@ namespace BlogEngine.Web.Helpers
                     UserId = blog.UserId, 
                     Tags = blog.Tags
                 }).ToList();
+        }
+
+        public static UserEditViewModel User(User user)
+        {
+            var model = new UserEditViewModel
+            {
+                Email = user.Email,
+                Roles = Roles.GetRolesForUser(user.UserName).ToList()
+            };
+
+            return model;
+        }
+
+        public static List<UsersViewModel> Users(ICollection<User> users)
+        {
+            var model = new List<UsersViewModel>();
+
+            foreach (var user in users)
+            {
+                model.Add(new UsersViewModel
+                {
+                    Name = user.FirstName + " " + user.LastName, 
+                    EmailAddress = user.Email,
+                    UserId = user.UserId, 
+                    Roles = RolesConcat(user.UserName),
+                    Username = user.UserName
+                });
+            }
+
+            return model;
+        }
+
+
+        // helper method to return a concatonated list of the roles for the given user
+        // used for grid.mvc to display the users roles in a string format
+        private static string RolesConcat(string username)
+        {
+            var roles = Roles.GetRolesForUser(username).ToList();
+            string roleString = "";
+
+            foreach (var role in roles)
+            {
+                roleString = roleString + role + ", ";
+            }
+
+            roleString = roleString.Substring(0, roleString.Length - 2);
+
+            return roleString;
         }
     }
 }

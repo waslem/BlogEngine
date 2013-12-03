@@ -1,10 +1,9 @@
-﻿@model IEnumerable<BlogEngine.Core.Models.User>
+﻿@model List<BlogEngine.Core.ViewModels.UsersViewModel>
 @using GridMvc.Html
 
 @{
     ViewBag.Title = "Users";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-
 }
 
 <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
@@ -17,9 +16,10 @@
         {
             columns.Add().Encoded(false).Sanitized(false).SetWidth(60).RenderValueAs(u => Html.ActionLink("Edit", "Edit", new { id = u.UserId }, new { @class = "editField" }));
             columns.Add(u => u.UserId).SetWidth(60).Titled("User Id");
-            columns.Add(u => u.UserName).Titled("Username").Filterable(true);
-            columns.Add(u => u.LastName).Titled("Name").RenderValueAs(u => u.FirstName + " " + u.LastName);
-            columns.Add(u => u.Email).Titled("Email Address");  
+            columns.Add(u => u.Username).Titled("Username").Filterable(true);
+            columns.Add(u => u.Name).Titled("Name").Filterable(true);
+            columns.Add(u => u.EmailAddress).Titled("Email Address");
+            columns.Add(u => u.Roles).Titled("Roles");
         }).WithPaging(3).Sortable(true)
 </div>
 <div class="col-md-4 col-lg-4 col-sm-12">

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GridMvc.Html;
+using BlogEngine.Web.Helpers;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
@@ -32,7 +33,10 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Users()
         {
             var users = _unitOfWork.UserRepository.GetAllUsers();
-            return View(users);
+
+            var model = ModelBinder.Users(users);
+
+            return View(model);
         }
 
         //
@@ -100,6 +104,19 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         public ActionResult Success()
         {
             return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var user = _unitOfWork.UserRepository.GetUserById(id);
+
+            if (user != null)
+            {
+                UserEditViewModel model = ModelBinder.User(user);
+                return View(model);
+            }
+
+            return View("index");
         }
     }
 }
