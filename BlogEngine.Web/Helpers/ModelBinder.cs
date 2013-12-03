@@ -125,7 +125,7 @@ namespace BlogEngine.Web.Helpers
             var model = new UserEditViewModel
             {
                 Email = user.Email,
-                Roles = Roles.GetRolesForUser(user.UserName).ToList()
+                Roles = RolesCheckBoxCreator(user.UserName)
             };
 
             return model;
@@ -150,7 +150,6 @@ namespace BlogEngine.Web.Helpers
             return model;
         }
 
-
         // helper method to return a concatonated list of the roles for the given user
         // used for grid.mvc to display the users roles in a string format
         private static string RolesConcat(string username)
@@ -163,9 +162,27 @@ namespace BlogEngine.Web.Helpers
                 roleString = roleString + role + ", ";
             }
 
+            // remove the last 2 characters of the string (this will be the ", " added to the last role)
             roleString = roleString.Substring(0, roleString.Length - 2);
 
             return roleString;
+        }
+
+        public static List<RoleCheckBox> RolesCheckBoxCreator(string username)
+        {
+            var roleList = Roles.GetAllRoles();
+            var rolecheckboxList = new List<RoleCheckBox>();
+
+            foreach (var role in roleList)
+            {
+                rolecheckboxList.Add(new RoleCheckBox
+                    {
+                        IsChecked = Roles.IsUserInRole(username, role),
+                        Name = role
+                    });
+            }
+
+            return rolecheckboxList;
         }
     }
 }

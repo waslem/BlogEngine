@@ -5,6 +5,7 @@ using BlogEngine.Core.Contexts;
 using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using System.Web.Security;
+using BlogEngine.Core.ViewModels;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -74,6 +75,51 @@ namespace BlogEngine.Core.Repositorys
         public bool UserExists(string username)
         {
             return _context.Users.Any(u => u.UserName == username);
+        }
+
+
+        public void EditEmail(int userId, string email)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null)
+            {
+                user.Email = email;
+                _context.Entry(user).State = System.Data.EntityState.Modified;
+            }
+            
+        }
+
+        public void EditRoles(int userId, IList<RoleCheckBox> roles)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null)
+            {
+                foreach (var role in roles)
+                {
+                    SyncRole(user, role);
+                }
+            }
+        }
+
+        private static void SyncRole(User user, RoleCheckBox role)
+        {
+            if (role.IsChecked)
+            {
+                // if user isn't in the role, add the role is checked, add them to the role
+                if (!Roles.IsUserInRole(user.UserName,role.Name))
+                {
+                    Roles.AddUserToRole(user.UserName, role.Name);
+                }
+            }
+            else
+            {
+                if (Roles.IsUserInRole(user.UserName, role.Name))
+                {
+                    Roles.RemoveUserFromRole(user.UserName, role.Name);
+                }
+            }
         }
     }
 }

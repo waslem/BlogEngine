@@ -630,6 +630,7 @@
     <Content Include="Areas\Admin\Views\Category\_createCategory.cshtml" />
     <Content Include="Areas\Admin\Views\Comment\Summary.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\_RoleEditor.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

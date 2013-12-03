@@ -9,11 +9,14 @@ namespace BlogEngine.Core.ViewModels
     public class UserEditViewModel
     {
         public string Email { get; set; }
-        public IList<string> Roles { get; set; }
+        public IList<RoleCheckBox> Roles { get; set; }
 
-        public UserEditViewModel()
-        {
-            Roles = new List<string>();
-        }
+    }
+
+    public class RoleCheckBox
+    {
+        public bool IsChecked { get; set; }
+        public string Name { get; set; }
+
     }
 }

@@ -14,5 +14,9 @@ namespace BlogEngine.Core.Infrastructure
         void RemoveUserFromAdminRole(int id);
 
         bool UserExists(string username);
+
+        void EditEmail(int userId, string email);
+
+        void EditRoles(int userId, IList<ViewModels.RoleCheckBox> roles);
     }
 }

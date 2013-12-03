@@ -116,7 +116,23 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
                 return View(model);
             }
 
-            return View("index");
+            return View("Users");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, UserEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.UserRepository.EditEmail(id, model.Email);
+                _unitOfWork.UserRepository.EditRoles(id, model.Roles);
+
+                _unitOfWork.Save();
+
+                return View("Users");
+            }
+
+            return View(model);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Work;
+﻿using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Work;
 using BlogEngine.Web.App_Start;
 using Ninject;
 using Ninject.Web.Common;
