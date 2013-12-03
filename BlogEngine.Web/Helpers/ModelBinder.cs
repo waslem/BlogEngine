@@ -162,8 +162,11 @@ namespace BlogEngine.Web.Helpers
                 roleString = roleString + role + ", ";
             }
 
-            // remove the last 2 characters of the string (this will be the ", " added to the last role)
-            roleString = roleString.Substring(0, roleString.Length - 2);
+            if (roles.Count > 0)
+            {
+                // remove the last 2 characters of the string (this will be the ", " added to the last role)
+                roleString = roleString.Substring(0, roleString.Length - 2);
+            }
 
             return roleString;
         }

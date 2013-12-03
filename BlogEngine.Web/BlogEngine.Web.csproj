@@ -574,7 +574,6 @@
     <Content Include="Areas\Admin\Views\Shared\_html5shiv.cshtml" />
     <Content Include="Areas\Admin\Views\Comment\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\AddUserToAdmins.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\RemoveUserFromAdmins.cshtml" />
     <Content Include="Areas\Admin\Views\User\Success.cshtml" />
     <Content Include="Images\cream.png" />
