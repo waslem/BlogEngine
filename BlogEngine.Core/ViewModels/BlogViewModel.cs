@@ -22,7 +22,8 @@ namespace BlogEngine.Core.ViewModels
         [Required(ErrorMessage="A short blog description is required")]
         public string BlogShortDescription { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="The blog entry is required")]
+        [AllowHtml]
         //[UIHint("tinymce_jquery_full"), AllowHtml]
         public string BlogEntryText { get; set; }
 

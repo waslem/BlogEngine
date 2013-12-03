@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace BlogEngine.Core.Models
 {
@@ -9,6 +10,8 @@ namespace BlogEngine.Core.Models
 
         public string BlogTitle { get; set; }
         public string BlogShortDescription { get; set; }
+
+        [AllowHtml]
         public string BlogEntryText { get; set; }
 
         public DateTime DateCreated { get; set; }

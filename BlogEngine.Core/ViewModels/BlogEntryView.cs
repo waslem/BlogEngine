@@ -1,6 +1,7 @@
 ﻿using BlogEngine.Core.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace BlogEngine.Core.ViewModels
 {
@@ -15,6 +16,7 @@ namespace BlogEngine.Core.ViewModels
         public string BlogShortDescription { get; set; }
 
         [Required]
+        [AllowHtml]
         public string BlogEntryText { get; set; }
 
         public string DateCreated { get; set; }
