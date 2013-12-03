@@ -150,8 +150,8 @@ namespace BlogEngine.Web.Helpers
             return model;
         }
 
-        // helper method to return a concatonated list of the roles for the given user
-        // used for grid.mvc to display the users roles in a string format
+        // helper method to return a concatonated string of the list of the roles for the given user
+        // used by grid.mvc to display the users roles in a string format
         private static string RolesConcat(string username)
         {
             var roles = Roles.GetRolesForUser(username).ToList();
@@ -162,6 +162,7 @@ namespace BlogEngine.Web.Helpers
                 roleString = roleString + role + ", ";
             }
 
+            // if there are roles, prevents exception when trying to create a substring if roleString.Length = 0
             if (roles.Count > 0)
             {
                 // remove the last 2 characters of the string (this will be the ", " added to the last role)
@@ -171,7 +172,7 @@ namespace BlogEngine.Web.Helpers
             return roleString;
         }
 
-        public static List<RoleCheckBox> RolesCheckBoxCreator(string username)
+        private static List<RoleCheckBox> RolesCheckBoxCreator(string username)
         {
             var roleList = Roles.GetAllRoles();
             var rolecheckboxList = new List<RoleCheckBox>();

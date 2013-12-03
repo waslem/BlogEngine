@@ -105,6 +105,12 @@ namespace BlogEngine.Core.Repositorys
 
         private static void SyncRole(User user, RoleCheckBox role)
         {
+            // only need to check  
+            //  - if role is checked and user is not in role, add them
+            //  - if role is checked and user is in role, do nothing
+            //  - if role is unchecked and user is in role, remove them.
+            //  - if role is unchecked and user is not in role, do nothing.
+
             if (role.IsChecked)
             {
                 // if user isn't in the role, add the role is checked, add them to the role
@@ -115,6 +121,7 @@ namespace BlogEngine.Core.Repositorys
             }
             else
             {
+                // if role is unchecked and the user is in the role, remove them from the role
                 if (Roles.IsUserInRole(user.UserName, role.Name))
                 {
                     Roles.RemoveUserFromRole(user.UserName, role.Name);
