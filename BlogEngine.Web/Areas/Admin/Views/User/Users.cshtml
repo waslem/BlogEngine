@@ -22,12 +22,13 @@
 
 <h2>Users</h2>
 
+@*bootstrap modal form for delete confirmation*@ 
 @using (Html.BeginForm("Delete", "User", null, FormMethod.Post, new { @class = "modal fade", id = "deleteModal" }))
 {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                Header
+                Delete
             </div>
             <div class="modal-body">
                 Are you sure you want to delete this user?

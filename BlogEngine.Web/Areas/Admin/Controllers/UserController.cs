@@ -76,13 +76,15 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            // delete user here.
             if (ModelState.IsValid)
-            {
-                
+            { 
+                // remove user from all roles
                 _unitOfWork.UserRepository.RemoveUserFromRoles(id);
+                // tell EF to remove user
                 _unitOfWork.UserRepository.DeleteUser(id);
+                // use membership api to delete user account
                 ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(_unitOfWork.UserRepository.GetUsername(id));
+
                 _unitOfWork.Save();
 
                 return RedirectToAction("Users");

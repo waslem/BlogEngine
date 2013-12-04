@@ -146,7 +146,6 @@ namespace BlogEngine.Core.Repositorys
 
             if (user != null)
             {
-                
                 _context.Users.Remove(user);
             }
         }
