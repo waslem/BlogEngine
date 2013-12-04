@@ -18,5 +18,11 @@ namespace BlogEngine.Core.Infrastructure
         void EditEmail(int userId, string email);
 
         void EditRoles(int userId, IList<ViewModels.RoleCheckBox> roles);
+
+        void RemoveUserFromRoles(int userId);
+
+        void DeleteUser(int userId);
+
+        string GetUsername(int userId);
     }
 }

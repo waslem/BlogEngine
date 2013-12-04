@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using GridMvc.Html;
 using BlogEngine.Web.Helpers;
+using WebMatrix.WebData;
+using System.Web.Security;
 
 namespace BlogEngine.Web.Areas.Admin.Controllers
 {
@@ -69,6 +71,23 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            // delete user here.
+            if (ModelState.IsValid)
+            {
+                
+                _unitOfWork.UserRepository.RemoveUserFromRoles(id);
+                _unitOfWork.UserRepository.DeleteUser(id);
+                ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(_unitOfWork.UserRepository.GetUsername(id));
+                _unitOfWork.Save();
+
+                return RedirectToAction("Users");
+            }
+            return HttpNotFound();
         }
     }
 }

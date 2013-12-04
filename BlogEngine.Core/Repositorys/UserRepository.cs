@@ -6,6 +6,7 @@ using BlogEngine.Core.Infrastructure;
 using BlogEngine.Core.Models;
 using System.Web.Security;
 using BlogEngine.Core.ViewModels;
+using WebMatrix.WebData;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -127,6 +128,39 @@ namespace BlogEngine.Core.Repositorys
                     Roles.RemoveUserFromRole(user.UserName, role.Name);
                 }
             }
+        }
+
+        public void RemoveUserFromRoles(int userId)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null)
+            {
+                Roles.RemoveUserFromRoles(user.UserName, Roles.GetRolesForUser(user.UserName));
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null)
+            {
+                
+                _context.Users.Remove(user);
+            }
+        }
+
+        public string GetUsername(int userId)
+        {
+            var user = _context.Users.Find(userId);
+
+            if (user != null)
+            {
+                return user.UserName;
+            }
+
+            return "";
         }
     }
 }
