@@ -79,18 +79,6 @@ namespace BlogEngine.Core.Repositorys
         }
 
 
-        public void EditEmail(int userId, string email)
-        {
-            var user = _context.Users.Find(userId);
-
-            if (user != null)
-            {
-                user.Email = email;
-                _context.Entry(user).State = System.Data.EntityState.Modified;
-            }
-            
-        }
-
         public void EditRoles(int userId, IList<RoleCheckBox> roles)
         {
             var user = _context.Users.Find(userId);
@@ -160,6 +148,21 @@ namespace BlogEngine.Core.Repositorys
             }
 
             return "";
+        }
+
+        public void UpdateMembers(int id, UserEditViewModel model)
+        {
+            var user = _context.Users.Find(id);
+
+            if (user != null)
+            {
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.UserName = model.Username;
+
+                _context.Entry(user).State = System.Data.EntityState.Modified;
+            }
         }
     }
 }

@@ -15,7 +15,6 @@ namespace BlogEngine.Core.Infrastructure
 
         bool UserExists(string username);
 
-        void EditEmail(int userId, string email);
 
         void EditRoles(int userId, IList<ViewModels.RoleCheckBox> roles);
 
@@ -24,5 +23,7 @@ namespace BlogEngine.Core.Infrastructure
         void DeleteUser(int userId);
 
         string GetUsername(int userId);
+
+        void UpdateMembers(int id, ViewModels.UserEditViewModel model);
     }
 }

@@ -59,8 +59,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // update the users email
-                _unitOfWork.UserRepository.EditEmail(id, model.Email);
+                // update the users details
+                _unitOfWork.UserRepository.UpdateMembers(id, model);
 
                 // update the users roles
                 _unitOfWork.UserRepository.EditRoles(id, model.Roles);

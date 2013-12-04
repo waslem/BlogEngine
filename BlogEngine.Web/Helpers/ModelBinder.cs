@@ -125,7 +125,10 @@ namespace BlogEngine.Web.Helpers
             var model = new UserEditViewModel
             {
                 Email = user.Email,
-                Roles = RolesCheckBoxCreator(user.UserName)
+                Roles = RolesCheckBoxCreator(user.UserName), 
+                FirstName = user.FirstName, 
+                LastName = user.LastName, 
+                Username = user.UserName
             };
 
             return model;
