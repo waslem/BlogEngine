@@ -10,9 +10,7 @@
 {
     @Html.ActionLink("Edit", "Edit", new { id = userId }, new { @class = "editField btn btn-xs btn-info" })
     <span> </span>
-    @*<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>*@
     <a href="#deleteModal" data-toggle="modal" data-id="@userId" class="open-deleteModal btn btn-danger btn-xs">Delete</a>
-    @*@Html.ActionLink("Delete", "Delete", new { id = userId }, new { @class = "btn btn-xs btn-danger delete-link" })*@
     <span> </span>
     @Html.ActionLink("Deactivate", "Deactivate", new { id = userId }, new { @class = "editField btn btn-xs btn-warning"})
 }
@@ -59,7 +57,6 @@
 <script type="text/javascript">
     $(document).on("click", ".open-deleteModal", function () {
         var deleteId = $(this).data('id');
-        console.log(deleteId);
         $('#deleteModal').submit(function () {
             $('#deleteModal').attr('action', '/admin/user/delete/' + deleteId);
         });

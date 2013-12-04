@@ -32,7 +32,8 @@
             @Html.ValidationMessageFor(model => model.LastName)
         </div>
     </div>
-
+    @Html.HiddenFor(model => model.Username)
+    
     @Html.Partial("_RoleEditor", Model.Roles)
 
     <div class="form-group">
