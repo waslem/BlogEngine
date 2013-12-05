@@ -1,0 +1,22 @@
+﻿@model List<BlogEngine.Core.ViewModels.TagCheckViewModel>
+
+<div class="form-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">Tags</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                @{ int i = 0; }
+                @foreach (var tag in Model)
+                {
+                    <li class="list-group-item">
+                        @Html.HiddenFor(model => model[i].Id)
+                        @Html.HiddenFor(model => model[i].Name)
+                        @Html.CheckBoxFor(model => model[i].Checked)
+                        @Html.DisplayFor(model => model[i].Name)
+                    </li>
+                    i++;
+                }
+            </ul>
+        </div>
+    </div>
+</div>

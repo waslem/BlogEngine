@@ -573,10 +573,11 @@
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_html5shiv.cshtml" />
     <Content Include="Areas\Admin\Views\Comment\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\User\AddUserToAdmins.cshtml" />
-    <Content Include="Areas\Admin\Views\User\RemoveUserFromAdmins.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Success.cshtml" />
     <Content Include="Images\cream.png" />
+    <Content Include="Images\soc_fb.png" />
+    <Content Include="Images\soc_gplus.png" />
+    <Content Include="Images\soc_pin.png" />
+    <Content Include="Images\soc_tw.png" />
     <Content Include="Scripts\2013.2.611\jquery-1.7.1.min.js" />
     <Content Include="Scripts\2013.2.611\jquery.validate.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.all.min.js" />
@@ -630,6 +631,7 @@
     <Content Include="Areas\Admin\Views\Comment\Summary.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\_RoleEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_TagPanel.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

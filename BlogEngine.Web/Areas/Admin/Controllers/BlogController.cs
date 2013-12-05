@@ -78,6 +78,8 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
             blogViewModel.Categories = _unitOfWork.CategoryRepository.GetCategoriesForBlogView();
             blogViewModel.UserId = WebSecurity.CurrentUserId;
 
+            blogViewModel.Tags = _unitOfWork.TagRepository.GetTagsSelectedForVM(blogViewModel.BlogId);
+
             return View(blogViewModel);
         }
 

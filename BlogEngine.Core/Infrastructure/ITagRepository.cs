@@ -19,5 +19,7 @@ namespace BlogEngine.Core.Infrastructure
         Tag GetTagById(int id);
 
         List<TagCheckViewModel> GetAllTagsForVM();
+
+        List<TagCheckViewModel> GetTagsSelectedForVM(int blogId);
     }
 }

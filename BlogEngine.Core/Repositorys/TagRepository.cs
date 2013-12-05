@@ -69,12 +69,35 @@ namespace BlogEngine.Core.Repositorys
                 .Tags
                 .Select(s => new TagCheckViewModel 
                     { 
-                        Id = s.TagId, 
+                        Id = s.TagId,
                         Checked = false, 
                         Name = s.Name
                     });
 
             return tags.ToList();
+        }
+
+        public List<TagCheckViewModel> GetTagsSelectedForVM(int blogId)
+        {
+            var tags = _context.Tags.Select(s => new TagCheckViewModel
+                {
+                    Id = s.TagId,
+                    Checked = false,
+                    Name = s.Name
+                }).ToList();
+
+            var blog = _context.BlogEntries.Find(blogId);
+
+            foreach (var t in blog.Tags)
+            {
+                var x = tags.Where(u => u.Id == t.TagId).FirstOrDefault();
+                if (x != null)
+                {
+                    x.Checked = true;
+                }     
+            }
+
+            return tags;
         }
     }
 }

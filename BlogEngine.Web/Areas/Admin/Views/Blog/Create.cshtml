@@ -6,38 +6,18 @@
 }
 <h2>Create</h2>
 
-@*<script src="~/Scripts/jquery-ui-1.10.3.min.js" type="text/javascript"></script>*@
 <link rel="stylesheet" href="~/Content/bootstrap-wysihtml5.css" />
 
 <div class="col-md-10 col-lg-8 col-sm-12 col-xs-12">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        @*@Html.ValidationSummary()*@
+
         @Html.HiddenFor(model => model.DateCreated)
         @Html.HiddenFor(model => model.UserId)
 
-        <div class="form-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">@Html.LabelFor(model => Model.Tags)</div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        @{ int i = 0; }
-                        @foreach (var tag in Model.Tags)
-                        {
-                            <li class="list-group-item">
-                                @Html.HiddenFor(model => model.Tags[i].Id)
-                                @Html.HiddenFor(model => model.Tags[i].Name)
-                                @Html.CheckBoxFor(model => model.Tags[i].Checked)
-                                @Html.DisplayFor(model => model.Tags[i].Name)
-                            </li>
-                            i++;
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+        @Html.Partial("_TagPanel", Model.Tags)
+       
         <div class="form-group">
             @Html.LabelFor(model => model.SelectedCategory)
             @Html.DropDownListFor(model => model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"), new { @class = "form-control" })
@@ -70,27 +50,27 @@
     }
 </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-            @Scripts.Render("~/bundles/jqueryvalun")
-            @Scripts.Render("~/bundles/jqueryui")
-            @*@Scripts.Render("~/bundles/bootstrapVal")*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalun")
+    @Scripts.Render("~/bundles/jqueryui")
+    @*@Scripts.Render("~/bundles/bootstrapVal")*@
 
-            <script src="~/Scripts/wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
-            <script src="~/Scripts/bootstrap-wysihtml5.js" type="text/javascript"></script>
+    <script src="~/Scripts/wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-wysihtml5.js" type="text/javascript"></script>
 
-            <script type="text/javascript">
-                $(function () {
-                    $('#@Html.IdFor(m => m.BlogEntryText)').wysihtml5({
-                        "font-styles": true,
-                        "emphasis": true,
-                        "lists": true,
-                        "html": false,
-                        "link": true,
-                        "image": true,
-                        "color": true,
-                        "useLineBreaks": true
-                    });
-                });
-            </script>
-        }
+    <script type="text/javascript">
+        $(function () {
+            $('#@Html.IdFor(m => m.BlogEntryText)').wysihtml5({
+                "font-styles": true,
+                "emphasis": true,
+                "lists": true,
+                "html": false,
+                "link": true,
+                "image": true,
+                "color": true,
+                "useLineBreaks": true
+            });
+        });
+    </script>
+}

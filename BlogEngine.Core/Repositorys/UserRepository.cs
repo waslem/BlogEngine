@@ -159,7 +159,6 @@ namespace BlogEngine.Core.Repositorys
                 user.Email = model.Email;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
-                user.UserName = model.Username;
 
                 _context.Entry(user).State = System.Data.EntityState.Modified;
             }
