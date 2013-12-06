@@ -22,6 +22,8 @@ namespace BlogEngine.Core.Models
 
         public virtual ICollection<BlogEntry> BlogEntries { get; set; }
 
+        public virtual ICollection<Message> Messages { get; set; }
+
         //public User()
         //{
         //    Blogs = new List<BlogEntry>();

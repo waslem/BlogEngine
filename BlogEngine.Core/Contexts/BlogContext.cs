@@ -19,6 +19,8 @@ namespace BlogEngine.Core.Contexts
         public DbSet<BlogImage> Images { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -45,6 +47,10 @@ namespace BlogEngine.Core.Contexts
                                                 m.MapLeftKey("TagId");
                                                 m.MapRightKey("BlogEntryId");
                                             });
+
+            modelBuilder.Entity<Message>().HasKey(x => x.MessageId);
+            modelBuilder.Entity<Message>().Property(x => x.MessageId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
         }
     }
 }

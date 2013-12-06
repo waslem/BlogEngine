@@ -15,6 +15,7 @@ namespace BlogEngine.Core.Work
         private CommentRepository _commentRepository;
         private VoteRepository _voteRepository;
         private TagRepository _tagRepository;
+        private MessageRepository _messageRepository;
 
         private bool _disposed = false;
 
@@ -87,6 +88,18 @@ namespace BlogEngine.Core.Work
                     this._tagRepository = new TagRepository(_context);
                 }
                 return _tagRepository;
+            }
+        }
+
+        public IMessageRepository MessageRepository
+        {
+            get
+            {
+                if (this._messageRepository == null)
+                {
+                    this._messageRepository = new MessageRepository(_context);
+                }
+                return _messageRepository;
             }
         }
 

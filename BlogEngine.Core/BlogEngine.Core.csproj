@@ -55,6 +55,7 @@
     <Compile Include="Infrastructure\ICategoryRepository.cs" />
     <Compile Include="Infrastructure\ICommentRepository.cs" />
     <Compile Include="Infrastructure\IMailService.cs" />
+    <Compile Include="Infrastructure\IMessageRepository.cs" />
     <Compile Include="Infrastructure\ITagRepository.cs" />
     <Compile Include="Infrastructure\IUserRepository.cs" />
     <Compile Include="Infrastructure\IVoteRepository.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\ContactForm.cs" />
     <Compile Include="Models\Enums\VoteType.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Repositorys\BlogRepository.cs" />
     <Compile Include="Repositorys\CategoryRepository.cs" />
     <Compile Include="Repositorys\CommentRepository.cs" />
+    <Compile Include="Repositorys\MessageRepository.cs" />
     <Compile Include="Repositorys\TagRepository.cs" />
     <Compile Include="Repositorys\UserRepository.cs" />
     <Compile Include="Repositorys\VoteRepository.cs" />
