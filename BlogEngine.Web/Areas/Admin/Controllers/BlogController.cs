@@ -104,18 +104,9 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Blog/Delete
-        public ActionResult Delete(int id)
-        {
-            var model = _unitOfWork.BlogRepository.GetBlogById(id);
-            return View(model);
-        }
-
-        //
         // POST: /Admin/Blog/Delete
         [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult DeleteConfirm(int id)
+        public ActionResult Delete(int id)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +116,7 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return HttpNotFound();
         }
 
         public ActionResult Details(int id)
@@ -142,6 +133,5 @@ namespace BlogEngine.Web.Areas.Admin.Controllers
 
             return PartialView("_modalBlogDetails", blogViewModel);
         }
-
     }
 }

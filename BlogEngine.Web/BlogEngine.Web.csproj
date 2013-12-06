@@ -632,6 +632,7 @@
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\_RoleEditor.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_TagPanel.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ConfirmDeleteModal.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
