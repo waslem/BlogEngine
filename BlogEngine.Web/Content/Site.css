@@ -755,3 +755,9 @@ tr.pager td {
         }
 }
 
+/* fix logged in margin issue*/
+fixMarginNav {
+    margin-left:-1px;
+    margin-right:-1px;
+}
+

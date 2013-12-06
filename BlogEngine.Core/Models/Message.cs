@@ -10,11 +10,9 @@ namespace BlogEngine.Core.Models
     {
         public int MessageId { get; set; }
 
-        public int SentById { get; set; }
-        public virtual User SentByUser { get; set; }
+        public int UserId { get; set; }
 
         public int RecievedById { get; set; }
-        public virtual User RecievedByUser { get; set; }
 
         public string Subject { get; set; }
         public string Body { get; set; }

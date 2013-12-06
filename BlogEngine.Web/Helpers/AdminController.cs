@@ -6,4 +6,7 @@ namespace BlogEngine.Web.Helpers
 
     [Authorize(Roles = "Administrator")]
     public abstract class AdminController : Controller { }
+
+    [Authorize(Roles = "User")]
+    public abstract class UserController : Controller { }
 }

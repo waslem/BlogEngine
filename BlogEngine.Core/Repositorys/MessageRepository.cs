@@ -26,9 +26,13 @@ namespace BlogEngine.Core.Repositorys
             return true;
         }
 
-        public int GetUnreadMessageCount(int userId)
+        public int GetUnreadMessageCount(string username)
         {
-            var unreadCount = _context.Messages.Where(u => u.RecievedById == userId).Count(c => c.ReadByRecipient == true);
+            int unreadCount = 0;
+
+            var user = _context.Users.FirstOrDefault(u => u.UserName == username);
+            if (user != null)
+                unreadCount = _context.Messages.Where(u => u.RecievedById == user.UserId).Count(c => c.ReadByRecipient == false);
 
             return unreadCount;
         }
@@ -36,19 +40,26 @@ namespace BlogEngine.Core.Repositorys
         public ICollection<Message> GetSentMessages(int userId)
         {
             var messages = _context.Messages
-                        .Where(u => u.SentById == userId)
+                        .Where(u => u.UserId == userId)
                         .Where(d => d.DeletedBySender == false);
             
             return messages.ToList();
         }
 
-        public ICollection<Message> GetRecievedMessages(int userId)
+        public ICollection<Message> GetRecievedMessages(string username)
         {
-            var messages = _context.Messages
-                        .Where(u => u.RecievedById == userId)
-                        .Where(d => d.DeletedByRecipient == false);
+            var user = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower());
 
-            return messages.ToList();
+            if (user != null)
+            {
+                var messages = _context.Messages
+                            .Where(u => u.RecievedById == user.UserId)
+                            .Where(d => d.DeletedByRecipient == false);
+
+                return messages.ToList();
+            }
+
+            return new List<Message>();
         }
 
         public bool DeleteSentMessage(int userId, int messageId)

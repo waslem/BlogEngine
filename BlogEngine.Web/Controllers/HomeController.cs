@@ -8,10 +8,12 @@ namespace BlogEngine.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(IMailService mailService)
+        public HomeController(IMailService mailService, IUnitOfWork unitOfWork)
         {
             _mailService = mailService;
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult Index()
@@ -58,6 +60,14 @@ namespace BlogEngine.Web.Controllers
                 return PartialView();
             }
             return View();
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult Messages(string username)
+        {
+            int messageCount = _unitOfWork.MessageRepository.GetUnreadMessageCount(username);
+
+            return PartialView("_Messages", messageCount);
         }
     }
 }
