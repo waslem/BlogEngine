@@ -191,5 +191,25 @@ namespace BlogEngine.Web.Helpers
 
             return rolecheckboxList;
         }
+
+        public static ICollection<MessageView> Message(ICollection<Message> messages)
+        {
+            var messageView = new List<MessageView>();
+            foreach (var mess in messages)
+            {
+                messageView.Add(new MessageView
+                {
+                    MessageId = mess.MessageId,
+                    From = mess.Username, 
+                    Body = mess.Body, 
+                    Read = mess.ReadByRecipient, 
+                    Sent = mess.Created, 
+                    Subject = mess.Subject, 
+                    To = mess.RecievedByUsername
+                });
+            }
+
+            return messageView;
+        }
     }
 }

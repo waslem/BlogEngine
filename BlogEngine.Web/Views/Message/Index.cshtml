@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlogEngine.Core.Models.Message>
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.MessageView>
 
 @{
     ViewBag.Title = "Index";
@@ -12,31 +12,16 @@
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.From)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RecievedById)
+            @Html.DisplayNameFor(model => model.To)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Attachment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedBySender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedByRecipient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReadByRecipient)
+            @Html.DisplayNameFor(model => model.Sent)
         </th>
         <th></th>
     </tr>
@@ -44,36 +29,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
+            @Html.DisplayFor(modelItem => item.From)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RecievedById)
+            @Html.DisplayFor(modelItem => item.To)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Subject)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Body)
+            @Html.DisplayFor(modelItem => item.Sent)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Attachment)
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedBySender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedByRecipient)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReadByRecipient)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.MessageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MessageId })
-        </td>
+        @Html.HiddenFor(modelItem => item.MessageId)
     </tr>
 }
 

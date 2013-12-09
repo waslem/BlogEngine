@@ -21,6 +21,9 @@ namespace BlogEngine.Core.Repositorys
 
         public bool Send(Message message)
         {
+            message.Username = _context.Users.FirstOrDefault(u => u.UserId == message.UserId).UserName;
+            message.RecievedByUsername = _context.Users.FirstOrDefault(u => u.UserId == message.RecievedById).UserName;
+
             _context.Messages.Add(message);
 
             return true;

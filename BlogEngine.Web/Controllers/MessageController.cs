@@ -24,7 +24,9 @@ namespace BlogEngine.Web.Controllers
         {
             var messages = _unitOfWork.MessageRepository.GetRecievedMessages(User.Identity.Name);
 
-            return View(messages);
+            var model = ModelBinder.Message(messages);
+
+            return View(model);
         }
 
     }

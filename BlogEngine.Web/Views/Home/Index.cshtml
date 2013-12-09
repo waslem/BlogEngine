@@ -5,36 +5,39 @@
 @section featured {
   <div class="jumbotron">
     <div class="container">
-      <h1>@ViewBag.Title.</h1>
-      <h2>@ViewBag.Message</h2>
+      <h1>My Blog</h1>
       <p>
-      To learn more about ASP.NET MVC visit
-      <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-      The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-      If you have any questions about ASP.NET MVC visit</p>
-      <a class="btn btn-large btn-success" href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+        Welcome to my blog
+      </p>
+      <a class="btn btn-large btn-default" href="@Url.Action("Register","Account")" title="Register">Register</a> or 
+      <a class="btn btn-large btn-success"  href="@Url.Action("Login","Account")"    title="Login">Login</a> to make use of all of the websites features.
     </div>
   </div>
 }
 <!-- Example row of columns -->
 <div class="row">
   <div class="col-md-4">
-    <h2>Getting Started</h2>
-    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-    enables a clean separation of concerns and that gives you full control over markup
-    for enjoyable, agile development. ASP.NET MVC includes many features that enable
-    fast, TDD-friendly development for creating sophisticated applications that use
-    the latest web standards.
+    <h2>Blog Posts</h2>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis sodales accumsan.
+      Sed viverra augue vitae cursus posuere. Nam adipiscing arcu quis condimentum porttitor. 
     <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more &raquo;</a></p>
   </div>
   <div class="col-md-4">
-    <h2>Add NuGet packages and jump-start your coding</h2>
-    <p>NuGet makes it easy to install and update free libraries and tools.</p>
+    <h2>Messaging</h2>
+    <p>ed sit amet ipsum pellentesque, commodo ipsum a, blandit ligula. 
+      Donec posuere velit in magna adipiscing ornare vitae sed quam.
+       Mauris nec ullamcorper eros. Nulla fringilla cursus ligula, vel faucibus quam pellentesque dignissim. </p>
     <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more &raquo;</a></p>
   </div>
   <div class="col-md-4">
-    <h2>Find Web Hosting</h2>
-    <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+    <h2>Contact us</h2>
+    <p>Ut blandit dui nibh, in euismod justo faucibus ac. Vestibulum pharetra nec arcu ut sollicitudin. 
+      Nullam semper, leo in rutrum convallis, ante est rutrum sem, non ultricies ante lectus eu neque. 
+      Fusce vitae mi lobortis, congue velit eget, venenatis mi. Nulla dui felis, luctus id eleifend sed, 
+      fringilla accumsan felis. Morbi condimentum iaculis convallis. Nulla tincidunt adipiscing lorem. 
+      Integer viverra lectus eu nunc ultricies tristique. Sed ac purus in tortor consectetur semper. 
+      Quisque non ante eget tellus facilisis varius hendrerit nec arcu. Phasellus sed accumsan neque, 
+      quis mollis tellus. Nam mattis, sapien quis sagittis porta, lorem purus auctor libero, in condimentum dui erat ac augue. </p>
     <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more &raquo;</a></p>
   </div>
 </div>
