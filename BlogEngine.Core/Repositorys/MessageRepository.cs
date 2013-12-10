@@ -57,7 +57,8 @@ namespace BlogEngine.Core.Repositorys
             {
                 var messages = _context.Messages
                             .Where(u => u.RecievedById == user.UserId)
-                            .Where(d => d.DeletedByRecipient == false);
+                            .Where(d => d.DeletedByRecipient == false)
+                            .OrderByDescending(d => d.Created);
 
                 return messages.ToList();
             }

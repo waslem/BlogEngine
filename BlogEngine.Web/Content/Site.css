@@ -761,3 +761,6 @@ fixMarginNav {
     margin-right:-1px;
 }
 
+unread {
+    font-weight: bold;
+}

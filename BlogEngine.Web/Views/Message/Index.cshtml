@@ -1,51 +1,49 @@
-﻿@model IEnumerable<BlogEngine.Core.ViewModels.MessageView>
+﻿@model List<BlogEngine.Core.ViewModels.MessageView>
+@using GridMvc.Html
 
 @{
     ViewBag.Title = "Index";
 }
+
+@helper FormatDate(DateTime date)
+{
+    TimeSpan span = DateTime.Now - date;
+    
+    if (span.TotalHours <= 24) {
+       @date.ToShortTimeString()
+    }
+    else  if (span.TotalDays < 365) {
+        if (date.Day < 10) {
+            <text>0</text>@date.Day<text> </text>@date.ToString("MMM")
+        }
+        else {
+            @date.Day<text> </text>@date.ToString("MMM")
+        }
+    }
+    else {
+        @date.ToString("dd/MM/yyyy")
+    }
+}
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.From)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.To)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sent)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.From)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.To)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sent)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-        @Html.HiddenFor(modelItem => item.MessageId)
-    </tr>
-}
-
-</table>
+<style type="text/css">
+    .unread {
+        font-weight: bold;
+    }
+</style>
+<div class="col-md-12 col-lg-12 col-sm-12">
+    @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(u => u.From).SetWidth(60).Titled("From");
+            columns.Add(u => u.Subject).Titled("Subject").Filterable(true);
+            columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
+        }).SetRowCssClasses(item => item.Read ? string.Empty : "unread").Sortable(true)
+</div> 

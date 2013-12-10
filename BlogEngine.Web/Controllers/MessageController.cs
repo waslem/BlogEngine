@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.Work;
+﻿using BlogEngine.Core.ViewModels;
+using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace BlogEngine.Web.Controllers
         {
             var messages = _unitOfWork.MessageRepository.GetRecievedMessages(User.Identity.Name);
 
-            var model = ModelBinder.Message(messages);
+            List<MessageView> model = ModelBinder.Message(messages).ToList();
 
             return View(model);
         }
