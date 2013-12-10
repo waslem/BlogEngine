@@ -15,5 +15,8 @@ namespace BlogEngine.Core.Infrastructure
         ICollection<Message> GetRecievedMessages(string username);
         bool DeleteSentMessage(int userId, int messageId);
         bool DeleteRecievedMessage(int userId, int messageId);
+        Message GetMessageById(int messageId, string username);
+
+        bool MarkMessageAsReadByRecipient(int messageId, string username);
     }
 }

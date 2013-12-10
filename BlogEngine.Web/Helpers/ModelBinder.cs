@@ -211,5 +211,22 @@ namespace BlogEngine.Web.Helpers
 
             return messageView;
         }
+
+        public static MessageDetailsView Message(Message message)
+        {
+            var messageDetailsView = new MessageDetailsView 
+            {
+                MessageId = message.MessageId,
+                Subject = message.Subject, 
+                Sent = message.Created, 
+                Body = message.Body, 
+                DeletedByRecipient = message.DeletedByRecipient, 
+                From = message.Username, 
+                ReadByRecipient = message.ReadByRecipient, 
+                To = message.RecievedByUsername 
+            };
+
+            return messageDetailsView;
+        }
     }
 }

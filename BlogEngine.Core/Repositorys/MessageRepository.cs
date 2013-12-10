@@ -101,5 +101,38 @@ namespace BlogEngine.Core.Repositorys
 
             return outcome;
         }
+        public Message GetMessageById(int messageId, string username)
+        {
+            var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
+
+            if (message != null)
+            {
+                if (message.RecievedByUsername.ToLower() == username.ToLower())
+                {
+                    return message;
+                }
+                return null;
+            }
+
+            return message;
+        }
+
+        public bool MarkMessageAsReadByRecipient(int messageId, string username)
+        {
+            var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
+            var result = false;
+
+            if (message != null)
+            {
+                if (message.RecievedByUsername.ToLower() == username.ToLower())
+                {
+                    message.ReadByRecipient = true;
+                    _context.Entry(message).State = System.Data.EntityState.Modified;
+                    result = true;
+                }
+            }
+
+            return result;
+        }
     }
 }

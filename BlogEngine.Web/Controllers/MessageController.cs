@@ -30,5 +30,21 @@ namespace BlogEngine.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int messageId, string username)
+        {
+            if (_unitOfWork.MessageRepository.MarkMessageAsReadByRecipient(messageId, username))
+            {
+                _unitOfWork.Save();
+                var message = _unitOfWork.MessageRepository.GetMessageById(messageId, username);
+
+                if (message == null)
+                    return HttpNotFound();
+
+                MessageDetailsView model = ModelBinder.Message(message);
+                return View(model);
+            }
+
+            return HttpNotFound();
+        }
     }
 }

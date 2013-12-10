@@ -28,22 +28,54 @@
 <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
 
+<script src="~/Scripts/jquery.ui.position.js"></script>
+<script src="~/Scripts/jquery.contextMenu.js"></script>
+<link href="~/Content/jquery.contextMenu.css" rel="stylesheet" />
 
-<h2>Index</h2>
+<h3 style="display: inline-block"><span class="glyphicon glyphicon-envelope"></span> Messages</h3>
+<h5 style="color: grey; display: inline-block">List of all your messages</h5>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="well well-sm">
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Message")'">
+        <span class="glyphicon glyphicon-envelope"></span>&nbsp;New Message
+    </button>
+</div>
+
 <style type="text/css">
     .unread {
         font-weight: bold;
     }
 </style>
+
 <div class="col-md-12 col-lg-12 col-sm-12">
     @Html.Grid(Model).Columns(columns =>
         {
-            columns.Add(u => u.From).SetWidth(60).Titled("From");
-            columns.Add(u => u.Subject).Titled("Subject").Filterable(true);
+            columns.Add(u => u.MessageId, true);
+            columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
+            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject,"Details","Message",new { messageId = o.MessageId, username = User.Identity.Name}, null));
             columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
         }).SetRowCssClasses(item => item.Read ? string.Empty : "unread").Sortable(true)
 </div> 
+
+<script>
+    $(function () {
+        $('grid-row').contextMenu({
+            selector: 'tr',
+            callback: function (key, options) {
+                /// key here ==name of action
+                // ans here = messageId
+                var action = key;
+                var id = parseInt($(this).text());
+                    
+            },
+            items: {
+                "Mark As Read": { name: "Mark As Read" },
+                "Mark As Unread": { name: "Mark As Unread" },
+                "sep1": "---------",
+                "Forward": { name: "Forward" },
+                "Reply": { name: "Reply" },
+                "Delete" : { name: "Delete", icon: "delete"}
+            }
+        });
+    });
+</script>
