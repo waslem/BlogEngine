@@ -64,9 +64,31 @@
             callback: function (key, options) {
                 /// key here ==name of action
                 // ans here = messageId
+                var classes = $(this).attr('class').split(' ');
+                var found = $.inArray('unread', classes);
                 var action = key;
                 var id = parseInt($(this).text());
-                    
+                switch (key)
+                {
+                    case "Mark As Unread":
+                        if (found == -1)
+                        {
+                            $.post("/message/MarkAsUnread", { Id: id }, function () {
+                                window.location.reload(true);
+                            });
+                        }
+                        break;
+                    case "Mark As Read":
+                        if (found > -1)
+                        {
+                            $.post("/message/MarkAsRead", { Id: id }, function () {
+                                window.location.reload(true);
+                            });
+                        }
+                        break;
+                    default:
+                        break;
+                }
             },
             items: {
                 "Mark As Read": { name: "Mark As Read" },

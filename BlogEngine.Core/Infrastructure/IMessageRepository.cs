@@ -18,5 +18,7 @@ namespace BlogEngine.Core.Infrastructure
         Message GetMessageById(int messageId, string username);
 
         bool MarkMessageAsReadByRecipient(int messageId, string username);
+
+        bool MarkMessageAsUnReadByRecipient(int messageId, string username);
     }
 }

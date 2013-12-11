@@ -46,5 +46,29 @@ namespace BlogEngine.Web.Controllers
 
             return HttpNotFound();
         }
+
+        [HttpPost]
+        public ActionResult MarkAsUnread(int id)
+        {
+           if (_unitOfWork.MessageRepository.MarkMessageAsUnReadByRecipient(id, User.Identity.Name))
+           {
+               _unitOfWork.Save();
+               return RedirectToAction("Index");
+           }
+
+           return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult MarkAsRead(int id)
+        {
+            if (_unitOfWork.MessageRepository.MarkMessageAsReadByRecipient(id, User.Identity.Name))
+            {
+                _unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

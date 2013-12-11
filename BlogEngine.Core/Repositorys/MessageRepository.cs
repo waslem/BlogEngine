@@ -128,6 +128,26 @@ namespace BlogEngine.Core.Repositorys
                 {
                     message.ReadByRecipient = true;
                     _context.Entry(message).State = System.Data.EntityState.Modified;
+
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        public bool MarkMessageAsUnReadByRecipient(int messageId, string username)
+        {
+            var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
+            var result = false;
+
+            if (message != null)
+            {
+                if(message.RecievedByUsername.ToLower() == username.ToLower())
+                {
+                    message.ReadByRecipient = false;
+                    _context.Entry(message).State = System.Data.EntityState.Modified;
+
                     result = true;
                 }
             }
