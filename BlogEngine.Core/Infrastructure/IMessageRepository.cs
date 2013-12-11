@@ -20,5 +20,7 @@ namespace BlogEngine.Core.Infrastructure
         bool MarkMessageAsReadByRecipient(int messageId, string username);
 
         bool MarkMessageAsUnReadByRecipient(int messageId, string username);
+
+        bool DeleteMessage(int messageId, string username);
     }
 }

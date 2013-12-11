@@ -192,38 +192,41 @@ namespace BlogEngine.Web.Helpers
             return rolecheckboxList;
         }
 
-        public static ICollection<MessageView> Message(ICollection<Message> messages)
+        public static ICollection<MessageView> Message(ICollection<Message> messages, string[] from, string[] to)
         {
             var messageView = new List<MessageView>();
+            int i = 0;
+
             foreach (var mess in messages)
             {
                 messageView.Add(new MessageView
                 {
                     MessageId = mess.MessageId,
-                    From = mess.Username, 
+                    From = from[i], 
                     Body = mess.Body, 
                     Read = mess.ReadByRecipient, 
                     Sent = mess.Created, 
                     Subject = mess.Subject, 
-                    To = mess.RecievedByUsername
+                    To = to[i]
                 });
+                i++;
             }
 
             return messageView;
         }
 
-        public static MessageDetailsView Message(Message message)
+        public static MessageDetailsView Message(Message message, string from, string to)
         {
-            var messageDetailsView = new MessageDetailsView 
+            var messageDetailsView = new MessageDetailsView
             {
                 MessageId = message.MessageId,
-                Subject = message.Subject, 
-                Sent = message.Created, 
-                Body = message.Body, 
-                DeletedByRecipient = message.DeletedByRecipient, 
-                From = message.Username, 
-                ReadByRecipient = message.ReadByRecipient, 
-                To = message.RecievedByUsername 
+                Subject = message.Subject,
+                Sent = message.Created,
+                Body = message.Body,
+                DeletedByRecipient = message.DeletedByRecipient,
+                From = from,
+                ReadByRecipient = message.ReadByRecipient,
+                To = to
             };
 
             return messageDetailsView;

@@ -21,8 +21,8 @@ namespace BlogEngine.Core.Repositorys
 
         public bool Send(Message message)
         {
-            message.Username = _context.Users.FirstOrDefault(u => u.UserId == message.UserId).UserName;
-            message.RecievedByUsername = _context.Users.FirstOrDefault(u => u.UserId == message.RecievedById).UserName;
+            //message.Username = _context.Users.FirstOrDefault(u => u.UserId == message.UserId).UserName;
+            //message.RecievedByUsername = _context.Users.FirstOrDefault(u => u.UserId == message.RecievedById).UserName;
 
             _context.Messages.Add(message);
 
@@ -103,11 +103,14 @@ namespace BlogEngine.Core.Repositorys
         }
         public Message GetMessageById(int messageId, string username)
         {
+            // get  userId from username
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
             var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
 
-            if (message != null)
+            if (message != null && userId > 0)
             {
-                if (message.RecievedByUsername.ToLower() == username.ToLower())
+                if (message.RecievedById == userId)
                 {
                     return message;
                 }
@@ -119,12 +122,15 @@ namespace BlogEngine.Core.Repositorys
 
         public bool MarkMessageAsReadByRecipient(int messageId, string username)
         {
+            // get  userId from username
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
             var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
             var result = false;
 
-            if (message != null)
+            if (message != null && userId > 0)
             {
-                if (message.RecievedByUsername.ToLower() == username.ToLower())
+                if (message.RecievedById == userId)
                 {
                     message.ReadByRecipient = true;
                     _context.Entry(message).State = System.Data.EntityState.Modified;
@@ -138,18 +144,52 @@ namespace BlogEngine.Core.Repositorys
 
         public bool MarkMessageAsUnReadByRecipient(int messageId, string username)
         {
+            // get  userId from username
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
             var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
             var result = false;
 
-            if (message != null)
+            if (message != null && userId > 0)
             {
-                if(message.RecievedByUsername.ToLower() == username.ToLower())
+                if (message.RecievedById == userId)
                 {
                     message.ReadByRecipient = false;
                     _context.Entry(message).State = System.Data.EntityState.Modified;
 
                     result = true;
                 }
+            }
+
+            return result;
+        }
+
+        // 'deletes' the message, based on the user.
+        // i.e if user of message is recipient, sets deletedbyrecipient to true
+        //  if user of message is sender, sets deletedbysender to true
+        // if both sets both true. (sending message to self)
+        public bool DeleteMessage(int messageId, string username)
+        {
+            // get  userId from username
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
+            var message = _context.Messages.Find(messageId);
+            var result = false;
+
+            if (message != null && userId > 0)
+            {
+                if (message.UserId == userId)
+                {
+                    message.DeletedBySender = true;
+                }
+                if (message.RecievedById == userId)
+                {
+                    message.DeletedByRecipient = true;
+                }
+
+                _context.Entry(message).State = System.Data.EntityState.Modified;
+
+                result = true;
             }
 
             return result;

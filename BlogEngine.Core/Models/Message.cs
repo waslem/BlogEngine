@@ -11,10 +11,10 @@ namespace BlogEngine.Core.Models
         public int MessageId { get; set; }
 
         public int UserId { get; set; }
-        public string Username { get; set; }
+        //public string Username { get; set; }
 
         public int RecievedById { get; set; }
-        public string RecievedByUsername { get; set; }
+        //public string RecievedByUsername { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public string Attachment { get; set; }

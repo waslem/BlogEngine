@@ -86,6 +86,10 @@
                             });
                         }
                         break;
+                    case "Delete":
+                        $.post("/message/Delete", { Id: id }, function () {
+                            window.location.reload(true);
+                        });
                     default:
                         break;
                 }

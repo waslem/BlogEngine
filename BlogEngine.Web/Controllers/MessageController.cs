@@ -25,7 +25,18 @@ namespace BlogEngine.Web.Controllers
         {
             var messages = _unitOfWork.MessageRepository.GetRecievedMessages(User.Identity.Name);
 
-            List<MessageView> model = ModelBinder.Message(messages).ToList();
+            string[] from = new string[messages.Count];
+            string[] to = new string[messages.Count];
+            int i = 0;
+
+            foreach (var mess in messages)
+	        {
+                from[i] = _unitOfWork.UserRepository.GetUsername(mess.UserId);
+                to[i] = _unitOfWork.UserRepository.GetUsername(mess.RecievedById);
+                i++;
+	        }
+
+            List<MessageView> model = ModelBinder.Message(messages, from, to).ToList();
 
             return View(model);
         }
@@ -40,7 +51,10 @@ namespace BlogEngine.Web.Controllers
                 if (message == null)
                     return HttpNotFound();
 
-                MessageDetailsView model = ModelBinder.Message(message);
+                MessageDetailsView model = ModelBinder.Message(message, 
+                    _unitOfWork.UserRepository.GetUsername(message.UserId),
+                    _unitOfWork.UserRepository.GetUsername(message.RecievedById));
+
                 return View(model);
             }
 
@@ -65,6 +79,19 @@ namespace BlogEngine.Web.Controllers
             if (_unitOfWork.MessageRepository.MarkMessageAsReadByRecipient(id, User.Identity.Name))
             {
                 _unitOfWork.Save();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (_unitOfWork.MessageRepository.DeleteMessage(id, User.Identity.Name))
+            {
+                _unitOfWork.Save();
+
                 return RedirectToAction("Index");
             }
 
