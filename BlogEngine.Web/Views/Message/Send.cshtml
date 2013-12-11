@@ -6,48 +6,46 @@
 
 <h2>Send</h2>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>MessageCreateView</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.From)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.From)
-            @Html.ValidationMessageFor(model => model.From)
-        </div>
-        <div>
-            @Html.LabelFor(model => model.To)
-            @Html.DropDownListFor(model => model.ToId, Model.To, "Select a user")
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Subject)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Subject)
-            @Html.ValidationMessageFor(model => model.Subject)
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Body)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Body)
-            @Html.ValidationMessageFor(model => model.Body)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.From, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.From, new { @class = "form-control", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(model => model.ToId, Model.To, "Select a user", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-8">
+                @Html.TextAreaFor(model => model.Subject, new { @class = "form-control", @rows = 1 })
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-8">
+                @Html.TextAreaFor(model => model.Body, new { @class = "form-control", @rows = 10 })
+                @Html.ValidationMessageFor(model => model.Body)
+            </div>
+        </div>  
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Send" class="btn btn-success" />&nbsp;<a href="@Url.Action("Index")">or cancel</a>
+            </div>
+        </div>
+    }
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

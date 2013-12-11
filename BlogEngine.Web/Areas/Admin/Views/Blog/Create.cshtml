@@ -44,7 +44,7 @@
             @Html.ValidationMessageFor(model => model.BlogEntryText)
         </div>
         <p>
-            <button class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Blog")'"> Back</button>
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-danger" })
             <input type="submit" value="Create" class="btn btn-success" />
         </p>
     }
