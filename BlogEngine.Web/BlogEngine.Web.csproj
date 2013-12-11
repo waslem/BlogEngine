@@ -981,6 +981,7 @@
     <Content Include="Views\Shared\_Messages.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\Details.cshtml" />
+    <Content Include="Views\Message\Send.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

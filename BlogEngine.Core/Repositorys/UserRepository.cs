@@ -7,6 +7,7 @@ using BlogEngine.Core.Models;
 using System.Web.Security;
 using BlogEngine.Core.ViewModels;
 using WebMatrix.WebData;
+using System.Web.Mvc;
 
 namespace BlogEngine.Core.Repositorys
 {
@@ -162,6 +163,24 @@ namespace BlogEngine.Core.Repositorys
 
                 _context.Entry(user).State = System.Data.EntityState.Modified;
             }
+        }
+
+        public List<SelectListItem> GetUsersSelectList()
+        {
+            var users = _context.Users.ToList();
+            List<SelectListItem> ls = new List<SelectListItem>();
+
+            foreach (var u in users)
+            {
+                ls.Add(new SelectListItem 
+                {
+                     Text = u.UserName, 
+                     Value = u.UserId.ToString(),
+                     Selected = false
+                });
+            }
+
+            return ls;
         }
     }
 }

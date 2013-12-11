@@ -25,5 +25,7 @@ namespace BlogEngine.Core.Infrastructure
         string GetUsername(int userId);
 
         void UpdateMembers(int id, ViewModels.UserEditViewModel model);
+
+        List<System.Web.Mvc.SelectListItem> GetUsersSelectList();
     }
 }

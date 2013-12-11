@@ -231,5 +231,22 @@ namespace BlogEngine.Web.Helpers
 
             return messageDetailsView;
         }
+
+        public static Message Message(MessageCreateView model, int toId, int fromId)
+        {
+            Message message = new Message
+            {
+                 UserId = fromId, 
+                 RecievedById = toId, 
+                 Created = DateTime.Now,
+                 Subject = model.Subject, 
+                 Body = model.Body, 
+                 DeletedByRecipient = false,
+                 DeletedBySender = false, 
+                 ReadByRecipient = false
+            };
+
+            return message;
+        }
     }
 }

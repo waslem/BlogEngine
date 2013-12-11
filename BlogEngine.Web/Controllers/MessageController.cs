@@ -1,4 +1,5 @@
-﻿using BlogEngine.Core.ViewModels;
+﻿using BlogEngine.Core.Models;
+using BlogEngine.Core.ViewModels;
 using BlogEngine.Core.Work;
 using BlogEngine.Web.Helpers;
 using System;
@@ -39,6 +40,44 @@ namespace BlogEngine.Web.Controllers
             List<MessageView> model = ModelBinder.Message(messages, from, to).ToList();
 
             return View(model);
+        }
+
+        public ActionResult Send()
+        {
+            var model = new MessageCreateView();
+            model.To = _unitOfWork.UserRepository.GetUsersSelectList();
+            model.From = User.Identity.Name;
+                        
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Send(MessageCreateView model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var toId = Int32.Parse(model.ToId);
+
+                // model, recipientId, senderId
+                Message message = ModelBinder.Message(model,toId,_unitOfWork.UserRepository.GetUserId(User.Identity.Name));
+
+                if (_unitOfWork.MessageRepository.Send(message))
+                {
+                    _unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+
+                // TODO: do this differently
+                return View(model);
+            }
+            //send message
+            
+            model.To = _unitOfWork.UserRepository.GetUsersSelectList();
+            model.From = User.Identity.Name;
+
+            return View(model);
+
         }
 
         public ActionResult Details(int messageId, string username)
