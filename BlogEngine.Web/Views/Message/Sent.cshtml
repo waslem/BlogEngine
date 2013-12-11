@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.MessageView>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Sent";
+}
+
+
+@helper FormatDate(DateTime date)
+{
+    TimeSpan span = DateTime.Now - date;
+
+    if (span.TotalHours <= 24)
+    {
+       @date.ToShortTimeString()
+    }
+    else if (span.TotalDays < 365)
+    {
+        if (date.Day < 10)
+        {
+            <text>0</text>@date.Day<text> </text>@date.ToString("MMM")
+        }
+        else {
+            @date.Day<text> </text>@date.ToString("MMM")
+        }
+    }
+    else {
+        @date.ToString("dd/MM/yyyy")
+    }
+}
+
+
+
+<h3 style="display: inline-block"><span class="glyphicon glyphicon-envelope"></span> Sent Messages</h3>
+<h5 style="color: grey; display: inline-block">List of all your sent messages</h5>
+
+<div class="well well-sm">
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Send", "Message")'">
+        <span class="glyphicon glyphicon-envelope"></span>&nbsp;New Message
+    </button>
+</div>
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+<div class="col-md-12 col-lg-12 col-sm-12">
+    @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(u => u.MessageId, true);
+            columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
+            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject, "DetailsSent", "Message", new { messageId = o.MessageId, username = User.Identity.Name }, null));
+            columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
+        }).Sortable(true).WithPaging(5)
+</div> 

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -26,20 +27,19 @@ namespace BlogEngine.Web.Controllers
         {
             var messages = _unitOfWork.MessageRepository.GetRecievedMessages(User.Identity.Name);
 
-            string[] from = new string[messages.Count];
-            string[] to = new string[messages.Count];
-            int i = 0;
-
-            foreach (var mess in messages)
-	        {
-                from[i] = _unitOfWork.UserRepository.GetUsername(mess.UserId);
-                to[i] = _unitOfWork.UserRepository.GetUsername(mess.RecievedById);
-                i++;
-	        }
-
-            List<MessageView> model = ModelBinder.Message(messages, from, to).ToList();
+            List<MessageView> model = BindMessageView(messages);
 
             return View(model);
+        }
+
+        public ActionResult Sent()
+        {
+            var messages = _unitOfWork.MessageRepository.GetSentMessages(User.Identity.Name);
+
+            List<MessageView> model = BindMessageView(messages);
+
+            return View(model);
+
         }
 
         public ActionResult Send()
@@ -56,7 +56,6 @@ namespace BlogEngine.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var toId = Int32.Parse(model.ToId);
 
                 // model, recipientId, senderId
@@ -79,7 +78,19 @@ namespace BlogEngine.Web.Controllers
             return View(model);
 
         }
+        public ActionResult DetailsSent(int messageId, string username)
+        {
+            var message = _unitOfWork.MessageRepository.GetMessageById(messageId, username);
 
+            if (message == null)
+                return HttpNotFound();
+
+            MessageDetailsView model = ModelBinder.Message(message,
+                _unitOfWork.UserRepository.GetUsername(message.UserId),
+                _unitOfWork.UserRepository.GetUsername(message.RecievedById));
+
+            return View(model);
+        }
         public ActionResult Details(int messageId, string username)
         {
             if (_unitOfWork.MessageRepository.MarkMessageAsReadByRecipient(messageId, username))
@@ -136,5 +147,22 @@ namespace BlogEngine.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        private List<MessageView> BindMessageView(ICollection<Message> messages)
+        {
+            string[] from = new string[messages.Count];
+            string[] to = new string[messages.Count];
+            int i = 0;
+
+            foreach (var mess in messages)
+            {
+                from[i] = _unitOfWork.UserRepository.GetUsername(mess.UserId);
+                to[i] = _unitOfWork.UserRepository.GetUsername(mess.RecievedById);
+                i++;
+            }
+
+            List<MessageView> model = ModelBinder.Message(messages, from, to).ToList();
+            return model;
+        } 
     }
 }

@@ -40,13 +40,21 @@ namespace BlogEngine.Core.Repositorys
             return unreadCount;
         }
 
-        public ICollection<Message> GetSentMessages(int userId)
+        public ICollection<Message> GetSentMessages(string username)
         {
-            var messages = _context.Messages
-                        .Where(u => u.UserId == userId)
-                        .Where(d => d.DeletedBySender == false);
-            
-            return messages.ToList();
+            var user = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower());
+
+            if (user != null)
+            {
+                var messages = _context.Messages
+                            .Where(u => u.UserId == user.UserId)
+                            .Where(d => d.DeletedBySender == false)
+                            .OrderByDescending(d => d.Created);
+
+                return messages.ToList();
+            }
+
+            return new List<Message>();
         }
 
         public ICollection<Message> GetRecievedMessages(string username)
@@ -110,7 +118,7 @@ namespace BlogEngine.Core.Repositorys
 
             if (message != null && userId > 0)
             {
-                if (message.RecievedById == userId)
+                if (message.RecievedById == userId || message.UserId == userId)
                 {
                     return message;
                 }

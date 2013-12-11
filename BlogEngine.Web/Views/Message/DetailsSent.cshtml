@@ -1,0 +1,71 @@
+﻿@model BlogEngine.Core.ViewModels.MessageDetailsView
+
+@{
+    ViewBag.Title = "DetailsSent";
+}
+
+<h2>DetailsSent</h2>
+
+<fieldset>
+    <legend>MessageDetailsView</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MessageId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MessageId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.From)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.From)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.To)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.To)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Subject)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Subject)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Body)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Body)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sent)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sent)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DeletedByRecipient)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeletedByRecipient)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReadByRecipient)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReadByRecipient)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

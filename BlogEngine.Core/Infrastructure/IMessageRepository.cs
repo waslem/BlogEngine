@@ -11,7 +11,7 @@ namespace BlogEngine.Core.Infrastructure
     {
         bool Send(Message message);
         int GetUnreadMessageCount(string username);
-        ICollection<Message> GetSentMessages(int userId);
+        ICollection<Message> GetSentMessages(string username);
         ICollection<Message> GetRecievedMessages(string username);
         bool DeleteSentMessage(int userId, int messageId);
         bool DeleteRecievedMessage(int userId, int messageId);
@@ -22,5 +22,6 @@ namespace BlogEngine.Core.Infrastructure
         bool MarkMessageAsUnReadByRecipient(int messageId, string username);
 
         bool DeleteMessage(int messageId, string username);
+
     }
 }
