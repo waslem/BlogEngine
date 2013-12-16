@@ -63,23 +63,21 @@
                         </ul>
                     </li>
                 }
-@*                @if(User.IsInRole("Administrator"))
-                {
-                    <li class="@ActiveItem("Index", "Home", "Admin")">@Html.ActionLink("Admin", "Index","Home", new { area = "Admin"}, null)</li>
-                }*@
             </ul>
             @if (Request.IsAuthenticated) {
             <ul class="nav pull-right">
                 <li>
                     <div class="nav navbar-text">@LoggedInUser()</div>
                     <div class="nav navbar-text" style="margin-top: 13px;font-size: 13px;margin-bottom: 10px;">
-                       @* @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, htmlAttributes: new { id = "logoutForm" })) *@
                         @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, htmlAttributes: new { id = "logoutForm"}))
                         {
                             <button type="submit" class="btn-link">Log Off</button>
                             @Html.AntiForgeryToken()
                         }
                     </div>
+                    <div class="nav navbar-text">
+                        @{ Html.RenderAction("Messages", "Home", new { username = User.Identity.Name, area = "" }); }
+                    </div> 
                 </li>
             </ul>
             }
