@@ -41,7 +41,15 @@ namespace BlogEngine.Web.Controllers
             return View(model);
 
         }
+        public ActionResult Trash()
+        {
+            var messages = _unitOfWork.MessageRepository.GetDeletedMessages(User.Identity.Name);
 
+            List<MessageView> model = BindMessageView(messages);
+
+            return View(model);
+
+        }
         public ActionResult Send()
         {
             var model = new MessageCreateView();
@@ -148,6 +156,28 @@ namespace BlogEngine.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult PermanentDelete(int id)
+        {
+            if (_unitOfWork.MessageRepository.PermanentlyDeleteMessage(id, User.Identity.Name))
+            {
+                _unitOfWork.Save();
+                return RedirectToAction("Trash");
+            }
+
+            return RedirectToAction("Trash");
+        }
+
+        public ActionResult UnDelete(int id)
+        {
+            if (_unitOfWork.MessageRepository.UnDeleteMessage(id, User.Identity.Name))
+            {
+                _unitOfWork.Save();
+                return RedirectToAction("Trash");
+            }
+
+            return RedirectToAction("Trash");
+        }
+
         private List<MessageView> BindMessageView(ICollection<Message> messages)
         {
             string[] from = new string[messages.Count];
@@ -164,5 +194,6 @@ namespace BlogEngine.Web.Controllers
             List<MessageView> model = ModelBinder.Message(messages, from, to).ToList();
             return model;
         } 
+
     }
 }

@@ -2,6 +2,7 @@
 *   Grid.Mvc stylesheet http://gridmvc.codeplex.com/
 *   This file contains default styles for Grid.Mvc.
 */
+
 /* Grid */
 table.grid-table { margin: 0; }
     table.grid-table .grid-wrap { padding: 0; position: relative; }

@@ -18,10 +18,11 @@ namespace BlogEngine.Core.Infrastructure
         Message GetMessageById(int messageId, string username);
 
         bool MarkMessageAsReadByRecipient(int messageId, string username);
-
         bool MarkMessageAsUnReadByRecipient(int messageId, string username);
 
         bool DeleteMessage(int messageId, string username);
-
+        ICollection<Message> GetDeletedMessages(string username);
+        bool PermanentlyDeleteMessage(int id, string username);
+        bool UnDeleteMessage(int id, string username);
     }
 }

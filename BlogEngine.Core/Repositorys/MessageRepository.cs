@@ -74,6 +74,23 @@ namespace BlogEngine.Core.Repositorys
             return new List<Message>();
         }
 
+        public ICollection<Message> GetDeletedMessages(string username)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower());
+
+            if (user != null)
+            {
+                var messages = _context.Messages
+                                .Where(u => u.RecievedById == user.UserId)
+                                .Where(d => d.DeletedByRecipient == true)
+                                .OrderByDescending(d => d.Created);
+
+                return messages.ToList();
+            }
+
+            return new List<Message>();
+        }
+
         public bool DeleteSentMessage(int userId, int messageId)
         {
             var outcome = false;
@@ -197,6 +214,42 @@ namespace BlogEngine.Core.Repositorys
 
                 _context.Entry(message).State = System.Data.EntityState.Modified;
 
+                result = true;
+            }
+
+            return result;
+        }
+
+        public bool PermanentlyDeleteMessage(int messageId, string username)
+        {
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
+            var message = _context.Messages.Find(messageId);
+
+            var result = false;
+
+            if (message != null && userId > 0)
+            {
+                _context.Messages.Remove(message);
+                result = true;
+            }
+
+            return result;
+        }
+
+        public bool UnDeleteMessage(int messageId, string username)
+        {
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+
+            var message = _context.Messages.Find(messageId);
+
+            var result = false;
+
+            if (message != null && userId > 0)
+            {
+                message.DeletedByRecipient = false;
+
+                _context.Entry(message).State = System.Data.EntityState.Modified;
                 result = true;
             }
 
