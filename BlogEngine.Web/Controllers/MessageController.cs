@@ -188,6 +188,18 @@ namespace BlogEngine.Web.Controllers
 
             return RedirectToAction("Sent");
         }
+
+        [ChildActionOnly]
+        public ActionResult _Folders (string page)
+        {
+            var model = new BlogEngine.Core.ViewModels.FolderPartialView();
+
+            model.PageName = page;
+            model.UnreadCount = _unitOfWork.MessageRepository.GetUnreadMessageCount(User.Identity.Name);
+
+            return PartialView("_Folders", model);
+
+        }
         private List<MessageView> BindMessageView(ICollection<Message> messages)
         {
             string[] from = new string[messages.Count];

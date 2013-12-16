@@ -54,7 +54,8 @@
 <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
 
-@Html.Partial("_Folders", new { page = "trash"})
+@*@Html.Partial("_Folders", new { page = "trash"})*@
+@Html.Action("_Folders", "Message", new { page = "trash" })
 
 <div class="col-md-10 col-lg-10 col-sm-10">
     @Html.Grid(Model).Columns(columns =>

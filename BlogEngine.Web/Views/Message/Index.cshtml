@@ -40,7 +40,9 @@
     </button>
 </div>
 
-@Html.Partial("_Folders", new { page = "index" })
+@*@Html.Partial("_Folders", new { page = "index" })*@
+
+@Html.Action("_Folders", "Message", new { page = "index"})
 
 <style type="text/css">
     .unread {
