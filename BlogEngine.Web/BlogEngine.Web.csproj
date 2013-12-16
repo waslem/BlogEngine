@@ -984,6 +984,7 @@
     <Content Include="Views\Message\Send.cshtml" />
     <Content Include="Views\Message\Sent.cshtml" />
     <Content Include="Views\Message\DetailsSent.cshtml" />
+    <Content Include="Views\Message\_Folders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

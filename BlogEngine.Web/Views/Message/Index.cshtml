@@ -33,7 +33,6 @@
 <link href="~/Content/jquery.contextMenu.css" rel="stylesheet" />
 
 <h3 style="display: inline-block"><span class="glyphicon glyphicon-envelope"></span> Messages</h3>
-<h5 style="color: grey; display: inline-block">List of all your messages</h5>
 
 <div class="well well-sm">
     <button class="btn btn-success" onclick="location.href='@Url.Action("Send", "Message")'">
@@ -47,7 +46,9 @@
     }
 </style>
 
-<div class="col-md-12 col-lg-12 col-sm-12">
+@Html.Partial("_Folders", new { page = "index"})
+
+<div class="col-md-10 col-lg-10 col-sm-10">
     @Html.Grid(Model).Columns(columns =>
         {
             columns.Add(u => u.MessageId, true);
