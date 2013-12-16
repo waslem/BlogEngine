@@ -37,9 +37,9 @@
 
 @helper GridManageItemColumn(int messageId)
 {
-    @Html.ActionLink("Delete", "PermanentDelete", new { id = messageId }, new { @class = "editField btn btn-xs btn-info" })
+    <a href='@Url.Action("UnDelete", new { id = messageId})' class="editField btn btn-xs btn-info"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Return to Inbox</a>
     <span> </span>
-    @Html.ActionLink("Return to Inbox", "UnDelete", new { id = messageId }, new { @class = "editField btn btn-xs btn-warning" })
+    <a href='@Url.Action("DeleteFromTrash", new { id = messageId})' class="editField btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a>
 }
 
 
@@ -63,6 +63,6 @@
             columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
             columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject, "DetailsSent", "Message", new { messageId = o.MessageId, username = User.Identity.Name }, null));
             columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
-            columns.Add().Encoded(false).Sanitized(false).SetWidth(165).Titled("Actions").RenderValueAs(u => GridManageItemColumn(u.MessageId)).Css("ActionsTitle");
+            columns.Add().Encoded(false).Sanitized(false).SetWidth(195).Titled("Actions").RenderValueAs(u => GridManageItemColumn(u.MessageId)).Css("ActionsTitle");
         }).Sortable(true).WithPaging(5)
 </div> 

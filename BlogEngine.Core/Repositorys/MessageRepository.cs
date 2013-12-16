@@ -83,6 +83,7 @@ namespace BlogEngine.Core.Repositorys
                 var messages = _context.Messages
                                 .Where(u => u.RecievedById == user.UserId)
                                 .Where(d => d.DeletedByRecipient == true)
+                                .Where(d => d.DeletedFromTrash == false)
                                 .OrderByDescending(d => d.Created);
 
                 return messages.ToList();
@@ -91,24 +92,25 @@ namespace BlogEngine.Core.Repositorys
             return new List<Message>();
         }
 
-        public bool DeleteSentMessage(int userId, int messageId)
+        public bool DeleteSentMessage(int messageId, string username)
         {
-            var outcome = false;
+            var result = false;
 
-            var message = _context.Messages.FirstOrDefault(u => u.MessageId == messageId);
-
-            if (message != null)
+            var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
+            var message = _context.Messages.Find(messageId);
+            
+            if (message != null && userId > 0)
             {
                 message.DeletedBySender = true;
-                _context.Entry(message).State = System.Data.EntityState.Modified;
-                outcome = true;
 
-                return outcome;
+                _context.Entry(message).State = System.Data.EntityState.Modified;
+                result = true;
             }
 
-            return outcome;
+            return result;
         }
 
+               
         public bool DeleteRecievedMessage(int userId, int messageId)
         {
             var outcome = false;
@@ -220,7 +222,7 @@ namespace BlogEngine.Core.Repositorys
             return result;
         }
 
-        public bool PermanentlyDeleteMessage(int messageId, string username)
+        public bool DeleteFromTrash(int messageId, string username)
         {
             var userId = _context.Users.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()).UserId;
 
@@ -230,7 +232,9 @@ namespace BlogEngine.Core.Repositorys
 
             if (message != null && userId > 0)
             {
-                _context.Messages.Remove(message);
+                message.DeletedFromTrash = true;
+                _context.Entry(message).State = System.Data.EntityState.Modified;
+
                 result = true;
             }
 

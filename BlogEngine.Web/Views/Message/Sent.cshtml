@@ -4,6 +4,13 @@
     ViewBag.Title = "Sent";
 }
 
+<style>
+    .ActionsTitle {
+        color: #428bca;
+        text-align: center;
+    }
+</style>
+
 @helper FormatDate(DateTime date)
 {
     TimeSpan span = DateTime.Now - date;
@@ -27,6 +34,11 @@
     }
 }
 
+@helper GridManageItemColumn(int messageId)
+{
+    <a href='@Url.Action("DeleteSent", new { id = messageId})' class="editField btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete</a>
+}
+
 <h3 style="display: inline-block"><span class="glyphicon glyphicon-envelope"></span> Messages</h3>
 
 <div class="well well-sm">
@@ -47,5 +59,6 @@
             columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
             columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject, "DetailsSent", "Message", new { messageId = o.MessageId, username = User.Identity.Name }, null));
             columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
+            columns.Add().Encoded(false).Sanitized(false).SetWidth(100).Titled("Actions").RenderValueAs(u => GridManageItemColumn(u.MessageId)).Css("ActionsTitle");
         }).Sortable(true).WithPaging(5)
 </div> 

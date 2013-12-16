@@ -24,6 +24,7 @@ namespace BlogEngine.Core.Models
         public bool DeletedBySender { get; set; }
         public bool DeletedByRecipient { get; set; }
 
+        public bool DeletedFromTrash { get; set; }
         public bool ReadByRecipient { get; set; }
     }
 }

@@ -156,9 +156,9 @@ namespace BlogEngine.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult PermanentDelete(int id)
+        public ActionResult DeleteFromTrash(int id)
         {
-            if (_unitOfWork.MessageRepository.PermanentlyDeleteMessage(id, User.Identity.Name))
+            if (_unitOfWork.MessageRepository.DeleteFromTrash(id, User.Identity.Name))
             {
                 _unitOfWork.Save();
                 return RedirectToAction("Trash");
@@ -178,6 +178,16 @@ namespace BlogEngine.Web.Controllers
             return RedirectToAction("Trash");
         }
 
+        public ActionResult DeleteSent(int id)
+        {
+            if (_unitOfWork.MessageRepository.DeleteSentMessage(id, User.Identity.Name))
+            {
+                _unitOfWork.Save();
+                return RedirectToAction("Sent");
+            }
+
+            return RedirectToAction("Sent");
+        }
         private List<MessageView> BindMessageView(ICollection<Message> messages)
         {
             string[] from = new string[messages.Count];

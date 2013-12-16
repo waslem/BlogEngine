@@ -13,7 +13,7 @@ namespace BlogEngine.Core.Infrastructure
         int GetUnreadMessageCount(string username);
         ICollection<Message> GetSentMessages(string username);
         ICollection<Message> GetRecievedMessages(string username);
-        bool DeleteSentMessage(int userId, int messageId);
+        bool DeleteSentMessage(int messageId, string username);
         bool DeleteRecievedMessage(int userId, int messageId);
         Message GetMessageById(int messageId, string username);
 
@@ -22,7 +22,7 @@ namespace BlogEngine.Core.Infrastructure
 
         bool DeleteMessage(int messageId, string username);
         ICollection<Message> GetDeletedMessages(string username);
-        bool PermanentlyDeleteMessage(int id, string username);
+        bool DeleteFromTrash(int id, string username);
         bool UnDeleteMessage(int id, string username);
     }
 }
