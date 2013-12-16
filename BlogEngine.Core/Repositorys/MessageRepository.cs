@@ -35,7 +35,10 @@ namespace BlogEngine.Core.Repositorys
 
             var user = _context.Users.FirstOrDefault(u => u.UserName == username);
             if (user != null)
-                unreadCount = _context.Messages.Where(u => u.RecievedById == user.UserId).Count(c => c.ReadByRecipient == false);
+                unreadCount = _context.Messages
+                                    .Where(u => u.RecievedById == user.UserId)
+                                    .Where(u => u.DeletedByRecipient == false)
+                                    .Count(c => c.ReadByRecipient == false);
 
             return unreadCount;
         }

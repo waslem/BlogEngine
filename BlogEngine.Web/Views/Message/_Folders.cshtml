@@ -8,19 +8,19 @@
         <div class="panel-body">
             @if (Model.PageName == "sent")
             {
-                <p>@Html.ActionLink("Inbox", "Index") (@Model.UnreadCount)</p>
+                <p>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</p>
                 <p><b>@Html.ActionLink("Sent", "Sent")</b></p>   
                 <p>@Html.ActionLink("Trash", "Trash")</p>
             }
             else if (Model.PageName == "index")
             {
-                <p><b>@Html.ActionLink("Inbox", "Index")</b> (@Model.UnreadCount)</p>
+                <p><b>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</b></p>
                 <p>@Html.ActionLink("Sent", "Sent")</p>   
                 <p>@Html.ActionLink("Trash", "Trash")</p>
             }
             else if (Model.PageName == "trash")
             {
-                <p>@Html.ActionLink("Inbox", "Index") (@Model.UnreadCount</p>
+                <p>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</p>
                 <p>@Html.ActionLink("Sent", "Sent")</p>   
                 <p><b>@Html.ActionLink("Trash", "Trash")</b></p>  
             }

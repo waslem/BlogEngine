@@ -5,53 +5,6 @@
     ViewBag.Title = "Index";
 }
 
-@*<h3 style="display: inline-block"><span class="glyphicon glyphicon-th-list"></span> Categories</h3>
-<h5 style="color: grey; display: inline-block">List of all the categories</h5>
-
-<div class="well well-sm">
-    <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "Category")'">
-        <span class="glyphicon glyphicon-pencil"></span>&nbsp;Create a new Category
-    </button>
-</div>
-<div class="table-responsive">
-    <table class="table table-hover">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-            </th>
-        </tr>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                <button class="btn btn-sm btn-primary" onclick="location.href='@Url.Action("Edit", "Category", new { id=item.CategoryId })'"> 
-                    <span class="glyphicon glyphicon-edit"></span> Edit
-                </button>
-                <button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete", "Category", new { id=item.CategoryId })'"> 
-                    <span class="glyphicon glyphicon-trash"></span> Delete
-                </button>
-            </td>
-        </tr>
-    }
-    </table>
-</div>*@
-
 <div class="pull-right" style="padding-top: 50px;">
     <a id="new-category" class="btn btn-success" data-toggle="modal" href="#category-modal">Add category</a>
 </div>
@@ -88,15 +41,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Create a new category</h4>
             </div>
-            <form id="category" data-bind="submit: save">
+            <form class="form-horizontal" role="form" id="category" data-bind="submit: save">
                 <div class="modal-body">
-                    <div>
-                        <label >Name:</label>
-                        <input type="text" id="Name" data-bind="value: $root.Name" />
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="Name" data-bind="value: $root.Name" />
+                        </div>
                     </div>
-                    <div>
-                        <label>Description:</label>
-                        <input type="text" id="Description" data-bind="value: $root.Description" />
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Description:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="Description" data-bind="value: $root.Description" rows="5"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -250,3 +250,12 @@ padding-bottom: 0px;
 .dropdown-links {
     color:#ccc;
 }
+
+.unreadCount {
+    color: rgb(12, 130, 182);
+
+}
+
+.boldText {
+    font-weight: bold;
+}
