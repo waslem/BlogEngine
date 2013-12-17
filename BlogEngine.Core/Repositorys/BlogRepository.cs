@@ -132,12 +132,37 @@ namespace BlogEngine.Core.Repositorys
             return blogs;
         }
 
-
         public List<BlogEntry> GetBlogsByTag(string tag)
         {
             var blogs = _context.Tags.Where(t => t.Name == tag).SelectMany(b => b.BlogEntries).ToList();
 
             return blogs;
+        }
+
+        public ICollection<BlogEntryView> Search(string search)
+        {
+            var blogs = _context.BlogEntries.Include("Comments")
+                            .OrderByDescending(o => o.DateCreated)
+                            .Where(b => b.BlogTitle.Contains(search) || 
+                                        b.BlogShortDescription.Contains(search) || 
+                                        b.BlogEntryText.Contains(search)).ToList();
+
+
+            var model = blogs.Select(blog => new BlogEntryView
+                                {
+                                    BlogEntryId = blog.BlogEntryId,
+                                    BlogShortDescription = blog.BlogShortDescription.Truncate(300),
+                                    BlogEntryText = blog.BlogEntryText,
+                                    BlogTitle = blog.BlogTitle,
+                                    Category = blog.Category,
+                                    User = blog.User,
+                                    DateCreated = blog.DateCreated.ToShortDateString(),
+                                    Comments = blog.Comments,
+                                    Image = blog.Image,
+                                    Tags = blog.Tags
+                                }).ToList();
+
+            return model;
         }
     }
 }

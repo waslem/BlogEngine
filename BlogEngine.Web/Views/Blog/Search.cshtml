@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BlogEngine.Core.ViewModels.BlogEntryView>
+
+@{
+    ViewBag.Title = "Search";
+}
+<h2>Search results... </h2>
+<div class="col-md-8">
+    @foreach (var item in Model)
+    {
+        @Html.HiddenFor(modelItem => item.UserId)
+        @Html.HiddenFor(modelItem => item.CategoryId)
+        @Html.Partial("_entryBlogList", item)
+    }
+</div>
+
+@Html.Partial("_sidebar")

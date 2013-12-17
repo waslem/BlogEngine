@@ -8,6 +8,7 @@ using WebMatrix.WebData;
 using PagedList;
 using System.Collections.Generic;
 using System.Web;
+using System.Data.Objects.SqlClient;
 
 namespace BlogEngine.Web.Controllers
 {
@@ -142,6 +143,23 @@ namespace BlogEngine.Web.Controllers
             List<TagCheckViewModel> tags = _unitOfWork.TagRepository.GetAllTagsForVM();
 
             return PartialView("_getTags", tags);
+        }
+
+        public ActionResult Search(string search)
+        {
+            var model = _unitOfWork.BlogRepository.Search(search);
+
+            // reset the search form
+            ModelState.Clear();
+
+            if (model.Count > 0)
+            {
+                return View(model);
+            }
+            else
+            {
+                return View("NoResults");
+            } 
         }
     }
 }
