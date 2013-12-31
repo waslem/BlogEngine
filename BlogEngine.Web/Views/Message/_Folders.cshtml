@@ -1,26 +1,60 @@
 ﻿@model BlogEngine.Core.ViewModels.FolderPartialView
 
+@helper ActiveHelper (string linkname, string pagename)
+{
+    if (pagename.ToLower() == linkname.ToLower())
+    {
+        @:active
+    }
+}
+@helper BoldHelper (string linkname, string pagename)
+{
+    if (pagename.ToLower() == linkname.ToLower())
+    {
+        @:boldText
+    }
+}
 <div class="col-md-2 col-lg-2 col-sm-2">
-    <div class="panel panel-primary">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="dropdown-header"><h4>Folders</h4></li>
+        <li class="@ActiveHelper("Index", @Model.PageName)">
+            <a href='@Url.Action("Index")' class='@BoldHelper("Index", @Model.PageName)'>
+                <span class="badge pull-right">@Model.UnreadCount</span>
+                Inbox
+            </a>
+        </li>
+        <li class="@ActiveHelper("Sent", @Model.PageName)">
+            <a href='@Url.Action("Sent")' class='@BoldHelper("Sent", @Model.PageName)'>
+                Sent
+            </a>
+        </li>
+        <li class="@ActiveHelper("Trash", @Model.PageName)">
+            <a href='@Url.Action("Trash")' class='@BoldHelper("Trash", @Model.PageName)'>
+                Trash
+            </a>
+        </li>
+    </ul> 
+
+    @*<div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Folders</h3>
         </div>
         <div class="panel-body">
             @if (Model.PageName == "sent")
             {
-                <p>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</p>
+                <p><a href='@Url.Action("Index")'>Inbox <span class="badge"> @Model.UnreadCount</span></a></p>
                 <p><b>@Html.ActionLink("Sent", "Sent")</b></p>   
                 <p>@Html.ActionLink("Trash", "Trash")</p>
             }
             else if (Model.PageName == "index")
             {
-                <p><b>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</b></p>
+                <p><b><a href='@Url.Action("Index")'>Inbox <span class="badge badgeCustomColor"> @Model.UnreadCount</span></a></b></p>
                 <p>@Html.ActionLink("Sent", "Sent")</p>   
                 <p>@Html.ActionLink("Trash", "Trash")</p>
             }
             else if (Model.PageName == "trash")
             {
-                <p>@Html.ActionLink("Inbox (" + Model.UnreadCount + ")", "Index")</p>
+                <p><a href='@Url.Action("Index")'>Inbox <span class="badge"> @Model.UnreadCount</span></a></p>
                 <p>@Html.ActionLink("Sent", "Sent")</p>   
                 <p><b>@Html.ActionLink("Trash", "Trash")</b></p>  
             }
@@ -29,5 +63,5 @@
                 <p>error</p>
             }
         </div>
-    </div>
+    </div>*@
 </div>

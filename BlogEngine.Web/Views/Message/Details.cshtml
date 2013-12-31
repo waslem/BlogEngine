@@ -4,69 +4,58 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<fieldset>
-    <legend>MessageDetailsView</legend>
+<h3 style="display: inline-block"><span class="glyphicon glyphicon-envelope"></span> Messages</h3>
 
- 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MessageId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MessageId)
-    </div>
+<div class="well well-sm">
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Send", "Message")'">
+        <span class="glyphicon glyphicon-envelope"></span>&nbsp;New Message
+    </button>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.From)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.From)
-    </div>
+@Html.Action("_Folders", "Message", new { page = "index" })
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.To)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.To)
-    </div>
+<div class="col-md-9 col-lg-9 col-sm-9">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Message</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Reply</a></li>
+                <li><a href="#">Delete</a></li>
+                <li><a href="#">Forward</a></li>
+                <li><a href="#">Mark as read</a></li>
+                <li><a href="#">Mark as unread</a></li>
+                <li><a href="#">Print</a></li>
+            </ul> 
+        </div>
+    </nav>
+    @Html.HiddenFor(model => model.MessageId)
+    @Html.HiddenFor(model => model.ReadByRecipient)
+    @Html.HiddenFor(model => model.DeletedByRecipient)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Subject)
+    <div class="well" style="margin:10px;">
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.From) : </span>
+            <span>@Html.DisplayFor(model => model.From)</span>
+        </div>
+        <div>
+            <span class ="boldText">@Html.DisplayNameFor(model => model.To) : </span>
+            <span>@Html.DisplayFor(model => model.To)</span>
+        </div>
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.Sent) : </span>
+            <span>@Html.DisplayFor(model => model.Sent)</span>
+        </div>
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.Subject) : </span>
+            <span>@Html.DisplayFor(model => model.Subject)</span>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Subject)
+    <div class="panel panel-default" style="height:500px;margin:10px;">
+        <div class="panel-body">
+            @Html.DisplayFor(model => model.Body)
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Body)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Body)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Sent)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Sent)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DeletedByRecipient)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DeletedByRecipient)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ReadByRecipient)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ReadByRecipient)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

@@ -86,8 +86,10 @@ namespace BlogEngine.Web.Controllers
             return View(model);
 
         }
-        public ActionResult DetailsSent(int messageId, string username)
+        public ActionResult DetailsSent(int messageId)
         {
+            string username = User.Identity.Name;
+
             var message = _unitOfWork.MessageRepository.GetMessageById(messageId, username);
 
             if (message == null)
@@ -99,8 +101,11 @@ namespace BlogEngine.Web.Controllers
 
             return View(model);
         }
-        public ActionResult Details(int messageId, string username)
+
+        public ActionResult Details(int messageId)
         {
+            string username = User.Identity.Name;
+
             if (_unitOfWork.MessageRepository.MarkMessageAsReadByRecipient(messageId, username))
             {
                 _unitOfWork.Save();

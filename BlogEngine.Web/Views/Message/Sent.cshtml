@@ -58,7 +58,7 @@
         {
             columns.Add(u => u.MessageId, true);
             columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
-            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject, "DetailsSent", "Message", new { messageId = o.MessageId, username = User.Identity.Name }, null));
+            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject, "DetailsSent", "Message", new { messageId = o.MessageId }, null));
             columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
             columns.Add().Encoded(false).Sanitized(false).SetWidth(100).Titled("Actions").RenderValueAs(u => GridManageItemColumn(u.MessageId)).Css("ActionsTitle");
         }).Sortable(true).WithPaging(5)

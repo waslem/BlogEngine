@@ -40,8 +40,6 @@
     </button>
 </div>
 
-@*@Html.Partial("_Folders", new { page = "index" })*@
-
 @Html.Action("_Folders", "Message", new { page = "index"})
 
 <style type="text/css">
@@ -55,7 +53,7 @@
         {
             columns.Add(u => u.MessageId, true);
             columns.Add(u => u.From).SetWidth(60).Titled("From").Css("showContext");
-            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject,"Details","Message",new { messageId = o.MessageId, username = User.Identity.Name}, null));
+            columns.Add(u => u.Subject).Encoded(false).Sanitized(false).Titled("Subject").Filterable(true).RenderValueAs(o => Html.ActionLink(o.Subject,"Details","Message",new { messageId = o.MessageId }, null));
             columns.Add(u => u.Sent).SetWidth(100).Titled("Recieved").Filterable(true).RenderValueAs(u => FormatDate(u.Sent));
         }).SetRowCssClasses(item => item.Read ? string.Empty : "unread").Sortable(true).WithPaging(5)
 </div> 
