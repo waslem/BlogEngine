@@ -988,6 +988,8 @@
     <Content Include="Views\Message\Trash.cshtml" />
     <Content Include="Views\Blog\Search.cshtml" />
     <Content Include="Views\Blog\NoResults.cshtml" />
+    <Content Include="Views\Message\_DetailsSetup.cshtml" />
+    <Content Include="Views\Message\_DetailsNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

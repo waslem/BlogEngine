@@ -259,3 +259,7 @@ padding-bottom: 0px;
 .boldText {
     font-weight: bold;
 }
+
+.underline {
+    text-decoration: underline;
+}

@@ -4,68 +4,36 @@
     ViewBag.Title = "DetailsSent";
 }
 
-<h2>DetailsSent</h2>
+@Html.Partial("_DetailsSetup")
 
-<fieldset>
-    <legend>MessageDetailsView</legend>
+<div class="col-md-9 col-lg-9 col-sm-9">
+    @Html.Partial("_DetailsNav")
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MessageId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MessageId)
-    </div>
+    @Html.HiddenFor(model => model.MessageId)
+    @Html.HiddenFor(model => model.ReadByRecipient)
+    @Html.HiddenFor(model => model.DeletedByRecipient)
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.From)
+    <div class="well" style="margin:10px;">
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.From) : </span>
+            <span>@Html.DisplayFor(model => model.From)</span>
+        </div>
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.To) : </span>
+            <span>@Html.DisplayFor(model => model.To)</span>
+        </div>
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.Sent) : </span>
+            <span>@Html.DisplayFor(model => model.Sent)</span>
+        </div>
+        <div>
+            <span class="boldText">@Html.DisplayNameFor(model => model.Subject) : </span>
+            <span>@Html.DisplayFor(model => model.Subject)</span>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.From)
+    <div class="panel panel-default" style="height:500px;margin:10px;">
+        <div class="panel-body">
+            @Html.DisplayFor(model => model.Body)
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.To)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.To)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Subject)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Subject)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Body)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Body)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Sent)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Sent)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DeletedByRecipient)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DeletedByRecipient)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ReadByRecipient)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ReadByRecipient)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
